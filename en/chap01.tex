@@ -1,37 +1,43 @@
 \chapter{Introduction}
-
-\section{Introduction to the problematic}
 Voice control or communication is a common feature of many systems nowadays.
-Its applications ranges from simple one-word control commands to complex communication in spoken dialogue systems.
-In this work, we consider mainly these complex systems.
+Its applications range from simple one-word control commands to complex communication in spoken dialogue systems.
+In this work, we consider mainly such complex systems.
 For the sake of clarity, we now briefly describe setting of such system.
+\linebreak\linebreak
 It usually contains Automatic Speech Recognition (ASR) module, so the natural speech can be recognized and translated into words.
-The system then somehow derives an appropriate response, typically in the form of sentence written in natural language.
-This response can be displayed in the textual form, however, it is more common to generate an audio with human voice reading the response.
+The system then derives an appropriate response, typically in the form of sentence written in natural language.
+The process of this derivation depends on the concrete implementation.
+The response can be displayed in the textual form, however, it is more common to generate audio recording with human voice reading the response.
 Although it is possible to use a set of prerecorded utterances, this approach has obvious limitations since it is not able to read an arbitrary phrase.
 Particularly, it may be difficult to read named entities and numerical values such as time and date.
 Also, the usage of variable utterances provides better user experience.
-Because of this, a Text-To-Speech (TTS) module is usually also part of dialogue systems.
+\linebreak\linebreak
+To overcoma the mentioned issues, a Text-To-Speech (TTS) module is usually also part of dialogue systems.
 The purpose of this module is to transform a (generally arbitrary) written text utterance to natural speech.
-Modern TTS systems produce audio waveforms that sound quite naturally and the pronunciation is sufficiently good.
+Modern TTS systems produce audio waveforms that sound quite naturaly and the pronunciation is sufficiently good.
 Nevertheless, it may experience some difficulties, mainly when it comes to unknown words.
 This may happen, because the system is usually trained using certain set of words, typically from one language.
 But real applications often require to pronounce named entities or other language- or domain- specific words, that cannot be present during the training phase.
-This cause situations, when the system has to emply some (imperfect) mechanism to derive the pronunciation and  the words may be mispronounced.
+This cause situations, when the system has to employ some mechanism to derive the pronunciation and the words may be mispronounced.
 Succh words are called Out-Of-Vocabulary (OOV).
-Although the does not occur often, the negative effect can be quite strong, since it is inconvenient for the user when his or her name is pronounced with mistakes.
+The derivation of the pronunciation is inherently imperfect and may cause errors.
+Although this does not occur often, the negative effect can be quite strong, since it is inconvenient for the user, especially when his or her name is pronounced with mistakes.
 \linebreak\linebreak
 In this work, we aim to improve the TTS system pronunciation of OOV words.
-First, we explore method that can identify words, that are potentially difficult to pronounce.
+First, we explore methods that can identify words that are potentially difficult to pronounce.
 The identification is first step towards the improvement.
 We propose several measures that can reflect badly pronounced words without any prior language knowledge.
+\linebreak\linebreak
+Next, we try to improve the TTS system's pronuncication of the desired words.
 To achieve this, we employ the user and obtain correct pronunciations from him.
 So we get training examples and we are able to improve the TTS system by processing the obtained recording, deriving a phonetic transcription (i.e. pronunciation) and adding it to the TTS vocabulary.
 Moreover, the derived pronunciations can be used to improve the recognition ability of the ASR module, since it is also dictionary-based.
-As it has been suggested, our method has got potentially very useful applications.
+\linebreak\linebreak
+As it has been suggested, there are several issues, that are related with the OOV words so methods of deriving correct pronunciations has got potentially very useful applications.
 It can be used to enlarge vocabularies of TTS or ASR systems both offline or on the fly using the user's feedback.
-There exist several ways how to obtain such a feedback, however, this is not a subject of this work.
-Theoretically, the method can work with just one gold example, however, it is better to obtain more recordings in general.7
+This leads to better pronunciation in case of TTS and improved performance in case of ASR systems.
+There exist several ways how to obtain such feedback, however, this is not a subject of this work.
+Theoretically, the method can work with just one gold example, however, it is better to obtain more recordings in general.
 In \figref{dialogsample} we provide basic example of simple dialogue, illustrating how real application could look like.
 However, in this work we assume the user's recording(s) have been gathered already and we do not consider the dialogue policy.
 \begin{center}
@@ -43,339 +49,7 @@ User: No, it is /ONDRZHEI/.\linebreak
 System: Oh, /ONDRZHEI/?\linebreak
 User: That's right.
 }
-\caption{Sample dialogue illustrating the pronunciation correction. The transcriptions of the user's name are given in ARPABET\cite{Arpabet}}
+\caption{Sample dialogue illustrating the pronunciation correction. The transcriptions of the user's name are given in ARPABET\citep{Arpabet}}
 \label{dialogsample}
 \end{figure}
 \end{center}
-
-\section{Overview of used techniques}
-\subsection{Audio signal processing\cite{taylor2009text}}
-\label{ASP-desc}
-Details of this part are beyond the scope of this book, however we sketch here the basic principles, so we can descrbie our input data.
-Speech signal in the real world are mechanical waves, so it is obviously analogous quantity.
-When we process the speech signal with computers, it is assumed to be digitised, so it is converted into discrete form.
-When performing digital signal processing, we are usually concerned with three key issues.
-\begin{enumerate}
-\item To remove the influence of phase
-\item Performing source/filter separation, so that we can study the \textit{spectral envelope} of sounds.
-Spectral envelope characterizes the frequency spectrum of the signal, which is essential for the speech recogniton and processing.
-\item We often wish to transform these spectral envelopes and source signals into more efficient representations.
-\end{enumerate}
-Overview of the main processing steps follows.
-The input signal is divided into \textit{windows}.
-Windowing considers only some part of the signal.
-Usually, the signal is transformed at window borders to prevent discontinuities.
-This is achieved for example by use of \textit{Hamming} window.
-The complete waveform is therefore a series of windows, that are sometimes called \textit{frames}.
-The frames overlap, this is influenced by the size of the \textit{frame shift}.
-Inside one frame, we assume, that the speech signal is stationary and we transform it to a frequency domain by Discrete Fourier Transformation\footnote{https://en.wikipedia.org/wiki/Discrete\_Fourier\_transform}.
-It is better for observing the natural speech characteristics, to use a logarithm scale instead of linear.
-In fact, the \textit{mel scale}\footnote{https://en.wikipedia.org/wiki/Mel\_scale} is frequently used, which even better corresponds with the human perception.
-Further, the so called \textit{cepstrum}\footnote{https://en.wikipedia.org/wiki/Cepstrum} is computed from the log magnitude spectrum, by performing inverse Fourier transformation.
-Cepstrum can be represented by coefficients, number of which can be chosen.
-Those are called the \textit{Mel Frequency Cepstral Coefficients}.
-To sum up, we have described how to process the digital audio signal and convert it into discrete series of overlaping frames, each of which is represented by a fixed-length vector of MFCCs.
-\linebreak\linebreak
-We gave a brief overview of the signal processing procedure that is essential to work with the audio signal.
-When we mention the input speech signal, we mean series of MFCC vectors, unless explicitly stated otherwise.
-\subsection{Finite state transducers\cite{mohri1997finite}}
-\label{fst-desc}
-Finite state transducers (FSTs) are finite state automata that are augmented by addition of output labels to each transition.
-We can further modify the FST and add a weight to each edge.
-We define a semiring $(S,\oplus,\otimes,\overline{0},\overline{1})$ as a system that fullfills the following conditions:
-\begin{itemize}
-\item $(S,\oplus,\overline{0})$ is a commutative monoid with identity element $\overline{0}$
-\item $(S,\otimes,\overline{1})$ is a monoid with identity element $\overline{0}$
-\item $\otimes $ distributes over $\oplus$
-\item $\forall a \in S: a \otimes \overline{0} = \overline{0} \otimes a = \overline{0}$
-\end{itemize}
-We this definition of the semiring, we can describe a weighted FST\cite{mohri2009weighted} $T$ over a semiring $S$ formally as a 8-tuple $(\Sigma,\Delta,Q,I,F,E,\lambda,\rho)$ where $\Sigma, \Delta$ are finite input and output alphabets, $Q$ is a finite set of states, $I \subset Q$ is a set of initial states, $F \subset Q$ is a set of final states, $E$ is a multiset of transitions, $\lambda: I \rightarrow S$ is an initial weight function and $\rho: F \rightarrow S$ is a final weight function.
-Each transition is element of $Q \times \Sigma \times \Delta \times S \times Q$.
-Note, that since $E$ is a multiset, it allows two transitions between states $p$ and $q$ with the same input
-and output label, and even the same weight.
-However, this is not used in practice.
-An example of weighted FST is given in TODO.
-Finite state transducers have been used widely in many areas, especially linguistics.
-They can represent local phenomena encountered in the study of language and they usage often leads to compact represantations.
-Moreover, it is also very good from the computational point of view, since it advantageous in terms of time and space efficiency.
-Whole area of algorithms has been described that consider FSTs.
-One of the most important is $determinization$, which determinize paths in the FST and thus allows the time complexity to be linear in the length of input.
-Weighted FSTs have been widely used in the area of automatic speech recogniton.
-The allows to compactly represent the hypothesis state of the acoustic model as well as combining it with the information contained in the language model.
-\subsection{Automatic speech recognition (ASR)}
-\label{ASR-desc}
-\subsubsection*{Overview}
-The task in ASR is quite clear: An utterance spoken in natural language should be translated into its text representation.
-Formally, we are given a sequence of acoustic observations $\textbf{X} = X_1X_2\dots X_n$ and we want to find out the corresponding word sequence $\textbf{W} = W_1W_2\dots W_m$ that has a maximum posterior probability $P(W | X)$i.e., according to the Bayes rule:
-\begin{equation}
-\hat{\textbf{W}} = argmax_w \frac{P(\textbf{W})P(\textbf{W}|\textbf{X})}{P(\textbf{X})}
-\end{equation}
-The challenge consists of two parts.
-First, we have to build accurate acoustic model that describes the conditional distribution $P(W|X)$.
-Second part is to create a language model that reflects the spoken language that should be recognized.
-Usually, a variation of the standard $N$-gram approach is sufficient.
-Individual words are composed of phonetic units, which are in turn modeled using states in probabilistic machinery such as a finite state transducers.
-Because the speech signal is continuous, it is transformed to discrete sequence of samples.
-MFFC's are commonly used to represent the signal.
-The process of deriving this sequence is described in further detail in the \ref{ASP-desc}.
-In general, it is difficult to use whole-word models for the acoustic part, because every new task may contain unseen words.
-Even if we had sufficient number of examples to cover all the words, the data would be too large.
-Thus, we have to select basic units to represent salient acoustic and phonetic information.
-These units should be $accurate, trainable$ and $generalizable$.
-It turns out that the most appropriate units are phones.
-Phones are very good for training and generalization, however, it does not include contextual information.
-Because of this, so called triphones are commonly used.
-To model the acoustic, Hidden Markov Models are commonly used, because it can deal with unknown alignments.
-In recent years, neural networks have experienced big breakthrough and it found application even in the area of speech recognition.
-Namely, recurrent neural networks are able to work with an abstraction of memory and process sequences of variable length, so it overcomes the HMM's in terms of accuracy.
-The language and acoustic models are traditionally trained independently and they are joined during the decoding process.
-The decoding process of finding the best matched word sequence $\textbf{W}$ to match the input speech signal $\textbf{X}$ in speech recognition systems is more than a simple pattern recognition problem, since there is an infinite number of word patterns to search in continuous speech recognition.
-A FST is built in order to make the decoding.
-Its nodes represent acoustic units and edges are assigned costs.
-This assignment corresponds to the likelihood determined by the acoustic model as well as the language model, so the FST is a composition of theses two.
-Decoding the output is realiztheed as searching the best path through this graph.
-\linebreak\linebreak
-The decoding graph is costructed in such a way, that the path can contain only words present in the vocabulary the language model is built on.
-Thus, each possible path consists of valid words.
-Because of that, we can see the word as a basic unsplittable unit, although it is actually composed from phones, or triphones respectively.
-However, we can build a FST that allows to construct the path from phones and thus recognize the input on the phonetic level.
-Also the search algorithm preserves alternative paths so in the end it gives us not only the best path but also list of alternative hypotheses.
-We call it the $n$-best list.
-Each hypothesis in the $n$-best list is associated with its likelihood that expresses information from both the language and acoustic model.
-In chapter ?? we explore the $n$-best list and propose method that exploits it.
-\label{ASR-phn}
-\subsection{Text-to-speech (TTS)}
-\subsubsection*{Overview\cite{taylor2009text}}
-The text-to-speech problem can be looked at as a task of transforming an arbitrary utterance in natural language from its written form to the spoken one.
-In general, these two forms have commonalities in the sense, that if we can decode the form from the written signal, then we have virtually all the information we require to generate a spoken signal.
-Importantly, it is not necessary to (fully) uncover the meaning of the written signal, i.e. employ Spoken Language Understanding (SLU).
-On the other hand, we may need to generate prosody which adds some information about emotional state of the speaker or emphasizes certain parts of the sentence and thus changing the meaning slightly.
-To obtain prosodic information, sophisticated techniques need to be involved, since its not a part of common written text, except some punctuation.
-Another difficulties stems from the fact, that we often need to read numbers, or characters with special meanings such as dates or mathematical equations.
-The problem of converting text into speech has been heavily explored in the past and the TTS systems (engines) are very sophisticated nowadays.
-The subsequent section, describes briefly the typical architecture of TTS system.
-\subsubsection*{TTS system architecture\cite{taylor2009text}}
-Let us now describe a common use of TTS system.
-The architecture usually consists of several modules, although some end-to-end systems base on neural networks have appeared recently\cite{van2016wavenet} \cite{wang2017tacotron}.
-First, the input text is divided into sentences and each sentence is further tokenized, based on whitespace characters, punctuation etc.
-Then, the non-natural language tokens are decoded and transformed into text form.
-We then try to get rid of ambiguity and do prosodic analysis.
-Although much of the information we might ideally like is missing from the text, we use algorithms to determine the phrasing, prominence patterns and tuning the intonation of the utterance.
-Next is the synthesis phase. The first stage in the synthesis phase is to take the words we have just found and encode them as phonemes.
-There are two main approaches how to deal with the synthesis phase.
-More traditional approach is so called \textbf{unit concatenation}.
-This approach uses a database of short prerecorded segments of speech (roughly 3 segments per phoneme).
-These segments are then concatenated together with some use of signal processing so they fit together well.
-An alternative is to use statistical, machine learning techniques to infer the specification-to-parameter mapping from data.
-While this and the concatenative approach can both be described as data-driven, in the concatenative approach we are effectively memorizing the data, whereas in the statistical approach we are attempting to learn the general properties of the data.
-Trained models are able to transform the phonemes into audio signal representation.
-This representation is then synthesized into waveforms using a vocoder module.
-Although unit concatenation approaches generally achieve better results, the statistical ones are more flexible and have good possibilities to fine tuning or postprocessing.
-\subsubsection*{Grapheme to Phoneme conversion and its drawbacks}
-In the stage of converting graphemes (i.e. text) to phonemes, the g2p module is usually used.
-The g2p task is to derive pronunciations from ortographic transcription.
-Traditionally, it was solved using decision trees models.
-It can also be formulated as a problem of translating one sequence to another, so neural networks can be used to solve this task\cite{yao2015sequence}.
-However, in our work we use joint-sequence model\cite{bisani2008joint}, which estimates joint distribution of phonemes based on probabilities derived from n-grams.
-The g2p module is crucial component of the system and it has great impact on the final pronunciation.
-Since we use machine learning techniques and train on the dictionary data, the model inherently adopts pronunciation rules from the respective language.
-Although it is in principle possible to  train multilingual g2p\cite{schlippe2012grapheme}, it is usually not the case in common TTS systems.
-The problem arises, when words that originate in some foreign language should be pronounced.
-In this work we address this issue by deriving pronunciations from the ASR output.
-\subsubsection*{Speech Synthesis Markup Language (SSML)\cite{taylor1997ssml}}
-SSML is a standard, that allows to specify aspects of the speech.
-It is an input to the synthesis module and many TTS engines support its use.
-We can specify emotions, breaks etc. with the help of SSML.
-More importantly, it can be used to input particular phonemes and thus circumvent the g2p module.
-In our work we use this method to feed our phonetic transcriptions into the engine.
-The disadvantage of this method is, that many TTS engines process the SSML input imperfectly or not at all.
-However, in principle it is possible to add the transcriptions directly into the system's vocabulary.
-\subsubsection*{Overview of the used TTS systems}
-\begin{enumerate}
-\item Cereproc TODO:citations
-This engine is a commercial software that is free for educational purposes.
-Although it is not open-sourced, we use it for its good quality and reliable outputs.
-\item MaryTTS
-MaryTTS is a German open-source project written in Java.
-It is highly customizable since it is modular.
-Thus we can explore output of an arbitrary module or replace it in the processing pipeline.
-MaryTTS is based on client-server architecture.
-\item gTTS is a TTS service provided online by Google.
-It achieves very good quality, however it allows ony use of one voice in the free version.
-\item Pico
-SVOX Pico TTS is a lightweight engine that lacks a good quality of the gTTS, however it offers a large selection of voices and it is commonly used on the phones with Google's Android operating system.
-
-\end{enumerate}
-\subsection{Algorithms description}
-\subsubsection*{Dynamic Time Warping}\cite{ratanamahatana2004everything}
-The measurement of similarity between two time series is
-an important subroutine in many applications.
-Moreover, sometimes we need to align two sequences that describe same data but are of different lengths.
-Both this tasks can be solved with use of DTW.
-Suppose we have two time series, a sequence $Q$ of length $n$,
-and a sequence $C$ of length $m$, where
-\begin{center}
-$Q = q_1 ,q_2 ,\dots, q_i ,\dots ,q_n$
-\linebreak
-$C = c_1 ,c_2 ,\dots, c_j \dots, c_m$
-\end{center}
-To align these two sequences using DTW, we first
-construct an n-by-m matrix where the $(i^{th} , j^{th} )$ element of
-the matrix corresponds to the squared distance, $d(q_i , c_j) =
-(q_i – c_j )$ , which is the alignment between points $q_i$ and $c_j$.
-To find the best match between these two sequences, we
-retrieve a path through the matrix that minimizes the total
-cumulative distance between them.
-In particular, the optimal path is the path that minimizes the
-warping cost:
-\begin{center}
-$DTW ( Q , C ) = \sqrt[]{\sum_{k=1}^{K}w_k}$
-\end{center}
-where $w_k$ is the matrix element $(i,j)_k$ that also belongs to $k^{th}$
-element of a warping path $W$, a contiguous set of matrix
-elements that represent a mapping between $Q$ and $C$.
-Methods of dynamic programming are used to fill in the values and find alignment of sequences.
-Thus a result of this algorithm is a mapping $\sigma$ that can be used to construct sequence of pairs $A$ containing members of both sequences $C,Q$ in each time step.
-$\sigma$ is constructed in such a way, that it holds:
-\begin{center}
-$A_i = (C_{\sigma (C,i)}, Q_{\sigma (Q, i)})$ \linebreak
-$i = 1 \dots K$ \linebreak
-$max(|C|,|Q|) \le K$ \linebreak
-and $\sum_{i=0}^K d(\sigma (C,i), \sigma(Q,i)$ is minimal
-\end{center}
-Where $d(x,y)$ is an arbitrary distance metric.
-In our application, we want to align two sequences of phonemes, so we choose Levensthein distance to be our metric.
-\section{Related Work}
-\subsection{Grapheme-to-phoneme conversion}
-An automatic grapheme-to-phoneme conversion was first considered in the context of TTS applications. The input text needs to be converted to a sequence of phonemes which is then fed into a speech synthesizer.
-It is common in TTS systems that they first try to find the desired word in the dictionary and if it doesn't find it, it employs the grapheme-to-phoneme ($g2p$) module.
-A trivial approach is to employ a \textit{dictionary look-up}.
-However, it cannot handle context and inherently covers only finite set of combinations.
-To overcome this limitations, the rule-based conversion was developed.
-Kaplan and Kay \cite{kaplan1994regular} formulate these rules in terms of finite-state automata.
-This system allows to greatly improve coverage.
-However the process of designing sufficient set of rules is difficult, mainly since it must capture irregularities.
-Because of this, a \textit{data-driven} approach based on machine learning has to be employed.
-Many such techniques were explored, starting with Sejnowski and Rosenberg \cite{sejnowski1988nettalk}.
-The approaches can be divided into three groups.
-\subsubsection{Techniques based on local similarities}
-The techniques presuppose an alignment of the training data between letters and phonemes or create such an alignment in a separate preprocessing step.
-The alignment is typically construed so that each alignment item comprises exactly one letter.
-Each slot is then classified (using its context) and a correct phoneme is predicted.
-Neural networks and decision tree classifiers are commonly used for this task.
-\subsubsection{Pronunciation by analogy}
-This term is typically used for methods that could be described as nearest-neighbor-like.
-They search for local similarities in the training lexicon and the output pronunciation is chosen to be analogous to retrieved examples. 
-In the work of \cite{dedina1991pronounce} the authors build a pronunciation lattice from the words that match the input string.
-Paths through the lattice then represent the derived pronunciations.
-This approach has been further improved.
-\subsubsection{Probabilistic approaches}
-The problem can also be viewed from a probabilistic perspective.
-Pioneers in this area were \cite{lucassen1984information} 
-They create 1-to-n alignments of the training data using a context independent channel model.
-The prediction of the next phoneme is based on a symmetric window of letters and left-sided window of phonemes.
-Authors then construct regression tree,the leafs of which carry probability distribution over the phonemes.
-Other approaches may be based on statistical parsing \cite{meng1994phonological or dynamic programming \cite{besling1994heuristical}.
-\label{g2p-jseq}
-A popular way to approach this is to employ so called \textit{joint sequence models} \cite{bisani2008joint}.
-We use an open-source implementation of such a model in our work.
-This approach formalizes the task as follows:
-\begin{equation}
-\boldsymbol{\varphi(g)} = \argmax_{\varphi'\in\Phi^*} p(\boldsymbol{g,\varphi'})
-\end{equation}
-where * denotes a Kleene star.
-In other words, for a given ortographic form $\boldsymbol{g} \in G^*$ we want to find the most likely pronunciation $\boldsymbol{\varphi} \in \Phi^*$, where $G, \Phi$ are ortographic and phonetic alphabets.
-The fundamental idea of joint-sequence models is that the relation of input and output sequences can be generated from a common sequence of joint units.
-These units carry both input and output symbols.
-Formally, the unit called \textit{grapheme} is a pair $q = (\mathbf{g}, \mathbf{\varphi}) \in Q \subset G* \times \Phi$ where $\mathbf{g}$ and $\mathbf{\varphi}$ are letter and phoneme sequences which can be of different lengths.
-In the simplest case, each unit carries zero or one input and zero or one output symbol.
-This corresponds to the conventional definition of finite state transducers (FST) that are described in \ref{fst-desc}.
-The letter and the phoneme sequences are grouped into an equal number of segments.
-Such a grouping is called a joint segmentation.
-The joint probability is defined as:
-\begin{equation}
-p(\mathbf{g}, \mathbf{\varphi}) = \sum_{\mathbf{q}\in S(\mathbf{g},\mathbf{\varphi})}p(\mathbf{q})
-\end{equation}
-since there are many possible groupings of input sequences in general.
-The joint probability distribution $p(\mathbf{g}, \mathbf{\varphi})$ has thus been reduced to a probability distribution $p(\mathbf{q})$ over graphone sequences $\mathbf{q} = q_1, \dots, q_K,$ which can be modeled using  $N$-gram approximation:
-\begin{equation}
-p(q_1^K) \cong \prod_{j=1}^{K+1} p(q_j\vert q_{j-1},\dots,q_{j-M+1})
-\end{equation}
-The probability distribution is then typically estimated by an Expectation-Maximization algorithm.
-\linebreak \linebreak
-Generally, the problem of the wrong pronunciation in TTS  is caused by a bad phonetic transcription.
-Traditional TTS systems are modular, one module's output is inputted into the next one.
-Because of this fact, the errors cumulate and thus the mistakes made by $g2p$ cannot be repaired.
-So if we want to improve the pronunciation, we can try to improve the $g2p$ as it is done in \cite{deri2016grapheme}.
-Authors in this work propose a method of exploiting a $g2p$ trained on a language with a high number of available resources to create a $g2p$ for language for which we do not have sufficient number of examples.
-This method relies on the existence of a conversion mapping between these two languages.
-Also it requires to do the conversion for every new language.
-In theory, a model can be created, that is able to transcribe grapheme sequences into an appropriate phonetic representation and can handle multiple languages.
-However, it needs to somehow obtain information, which language the input sequence comes from, which is not straightforwardly doable.
-This method has several drawbacks, because the language is not always known and the set of known languages is limited, so it does not realy solve the OOV problem.
-Also, it potentially requires a lot of training data.
-Moreover, if we want to learn a new pronunciation of just one word, it's more convenient to do it in a different way.
-\subsection{Learning pronunciation from spoken examples}. 
-This group of methodologies aim to derive phonetic transcriptions directly from audio input.
-They are built on the theory of Automatic Speech Recognition which we discuss in \ref{ASR-desc}.
-Authors of \cite{slobada1996dictionary} introduce method of deriving correct pronunciation for a word in order to enlarge the recognizer's dictionary.
-They propose a data-driven approach to automatically add new words and their variants, respectively.
-The authors argue that in the spontaneous speech, the most frequent pronunciation does not need to be the one that is marked as correct and is used in the training phase.
-Thus the overall performance of the recognizer may be degraded since the phonetic units are bound with inadequate acoustics.
-The method is proposed, that relies on the use of both phoneme and word-level speech recognizer.
-The phoneme recognizer is constructed using smoothed bigram Language model.
-We discuss the phoneme recognizers in more detail in \ref{ASR-phn}.
-The algorithm collects all occurences of words in the database and creates phonetic transcriptions using the recognizer.
-It then sorts the variants, rejects some of them an creates an $n-best$ list which is added to the dictionary.
-The recognizer can then be retrained, allowing multiple pronunciations for each word.
-Thus the recognition performance can be improved by an automatic procedure without the need for using the phonological rules.
-	
-In the work of \cite{mcgraw2013learning}, the concept of Pronunciation Mixture Models is introduced.
-Authors use a special kind of speech recognizer, search space of which has four primary hierarchical components: the language model $G$, the phoneme lexicon $L$, the phonological rules $P$ that expand the phoneme pronunciations to their phone variations, and the mapping from phone sequences to context-dependent model labels
-$C$.
-These can be with advantage represented as FSTs and thus the full decoder network can be represented as a composition of these components: $R = C\circ P \circ L \circ G$.
-A probabilistic lexicon is considered in a sense, that several pronunciations are allowed for each word and there is no hard limitation that would force the recognzier to choose one.
-Instead, kind of soft voting is considered, meaning, that each transcription is used with certain probability.
-Also, joint-sequence modelling is considered, as we introduced in \ref{g2p-jseq}, so each transcription is considered together with its orotgraphic form.
-That means, that we can describe the log-likehood of $M$ utterances $ D = \{\mathbf{u}_i,\mathbf{W}_i\}$ where $\mathbf{u}_i$ are speech data and $\mathbf{W}_i$ their transctiptions as follows:
-\begin{equation}
-\mathcal{L}(\Theta\vert D) = \sum_{i=1}^M log \sum_{B \in \mathcal{B}} P(\mathbf{u}_i,\mathbf{B},\mathbf{W}_i;\Theta)
-\end{equation}
-where $\mathbf{B}$ are respective phone sequences (i.e. pronunciations) and $\Theta$ represents the model parameters.
-Then, we derive using a chain rule:
-\begin{equation}
-P(\mathbf{u}_i,\mathbf{B},\mathbf{W}_i;\Theta) =  P(\mathbf{u}_i\vert\mathbf{B})P(\mathbf{B}\vert\mathbf{W}_i;\Theta)P(\mathbf{W}_i)
-\end{equation}
-If we further assume, that pronunciation sub-units $\mathbf{b}_i \in \mathbf{B}$ are context independent, we can transcribe the above expression:
-\begin{equation}
-P(\mathbf{u}_i\vert\mathbf{B})P(\mathbf{B}\vert\mathbf{W}_i;\Theta)P(\mathbf{W}_i) = P(\mathbf{u}_i\vert\mathbf{B})(\prod_{j=1}^{k_i}P(\mathbf{b}_j\vert \mathbf{w}^i_j;\Theta))P(\mathbf{W}_i) 
-\end{equation}
-The model parameters are then estimated using the EM-algorithm.
-Parameters related to the language model, can be initialized with use of graphone language model.
-Several technical issues has to be dealed with, however the Pronunciation Mixture Models can be trained on the same data as traditional ASR engines and can be used to obtain phonetic transcriptions from audio data.
-
-Similar approach is considered in the work \cite{reddy2011learning}, except they do not have access to the acoustic models or phone lattices, only the word recognition mistakes.
-An OOV word is passed through an ASR decoder giving an n-best word recognition output.
-Since the words are OOVs, every hypothesis will be a recognition mistake.
-These mistakes are then explited, assuming that the following generative story of the recognition output
-for a word w holds:
-\begin{enumerate}
-\item A pronunciation baseform $\mathbf{b}$ is drawn from the distribution $\Theta$.
-\item A phonetic confusion function from the word $\mathbf{w}$ and the selected baseform $\mathbf{b}$ is applied in order to generate a phoneme sequence $\mathbf{p}$ with probability $P(\mathbf{p}|\mathbf{b},\mathbf{w})$
-\item A word sequence $\mathbf{e}$ with probability $P (\mathbf{e} \vert \mathbf{p},\mathbf{b},\mathbf{w}) = 1$ 
-is generated using the pronunciation lexicon.
-\end{enumerate}
-Authors model the joint probability of hypothesis and reference word $P(\mathbf{e}, \mathbf{w}) = P(\mathbf{w}\sum_b f_{e,b,w})$, where $f_{e,b,w} = P(\mathbf{e}\vert \mathbf{b}, \mathbf{w})$ is the phonetic confusion function and it is used to estimate the distribution $P(\mathbf{b}\vert\mathbf{w},\mathbf{e})$.
-Thus they are able to derive pronunciations without access to ASR lattices, i.e. it only consideres the recognizer as a black-box. 
-\subsection{Conclusion}
-Many approaches were introduced, that are able to convert an utterance in ortographic or audio form to its phonetic representation.
-$G2P$ converts the grapheme transcriptions, using only the text input.
-It is a well explored field of study with many different variants of realization.
-Although it achieves very good results nowadays, it suffers from the fact, that same groups of letters may have different pronunciations in different languages.
-We typically don't have access to the information which language is considered and it may be difficult to get access to sufficient number of datasets.
-The latter problem can be partially solved by transfer learning as proposed in \cite{deri2016grapheme}.
-Alternatively, one can derive pronunciations directly from audio signal.
-This approach has been also explored by some authors, however it usually requires quite low level modifications of the speech recognizer.
-Also, the authors used the derived pronunciations to enlarge the phonetic dictionary of the recognizer, not to improve the Text-To-Speech sytems.
-We explore methods of merging the mentioned approaches to combine both textual and acoustic information and its usability when confronted with human judgments.
-\section{Thesis overview}

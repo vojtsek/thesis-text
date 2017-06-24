@@ -1,3 +1,9 @@
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Sample dialogue illustrating the pronunciation correction. The transcriptions of the user's name are given in ARPABET\cite {Arpabet}}}{4}{figure.1.1}
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Sample dialogue illustrating the pronunciation correction. The transcriptions of the user's name are given in ARPABET\citep {Arpabet}}}{3}{figure.1.1}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Example of Finite State Transducers and their composition}}{6}{figure.2.1}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Example of SSML code}}{10}{figure.2.2}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Sample alignment of two phonetic sequences}}{19}{figure.3.1}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Frequencies of confusing respective bigrams, i.e. how many times it occurs in some confused pair. We can see, that the majority of bigrams has somewhat low scores.}}{20}{figure.3.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Visualization of the confusion matrix computed from the results.}}{21}{figure.3.3}

@@ -40,6 +40,7 @@
 \usepackage{amsthm}         % theorems, definitions, etc.
 \usepackage{bbding}         % various symbols (squares, asterisks, scissors, ...)
 \usepackage{bm}             % boldface symbols (\bm)
+\usepackage{hyperref}
 \usepackage{graphicx}       % embedding of pictures
 \usepackage{fancyvrb}       % improved verbatim environment
 \usepackage{natbib}         % citation style AUTHOR (YEAR), or AUTHOR [NUMBER]
@@ -50,7 +51,21 @@
 \usepackage{booktabs}       % improved horizontal lines in tables
 \usepackage{paralist}       % improved enumerate and itemize
 \usepackage[usenames]{xcolor}  % typesetting in color
+\graphicspath{{img/}}
+\newcommand{\figref}[1]{Figure \ref{#1}}
+\newcommand{\tabref}[1]{\hyperref[#1]{Table \ref{#1}}}
+\newcommand{\sect}[1]{\LARGE\textbf{{#1}}\normalsize}
+\newcommand{\link}[1]{\textcolor{blue}{\texttt{#1}}}
+\newcommand{\td}[1]{\textcolor{red}{\textbf{TODO:} #1}}
+\newcommand{\note}[1]{\textcolor{notegreen}{#1}}
+\newcommand{\tab}[1][1cm]{\hspace*{#1}}
+\newcommand{\img}[4]{\begin{figure}[h!]
 
+\centering
+\label{#4}
+\includegraphics[width=#2\textwidth]{#1}
+\caption{#3}
+\end{figure}}
 %%% Basic information on the thesis
 
 % Thesis title in English (exactly as in the formal assignment)
@@ -114,10 +129,9 @@ Abstract.
 \tableofcontents
 
 %%% Each chapter is kept in a separate file
-\include{preface}
 \include{chap01}
 \include{chap02}
-
+\include{chap03}
 \include{epilog}
 
 %%% Bibliography
