@@ -1,93 +1,159 @@
 \chapter{Methodology}
-\section{Used approaches}
-- use of ssml
-- phonetic alphabets
-\section{Overview and key insight}
-We aim to improve the pronunciation, that means, we need to derive phonetic transcriptions of good quality. Straightforward way of achieving this is to use a g2p module. As we discuss in \ref{g2p-desc} and \ref{relatedwork}, this approach has some limitations, mainly because the pronunciation of some tokens in different languages may vary. However, grapheme-to-phoneme conversion is a well explored area and its output may serve as sufficiently good baseline. In \ref{relatedwork} we also discuss methods, that are able to derive phonetic transcriptions directly from the speech signal, using a speech recognition framework. These methods are somewhat complex and they are typically specific for a particular recognizer. Rather than improving any of these methods, we aim to explore a possibility to combine them. That is, we want to exploit both textual and acoustic information to derive phonetic transcriptions of the desired words.
-\linebreak \linebreak
-In the desired settings, the acoustica data with user's recordings are obtained online. It can be difficult to make user say words we are interested in, so the ultimate goal is to develop algorithm, that is able to extract those words from a dialogue history or ask user to say them. Crucial point of this approach is, that the user should not feel bored by the process. For a purpose of this work, we assume that we have already obtained recordings with correct pronunciations and work with it. In real setting we would have to employ dialogue policy to be able to gather our own recordings or process the history and try to identify respective words.
-
-\section{Identifying difficult words}
-If we want to improve pronunciations, we should first identify the words that are mispronounced. Obviously, we could let the TTS system to pronounce each word in a best effort style and user would identify mistakes and correct them. This approach hase several drawbacks. First, the communication with the user is rather complicated, since the badly pronounced word has to be isolated prior to obtaining the correct pronunciation. Second, it may be unpleasant for the user if he or she has to undergo this process and hear the bad pronunciation. Thus, it would be better if we could recognize the possibly difficult words somehow. It would mean, that we can ask user directly for the correct pronunciation of the world. We explore this issue in the rest of this section.
-\subsection{Data}
-TODO: probably move to experiments section
-We explore the problem on two datasets. The first one, we call it $D_1$ is artificial and it contains Czech and English words. The Czech are chosen in a way, that the should be difficult to pronounce for a TTS engine trained on English. On the other hand, the English words were picked from the cmu dictionary TODO: cite so it should be pronounced correctly. We then synthesized each word by three synthesizers, namely it was $gtts$, $cereproc$ and $svox$. The other dataset, $D_2$ was created as the random subsample of the Autonomata corpus. It contains one hundred Dutch names.
-\linebreak \linebreak
-\textbf{The data labeling}. Labeling of $D_1$  was performed by three annotators. Each of them had to listen each of the words three times, each time synthesized by different engine. He then labeled each of the recording with a discrete number ranging from one to five. The recordings labels were averaged. Thus we obtain labels per each recording and we have three labels in total for each word. We average these three labels and obtain a score between one and five, that describes overall quality of the word's pronunciation.
-\subsection{Measuring the difficulty}
-In order to estimate the difficulty of each word's pronunciation, we propose three measures, which we introduce in this section. The key idea is, that we obtain values for each of this measures and then combine them in one feature vector that represents the recording. Then we can train a classifier, that learns to predict quality of the pronunciation.
-\subsubsection{$M_1$ measure - averaged Mel Cepstral Distortion}
-We discuss Mel Cepstral Distortion in detail in TODO: ref. We use it here to define the $M_1$ measure. We can describe it as follows:
-\begin{equation}
-M_1(k) = \frac{1}{N}\sum_{(i,j)}{MCD(r_{ki},r_{kj})}
-\end{equation}
-Where $N = {3\choose2}$, $(i,j)$ stands for every combination of synthesizers, $r_{ki}$ is name {k} synthesized by engine {i} and $MCD$ is the Mel Cepstral Distortion.
-The key idea motivating this measure is, that if there is a problem with a pronunciation of some part of the word, every synthesizer have to deal with it somehow. It is likely, that each of them will do it in sligthly differnt way. This implies, that the pairwise $MCD$ will increase.
-\linebreak \linebreak
-Nevertheless, the process of computing value of $M_1$ introduce some problems. The troubles stem from the fact, that there is high variability in the data obtained from the synthesizers. That is, one synthesizer's output may differ greatly from the others, so it biases the result. TODO: figure. If we had enough synthetizers, we could afford to ignore values of the outliers and thus smooth the results
-\linebreak \linebreak
-We tested, how good is the correlation of $M_1$ measure and human judgement. First, we synthesized the words by different synthesizers. Each recording created this way was then labeled by human. Set of recordings for each word was then used to compute $M_1$ value and this was compared with the mean of the respective human judgements. Results on our sample dataset with the use of the $0$-th coefficient and without it are shown in \figref{mcdcorr} and \figref{mcdcorrwt} respectively. Based on these results, it may seem, that the $M_1$ measure is not very good, the best correlation was 0.471. However, it may add important peace of information to the feature vector.
-\linebreak \linebreak
-The $MCD$ has one feature, that can be looked at as a disadvantage: It does not weight its coefficients, respectively it weights all with the same weights. We propose to change it - for example linear model could be trained, that finds the combination of MFCC's that corresponds the best. The coefficients derived by this model would be difficult to interpret without further research. However, we can train it and try to use it instead of typical $MCD$. TODO: further variations
-\subsubsection{$M_2$ measure - averaged phonetic distance}
-Another measure we can possibly use is based on phonetic transcriptions. We first recognize the recordings with a phoneme recognizer, thus we obtain a sequence of characters per each recording. We can compute pairwise distances of these transcriptions, using for example Levensthein \cite{navarro2001guided} or Hamming distance, which we normalize. The motivation is similar to the $M_1$ measure. Assuming the difficult words have positions that are problematic for the TTS engine, the recognized phonemes on these positions should differ and thus the distance between transcriptions should increase. Four our purposes, we have used Levenshtein distance as a metric.\linebreak
-The M2 measure is described by equation:
-\begin{equation}
-M_2(k) = \frac{1}{N}\sum_{(i,j)}{\frac{LD(Hyp(r_{ki}),Hyp(r_{kj}))}{max(len(r_{ki},len(r_{kj})))}}
-\end{equation}
-Where $N = {3\choose2}$, $(i,j)$ stands for every combination of synthesizers and $r_{ki}$ is name $\{k\}$ synthesized by engine $\{i\}$. $LD$ means Levenshtein Distance and $Hyp$ represents the best hypothesis from the phonetic recognizer. Note, that we normalize the distance by length of the longer transcriptions.
-\subsubsection{$M_3$ measure - occurence of bad bigrams}
-The $M_3$ measure is based on a different approach.
-We want to learn the typical mistakes of $grapheme-to-phoneme$ converter, concretely which groups of graphemes are difficult to transcribe for it.
-We suppose, that words with many occurences of such groups are difficult to pronounce.
-To compute the measure, we need two corpuses ($C_1$ and $C_2$) in different languages and a $grapheme-to-phoneme\:(g2p)$ training algorithm.
-The corpuses should consist of pairs (word, transcription).
-We can then prepare for computation of $M_3$ in three stages:
+\section{Used techniques}
+\subsection{Notion of communication}
+Communication is a process during which some entities exchange information.
+There are different types of communication, we focus here on the communication in natural language.
+When we consider communication, we have to define meaning and form \cite{taylor2009text}.
+The meaning or semantics is difficult to formalize and study.
+However, the Text-To-Speech(TTS) system does not need to understand the utterance.
+The concept of form deserves some elaboration.
+A proper understanding of this part of communication is essential for our purposes, but thankfully we can rely on an established frameworks.
+\par
+The main issue when discussing form, or a message, is to distinguish the general nature of the form from
+any specific instantiation it may have.
+Imagine, someone wants to deliver an information by showing some color.
+If a red card is used, it isn’t the card itself that is the important point, rather that red color was used instead of different color.
+So for example, a different red card could be used successfully  as it
+is not the particular red card itself which is the form, but rather that the card has the property “red”
+and it is this property and its contrasting values that is the basis of the communication system.
+We use the term signal to refer to the physical manifestation of the form.
+Here signal is again used in a specific technical sense: it can be thought of as the thing which is stored or the
+thing which is transmitted during communication.
+The idea of “red” and the fact that it contrasts with other colours is the form; the physical light waves that travel are the signal.
+\par
+It is important to see that the relationship between meaning and form, and form and signal
+are quite separate.
+If we assigned meaning only to colors red, blue and green and an orange card would have been showed to us, we would not decode the meaning, although the signal-form translation worked well.
+This situation is similar to that when we read a new word - while are quite capable of using our eyes to read the physical pattern from the page and create an idea of the letters in our head, if we don’t know the form-meaning mapping of the word, we can not understand it.
+Finally, we use the term channel or medium to refer to the means by which we the message
+is converted and transmitted as a signal.
+\par
+In this work, we deal mainly with the spoken channel and the written channel.
+Encoding is the process of creating a signal from a message. When dealing with speech, we talk
+of speech encoding and when dealing with writing we talk of writing encoding. Speech encoding
+by computer is more commonly known as speech synthesis, which is of course the topic of this
+book.
+The most significant aspect of speech encoding is that the nature of the two representations,
+the message and the speech signal, are dramatically different.
+A word (e.g. $HELLO$) may be composed of four phonemes ($/H\:EH\:L\:OW/$) but the speech signal is a continuously varying acoustic waveform, with no discrete components.
+In this work, we focus on derivation of the first representation and we let the used synthesis frameworks do the speech signal generation.
+So we simplify the speech representation to its phonetic transcription.
+\par
+However, it is important to understand, that we do not change the meaning or even form of the communication, we just want to use different channel for the transmition.
+When we consider the verbal language, we may talk about the duality of form such that we have a phonemes which combine to words which combine to form sentences.
+We define three terms that help us to describe the problematic:
 \begin{enumerate}
-\item Train $g2p$ model $G_1$ on corpus $C_1$ in language $L_1$.
-\item Use trained $G_1$ to transcribe words contained in corpus $C_2$.
-\item Identify problematic parts.
+\item \textbf{phonemes} are members of the relatively small (between 15-50) set of units which can be combined to produce distinct word forms.
+\item Term \textbf{phone} is used to describe a single speech sound, spoken with a single articulatory configuration.
+\item \textbf{allophones} link the phonemes and phones: different ways of realising a single phoneme are called allophones.
 \end{enumerate}
-Stage 3 needs further description.
-We obtained list of triples, $i^{th}$ of which is structured:
-\begin{center}
-(word $w_i$ from $C_2$, original transcription $t^o_i$, transcription $t^h_i$ derived by $G_1$)
-\end{center}
-We can then use the Dynamic Time Warping algorithm to obtain pairwise alignments of these sequences, illustrated on \figref{sample_dtw_alignment}
-In fact, we first transform the phoneme sequences into sequences of bigrams.
-This is because graphemes and phonemes are not in one-to-one correspondence and bigrams capture the relations better.
-\img{sample_align.jpg}{0.45}{Sample alignment of two phonetic sequences}{sample_dtw_alignment}
-Once we have the alignments, we can identify positions, where original transcriptions from $C_2$ differ from the hypothesis derived in stage 2.
-Respective bigrams from the original word can then be identified.
-For each bigram, we count number of times it was marked as difficult.
-Each word can then be scored according to number of bad bigrams it contains.
-To evaluate the $M_3$ measure, the MaryTTS framework was used, because we can extract phonetic transcriptions from it and thus use its $g2p$ module.
-This means, we are able to derive the transcriptions with the exactly same module, that is used in the synthesizer.
-We have also used the Cereproc engine.
-Because we do not have access to the $g2p$ that Cereproc uses, we trained our own model on the $cmu$ dictionary\footnote{http://www.speech.cs.cmu.edu/cgi-bin/cmudict}.
-The data was then processed and the confusion matrix was created, containing number of times, respective bigrams are confused with each other.
-The matrix turns out to be quite sparse, which is not surprising, since the majority of bigram pairs are interchanged with probability nearly zero.
-TODO: describe settings, move to experiments?
-If we restrict the matrix only to values greater than certain threshold, its dimensions decrease dramatically and we can visualize it, the result can be seen in \figref{bigram_conf}
-The scoring procedure counts for each word a number of occurrences of bigrams that were confused and the number of confusions is summed and divided by the length of the word.
-We plot the scores in \figref{bigram_scores}.
-The shape of the curve corresponds to the fact, that many bigrams does not occur a lot, or are not problematic.
-The correlation of this measure and annotations was $0.20$ for the MaryTTS and $0.31$ for the Cereproc, respectively.
-Intuitively, if we have access to the $g2p$ module, which is the MaryTTS case, it is expectable, that the results would be better.
-However, this turns out not to be true, which is surprising.
-\img{bigroccurrs.jpg}{0.9}{Frequencies of confusing respective bigrams, i.e. how many times it occurs in some confused pair. We can see, that the majority of bigrams has somewhat low scores.}{bigram_scores}
-\img{confusion_limit.png}{0.9}{Visualization of the confusion matrix computed from the results.}{bigram_conf}
-TODO: why?
-\linebreak\linebreak
-The disadvantage of this approach is, that it relies quite heavily on the alignment process, which is imperfect, so sometimes it can mark as confused pair of bigrams, that is not correct.
-Also occurence of some bigrams is very sparse, so its scores may be estimated poorly.
-Another possible problem is, that it relies on the corpuses with phonetic transcriptions and then it is specific to certain pair of languages.
-\subsubsection{Measure combination}
-We haver seen, that neither of the measures correlates well with the annotators' labeling.
-Despite this fact, it may by interesting to explore, whether the combination of the measures can work better.
-As described in the introduction to this section, we combine the measured values to one feature vector that represents the word.
-We then train a $Ridge\: Regression$ model using the averaged human labels as a target variable.
-We have used 5 fold cross validation and measured the $R^2$ and $Mean Squared Error (MSE)$, which we averaged over all the folds.
-The measured $MSE$ was $0.43$ and $R^2$ was $0.58$.
-We remind, that the human labels are discrete values in the interval $[1,5]$, so the $MSE$ value is good, saying, that we differ from the human label by less than $0.5$.
-We can choose a threshold and state, that if the model's predicted value is greater than the threshold, the respective word is hard to pronounce and we should try to improve the pronunciation.
+The duality principle states that verbal language is not one system but two; the first system uses a
+small inventory of forms, phonemes, which sequentially combine to form a much larger inventory
+of words.
+\par
+We have a similar dual structure in written communication, where words are made of \textbf{graphemes}.
+Graphemes are in many ways analogous to phonemes, but differ in that they vary much more from language to language. In alphabetic languages like, graphemes can be thought of as letters or characters; in syllabic writing like Japanese hiragana, each grapheme represents a syllable or mora, and in languages like Chinese each grapheme
+represents a full word or part of a word.
+We consider alphabetic languages in this work, encoded with the latin alphabet\footnote{https://en.wikipedia.org/wiki/Latin\_alphabet}.
+However, it is possible to extend the used $grapheme-to-phoneme$ conversion technique \cite{bisani2008joint} to work with other types languages.
+\par
+To encode the phonemes, phonetic alphabets are used. Standard is an International Phonetic Alphabet (IPA)\footnote{https://en.wikipedia.org/wiki/International\_Phonetic\_Alphabet}.
+IPA symbols are composed of one or more elements of two basic types, letters and diacritics.
+The general principle of the IPA is to provide one letter for each distinctive sound (speech segment), although this practice is not followed if the sound itself is complex.
+An example of IPA characters is given in \figref{ipa_overview}.
+\img{ipa_overview.png}{0.9}{Some letter of the IPA alphabet together with their occurences in English words.}{ipa_overview}
+\par
+The problem is, that some of the tools we work with use different phonetic alphabets with possibly different rules.
+However, the TTS engines works with IPA, so it is neccessary to convert the transcriptions.
+To overcome this problem, we have derived one-to-one mappings between these sets and IPA.
+This process may introduce some errors, however the alphabets are usually based on similar principles, so it is no so hard to derive this mappings.
+Namely, we used the Arpabet\footnote{https://en.wikipedia.org/wiki/Arpabet}, Timit\footnote{https://catalog.ldc.upenn.edu/docs/LDC93S1/PHONCODE.TXT} and CGN\footnote{https://pdfs.semanticscholar.org/64d5/d612f9c639271a1340820a418fa5baf02770.pdf} phoneme sets.
+\par
+As we have suggested, some speech synthezizers are able to accept input in the SSML format which we introduce in \ref{SSML}.
+However, not all the synthesizers have this ability.
+We use Cereproc to work with utterances written in SSML.
+An example of such utterance is given in \figref{SSML-trn}.
+The problem with providing transcriptions in this way is, that the Cereproc synthesizer ignores the characters defining strech of the phoneme.
+Therefore, we ommit these characters from the transcriptions by mapping the streched phonemes to their base variants
+This leads to worse quality of the pronunciation, however is sufficient to explore it.
+\img{ssml_ipa.png}{1.0}{An example of the synthesizer's input in SSML, forcing it to use our phonetic transcription.}{SSML_trn}
+\subsection{Phoneme recognition}
+To improve the pronunciation, it is essential to obtain information from the user's recording.
+We need to work on the phonetic level, so we have to gather phonetic transcription of the recording.
+In theory, we could use the standard output of the speech recognizer, i.e. sequence of words and transcribe it phonetically.
+However, this is not desirable, because such procedure adds new source of potential errors, since the $g2p$ module has to be used.
+Furthermore, since we aim to add new words to the TTS vocabulary, it is likely, that the word is missing also in the vocabulary of the speech recognition system.
+This fact means, that the desired word will not appear in the recognizer's output and thus we cannot obtain any relevant transcription.
+Instead, we can modify decoder used in the speech recognizer in such way, that it outputs sequences of phonemes rather than words.
+This can be done in several ways, some of which we introduce in the following text.
+\subsubsection{On the Automatic Speech Recognition (ASR) decoding process}
+We use a Kaldi framework for the ASR task and follow the procedure suggested in the official documentation.
+Kaldi constructs a Finite State Transducer for purposes of the decoding process \footnote{http://kaldi-asr.org/doc/graph.html}
+This transducer is created as a composition of four other FSTs, $HCLG = H \circ C \circ L \circ G$.
+The meanings of the parts are:
+\begin{itemize}
+\item $G$ is an acceptor (i.e. its input and output symbols are the same) that encodes the grammar or language model.
+\item $L$ is the lexicon; its output symbols are words and its input symbols are phones.
+\item $C$ represents the context-dependency: its output symbols are phones and its input symbols represent context-dependent phones, i.e. windows of $N$ phones
+\item $H$ contains the acoustic model's definitions; its output symbols represent context-dependent phones and its input symbols reference the model.
+\end{itemize}
+As we can see, the $G$ FST brings information contained in the language model to the decoding graph.
+We provide an example in \figref{Lfst} which shows, that the $L$ transducer determines the output elements.
+Hence, by modification of $G$ and $L$ we can change the output set of the decoded tokens.
+\img{Lfst.png}{0.9}{An example of the finite state transducer representing the lexicon}{Lfst}
+\subsubsection{Evaluation}
+In ASR systems, the most common phone recognition evaluation measures are phone error rate (PER), or the related performance metric, phone accuracy rate.
+The latter is defined by the following expression:
+\begin{equation}
+Accracy = \frac{N_T - S - D - I}{N_T} \times 100\%
+\end{equation}
+where $N_T$ is the total number of phonemes in the gold utterance and $S, D$ and $I$ are the substitution, deletion and insertion errors, respectively.
+From this perspective, we can see it as related to Levensthein distance of the gold and test sequences.
+Then, we can define $PER \: = \: 100\% - Accuracy$.
+Another measure is correctness, which is similar to accuracy, but does not consider insertion errors.
+The number of insertion, deletion and substitution errors is computed using the best alignment between two token sequences: the manually aligned (gold) and the recognized (test).
+An alignment resulting from search strategies based on dynamic programming is normally used successfully for a large number of speech recognition tasks \cite{ney2000progress}.
+We use a $sclite$ utility \footnote{http://www1.icsi.berkeley.edu/Speech/docs/sctk-1.2/sclite.htm} to measure the PER.
+\subsubsection{Modifying the Language Model}
+Language Model (LM) is an essential part of the ASR engine.
+It provides probabilities that a particular word occur in the considered context. 
+For example we can imagine model, that assigns probability to every possible n-gram.
+The easiest approach is to use a so called 0-gram LM.
+It simply distributes the probability mass uniformly among the words.
+Obviously, this model is not very good.
+If we want to employ prior knowledge about domain, we can use collected textual data and estimate probabilities of $n$-grams.
+If we want to decode phonemes, we can construct a language model, that describes probabilities of phoneme occurrences instead of words.
+We can then modify $L$ and $G$ transducers to change the output of the recognizer to phonemes.
+Ideally, we would use a set of name transcriptions to train the language model.
+However, it is difficult to get such corpus that would be also large enough to robustly estimate the LM parameters. So we create artificial training dataset by transcribing written text with a $g2p$ module.
+Alternatively, we could use phonetic alignments that are created during the decoding process and can be extracted from the recognizer.
+However, we did not choose this option, since the transcriptions that are obtained this way are not accurate enough, mainly because the word recognition errors.
+\par
+Creation of the decoding graph works with vocabulary and phonetic dictionary.
+The vocabulary contains list of known words and the dictionary respective phonetic transcriptions. 
+To change the transducers in the above mentioned way, we reduce the vocabulary to list of phonemes and setting the dictionary mapping to be identity.
+This way we force the decoder to output phonemes.
+\subsubsection{Timit dataset}
+The above approach has a disadvantage, that it is difficult to obtain language model of good quality without a proper corpus of transcriptions.
+This corpus may be found as a part of the timit dataset \cite{lopes2011phoneme}.
+In fact, the Kaldi framework contains scripts, that train a model using this dataset.
+The timit dataset has got transcriptions labeled with granularity of individual phonemes.
+This means, that we can train the phonetic recognizer directly.
+Problem is, that different set of phonemes is used but we can solve it by mapping the phonemes to IPA.
+Worse is the fact, that the phone error rate measured on different data gives poor results.
+This can be caused by the fact, that dataset is not very big and thus the model can have problems accomodating to different acoustic conditions.  
+\subsubsection{Modelling phoneme bigrams}
+The decoding graph is context dependent. 
+It means, that decoder takes into account both the right and the left context of the phonemes. 
+In order to model the pronunciation on various positions in the word, each phoneme is represented in several variants, depending in which part of the word it is located ($beginning, end, inside$). 
+One option is to model each phoneme as a singleton as we have done in previous.
+Alternatively, we can create a decoding graph, that models bigrams of phonemes.
+This way the information about the context is preserved.
+Moreover, we can model the input more accurately and distinguish pauses between words from space between phonemes. 
+This approach proved to yield the best results.
+
+\section{Overview and key insight}
+We aim to improve the pronunciation, that means, we need to derive phonetic transcriptions of good quality. Straightforward way of achieving this is to use a $grapheme-to-phoneme (g2p)$ module. As we discuss in \ref{g2p-desc} and \ref{relatedwork}, this approach has some limitations, mainly because the pronunciation of some tokens in different languages may vary. However, grapheme-to-phoneme conversion is a well explored area and its output may serve as sufficiently good baseline. In \ref{relatedwork} we also discuss methods, that are able to derive phonetic transcriptions directly from the speech signal, using a speech recognition framework. These methods are somewhat complex and they are typically specific for a particular recognizer. Rather than improving any of these methods, we aim to explore a possibility to combine them. That is, we want to exploit both textual and acoustic information to derive phonetic transcriptions of the desired words.
+\par
+In the desired settings, the acoustica data with user's recordings are obtained online. It can be difficult to make user say words we are interested in, so the ultimate goal is to develop algorithm, that is able to extract those words from a dialogue history or ask user to say them. Crucial point of this approach is, that the user should not feel bored by the process. For a purpose of this work, we assume that we have already obtained recordings with correct pronunciations and work with it. In real setting we would have to employ dialogue policy to be able to gather our own recordings or process the history and try to identify respective words.
+\section{TTS evaluation}

@@ -1,45 +1,60 @@
 \chapter{Introduction}
-Voice control or communication is a common feature of many systems nowadays.
-Its applications range from simple one-word control commands to complex communication in spoken dialogue systems.
+Voice communication is a common interface of many systems nowadays.
+Voice communication applications range from simple one-word control commands to complex communication in spoken dialogue systems.
 In this work, we consider mainly such complex systems.
-For the sake of clarity, we now briefly describe setting of such system.
-\linebreak\linebreak
-It usually contains Automatic Speech Recognition (ASR) module, so the natural speech can be recognized and translated into words.
-The system then derives an appropriate response, typically in the form of sentence written in natural language.
-The process of this derivation depends on the concrete implementation.
-The response can be displayed in the textual form, however, it is more common to generate audio recording with human voice reading the response.
+We now briefly introduce setting of such system.
+\par
+Leading a reasonable dialogue with a user is a substantially difficult composed of many subtasks.
+High level overview of such system is given in \figref{sds}.
+First, the input from the user has to be processed
+Spoken dialogue systems typically contain Automatic Speech Recognition (ASR) module for this purposes, so the natural speech can be recognized and translated into words.
+Afterwards, some Spoken Language Understanding (SLU) technique has to be employed in order to extract essential information from the input.
+In plain words, we have to understand the meaning of the utterance obtained from the user.
+The dialogue system than derives a relevant response using its policy.
+The process of this derivation depends on particular implementation.
+A $rule-based$ policy can be used, however it is more common nowadays to employ $data-driven$ approaches.
+\par
+The derived response has to be translated into human readable language, using Natural Language Generation (NLG) techniques.
+The response can be displayed in textual form, however, it is more common to generate audio recording with human voice reading the response.
 Although it is possible to use a set of prerecorded utterances, this approach has obvious limitations since it is not able to read an arbitrary phrase.
 Particularly, it may be difficult to read named entities and numerical values such as time and date.
 Also, the usage of variable utterances provides better user experience.
-\linebreak\linebreak
-To overcoma the mentioned issues, a Text-To-Speech (TTS) module is usually also part of dialogue systems.
-The purpose of this module is to transform a (generally arbitrary) written text utterance to natural speech.
-Modern TTS systems produce audio waveforms that sound quite naturaly and the pronunciation is sufficiently good.
+\img{SDS.png}{0.9}{A high level architecture of spoken dialogue system.}{sds}
+\par
+To introduce a variability and allow to use nearly arbitrary phrase a Text-To-Speech (TTS) module is usually also part of dialogue systems.
+The purpose of this module is to transform written text utterance to natural speech.
+Modern TTS systems produce audio waveforms that sound naturaly and the pronunciation is sufficiently good.
 Nevertheless, it may experience some difficulties, mainly when it comes to unknown words.
-This may happen, because the system is usually trained using certain set of words, typically from one language.
-But real applications often require to pronounce named entities or other language- or domain- specific words, that cannot be present during the training phase.
-This cause situations, when the system has to employ some mechanism to derive the pronunciation and the words may be mispronounced.
-Succh words are called Out-Of-Vocabulary (OOV).
+This may happen, because although some multilingual TTS systems exists (\cite{sproat1997multilingual}, \cite{miro2009multilingual}), the system is usually trained using certain set of words, typically from one language.
+But some applications often require to pronounce named entities or other language- or domain-specific words, that cannot be present during the training phase.
+Furthermore, the system needs to obtain information, which language it should use.
+This does not make much sense when considering individual proper names.
+Such words are called Out-Of-Vocabulary (OOV), because the TTS systems are vocabulary based, i.e. they contain set of known words and their phonetic transcriptions.
+Occurences of OOV words cause situations, when the system has to employ some mechanism to derive the pronunciation and the words may be mispronounced.
 The derivation of the pronunciation is inherently imperfect and may cause errors.
-Although this does not occur often, the negative effect can be quite strong, since it is inconvenient for the user, especially when his or her name is pronounced with mistakes.
-\linebreak\linebreak
+Although this does not occur often, the negative effect can be quite strong, since it is inconvenient for the user, especially when known propername, e.g. his or her name is pronounced with mistakes.
+\par
 In this work, we aim to improve the TTS system pronunciation of OOV words.
 First, we explore methods that can identify words that are potentially difficult to pronounce.
-The identification is first step towards the improvement.
-We propose several measures that can reflect badly pronounced words without any prior language knowledge.
-\linebreak\linebreak
+The identification is first step towards the improvement, because we can then ask the user for proper pronunciation.
+We propose and explore several measures that can reflect badly pronounced words without any prior language knowledge.
+\par
 Next, we try to improve the TTS system's pronuncication of the desired words.
-To achieve this, we employ the user and obtain correct pronunciations from him.
+To achieve this, we ask the user and obtain correct pronunciations from him.
 So we get training examples and we are able to improve the TTS system by processing the obtained recording, deriving a phonetic transcription (i.e. pronunciation) and adding it to the TTS vocabulary.
 Moreover, the derived pronunciations can be used to improve the recognition ability of the ASR module, since it is also dictionary-based.
-\linebreak\linebreak
-As it has been suggested, there are several issues, that are related with the OOV words so methods of deriving correct pronunciations has got potentially very useful applications.
-It can be used to enlarge vocabularies of TTS or ASR systems both offline or on the fly using the user's feedback.
-This leads to better pronunciation in case of TTS and improved performance in case of ASR systems.
+Thus if we enlarge the vocabulary, the ASR has got access to more possibilities and can recognize the new words correctly.
+\par
+There are several issues, that are related with the OOV words so methods of deriving correct pronunciations has got potentially very useful applications.
+As it has been said, it can be used to enlarge vocabularies of TTS or ASR systems.
+This may potentially lead to better pronunciation in case of TTS.
+It is because the extended vocabulary implies, that a number of occurences of the badly pronounced words decreases.
+In case of ASR systems, bigger vocabulary can cause, that less words are recognized incorrectly.
 There exist several ways how to obtain such feedback, however, this is not a subject of this work.
+It is related with respective dialogue policy and concrete applications.
 Theoretically, the method can work with just one gold example, however, it is better to obtain more recordings in general.
 In \figref{dialogsample} we provide basic example of simple dialogue, illustrating how real application could look like.
-However, in this work we assume the user's recording(s) have been gathered already and we do not consider the dialogue policy.
+However, in this work we assume the user's recording(s) have been gathered already and we do not discuss the dialogue policy.
 \begin{center}
 \begin{figure}[h]
 \texttt{System: Hello, /AANDRZHEZH/.\linebreak

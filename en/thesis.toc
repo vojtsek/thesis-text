@@ -1,32 +1,45 @@
 \contentsline {chapter}{\numberline {1}Introduction}{2}{chapter.1}
-\contentsline {chapter}{\numberline {2}Overview of used techniques and algorithms}{4}{chapter.2}
-\contentsline {section}{\numberline {2.1}Audio signal processing}{4}{section.2.1}
-\contentsline {section}{\numberline {2.2}Mel Cepstral distortion}{5}{section.2.2}
-\contentsline {section}{\numberline {2.3}Finite state transducers}{5}{section.2.3}
-\contentsline {section}{\numberline {2.4}Automatic speech recognition (ASR)}{7}{section.2.4}
-\contentsline {section}{\numberline {2.5}Text-to-speech (TTS)}{8}{section.2.5}
-\contentsline {section}{\numberline {2.6}Algorithms description}{10}{section.2.6}
-\contentsline {section}{\numberline {2.7}Related Work}{11}{section.2.7}
-\contentsline {subsection}{\numberline {2.7.1}Grapheme-to-phoneme conversion}{11}{subsection.2.7.1}
-\contentsline {subsubsection}{Techniques based on local similarities}{11}{section*.9}
-\contentsline {subsubsection}{Pronunciation by analogy}{12}{section*.10}
-\contentsline {subsubsection}{Probabilistic approaches}{12}{section*.11}
-\contentsline {subsection}{\numberline {2.7.2}Learning pronunciation from spoken examples}{13}{subsection.2.7.2}
-\contentsline {subsection}{\numberline {2.7.3}Conclusion}{15}{subsection.2.7.3}
-\contentsline {section}{\numberline {2.8}Thesis overview}{15}{section.2.8}
-\contentsline {chapter}{\numberline {3}Methodology}{16}{chapter.3}
-\contentsline {section}{\numberline {3.1}Used approaches}{16}{section.3.1}
-\contentsline {section}{\numberline {3.2}Overview and key insight}{16}{section.3.2}
-\contentsline {section}{\numberline {3.3}Identifying difficult words}{16}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Data}{17}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Measuring the difficulty}{17}{subsection.3.3.2}
-\contentsline {subsubsection}{$M_1$ measure - averaged Mel Cepstral Distortion}{17}{section*.12}
-\contentsline {subsubsection}{$M_2$ measure - averaged phonetic distance}{18}{section*.13}
-\contentsline {subsubsection}{$M_3$ measure - occurence of bad bigrams}{18}{section*.14}
-\contentsline {subsubsection}{Measure combination}{20}{section*.15}
-\contentsline {chapter}{Conclusion}{22}{chapter*.16}
-\contentsline {chapter}{Bibliography}{23}{chapter*.17}
-\contentsline {chapter}{List of Figures}{25}{chapter*.18}
-\contentsline {chapter}{List of Tables}{26}{chapter*.19}
-\contentsline {chapter}{List of Abbreviations}{27}{chapter*.20}
-\contentsline {chapter}{Attachments}{28}{chapter*.21}
+\contentsline {chapter}{\numberline {2}Overview of used techniques and algorithms}{5}{chapter.2}
+\contentsline {section}{\numberline {2.1}Audio signal processing}{5}{section.2.1}
+\contentsline {section}{\numberline {2.2}Mel Cepstral distortion}{6}{section.2.2}
+\contentsline {section}{\numberline {2.3}Finite state transducers}{6}{section.2.3}
+\contentsline {section}{\numberline {2.4}Automatic speech recognition (ASR)}{8}{section.2.4}
+\contentsline {section}{\numberline {2.5}Text-to-speech (TTS)}{9}{section.2.5}
+\contentsline {section}{\numberline {2.6}Algorithms description}{11}{section.2.6}
+\contentsline {section}{\numberline {2.7}Related Work}{12}{section.2.7}
+\contentsline {subsection}{\numberline {2.7.1}Grapheme-to-phoneme conversion}{12}{subsection.2.7.1}
+\contentsline {subsubsection}{Techniques based on local similarities}{12}{section*.9}
+\contentsline {subsubsection}{Pronunciation by analogy}{13}{section*.10}
+\contentsline {subsubsection}{Probabilistic approaches}{13}{section*.11}
+\contentsline {subsection}{\numberline {2.7.2}Learning pronunciation from spoken examples}{14}{subsection.2.7.2}
+\contentsline {subsection}{\numberline {2.7.3}Conclusion}{16}{subsection.2.7.3}
+\contentsline {section}{\numberline {2.8}Thesis overview}{16}{section.2.8}
+\contentsline {chapter}{\numberline {3}Methodology}{17}{chapter.3}
+\contentsline {section}{\numberline {3.1}Used techniques}{17}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Notion of communication}{17}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Phoneme recognition}{19}{subsection.3.1.2}
+\contentsline {subsubsection}{On the Automatic Speech Recognition (ASR) decoding process}{20}{section*.12}
+\contentsline {subsubsection}{Evaluation}{21}{section*.13}
+\contentsline {subsubsection}{Modifying the Language Model}{21}{section*.14}
+\contentsline {subsubsection}{Timit dataset}{21}{section*.15}
+\contentsline {subsubsection}{Modelling phoneme bigrams}{22}{section*.16}
+\contentsline {section}{\numberline {3.2}Overview and key insight}{22}{section.3.2}
+\contentsline {section}{\numberline {3.3}TTS evaluation}{23}{section.3.3}
+\contentsline {chapter}{\numberline {4}Experiments}{24}{chapter.4}
+\contentsline {section}{\numberline {4.1}Data}{24}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Dataset \textbf {$D_1$} - artificial}{24}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Dataset \textbf {$D_2$} - artificial}{24}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}Dataset \textbf {$D_3$} - Autonomata Spoken Name Corpus}{24}{subsection.4.1.3}
+\contentsline {subsection}{\numberline {4.1.4}Annotation procedure}{25}{subsection.4.1.4}
+\contentsline {section}{\numberline {4.2}Identifying difficult words}{25}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Measuring the difficulty}{25}{subsection.4.2.1}
+\contentsline {subsubsection}{$M_1$ measure - averaged Mel Cepstral Distortion}{26}{section*.17}
+\contentsline {subsubsection}{$M_2$ measure - averaged phonetic distance}{28}{section*.18}
+\contentsline {subsubsection}{$M_3$ measure - occurence of bad bigrams}{30}{section*.19}
+\contentsline {subsubsection}{Measure combination}{31}{section*.20}
+\contentsline {chapter}{Conclusion}{33}{chapter*.21}
+\contentsline {chapter}{Bibliography}{34}{chapter*.22}
+\contentsline {chapter}{List of Figures}{36}{chapter*.23}
+\contentsline {chapter}{List of Tables}{37}{chapter*.24}
+\contentsline {chapter}{List of Abbreviations}{38}{chapter*.25}
+\contentsline {chapter}{Attachments}{39}{chapter*.26}

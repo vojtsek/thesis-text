@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.16)  24 JUN 2017 09:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.16)  30 JUN 2017 16:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2309,43 +2309,54 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
 )
-Package hyperref Info: Option `unicode' set `true' on input line 117.
-Package hyperref Info: Option `breaklinks' set `true' on input line 118.
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/ucs.sty
+Package: ucs 2013/05/11 v2.2 UCS: Unicode input support
+
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-global.def
+File: uni-global.def 2013/05/13 UCS: Unicode global data
+)
+\uc@secondtry=\count119
+\uc@combtoks=\toks31
+\uc@combtoksb=\toks32
+\uc@temptokena=\toks33
+)
+Package hyperref Info: Option `unicode' set `true' on input line 120.
+Package hyperref Info: Option `breaklinks' set `true' on input line 121.
 
 \@input{macros.aux}
 \openout2 = `macros.aux'.
 
 (./macros.tex
-\c@thm=\count119
-\c@defn=\count120
+\c@thm=\count120
+\c@defn=\count121
 ) (./thesis.aux (./title.aux) (./chap01.aux) (./chap02.aux)
-(./chap03.aux) (./epilog.aux) (./bibliography.aux))
+(./chap03.aux) (./chap04.aux) (./epilog.aux) (./bibliography.aux))
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 124.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 127.
 
 
 (/usr/share/texmf/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 \AtBeginShipoutBox=\box29
-Package hyperref Info: Link coloring OFF on input line 124.
+Package hyperref Info: Link coloring OFF on input line 127.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -2353,11 +2364,11 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count121
+\c@section@level=\count122
 )
-LaTeX Info: Redefining \ref on input line 124.
-LaTeX Info: Redefining \pageref on input line 124.
-LaTeX Info: Redefining \nameref on input line 124.
+LaTeX Info: Redefining \ref on input line 127.
+LaTeX Info: Redefining \pageref on input line 127.
+LaTeX Info: Redefining \nameref on input line 127.
 
 (./thesis.out) (./thesis.out)
 \@outlinefile=\write5
@@ -2366,17 +2377,17 @@ LaTeX Info: Redefining \nameref on input line 124.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count122
+\scratchcounter=\count123
 \scratchdimen=\dimen133
 \scratchbox=\box30
-\nofMPsegments=\count123
-\nofMParguments=\count124
-\everyMPshowfont=\toks31
-\MPscratchCnt=\count125
+\nofMPsegments=\count124
+\nofMParguments=\count125
+\everyMPshowfont=\toks34
+\MPscratchCnt=\count126
 \MPscratchDim=\dimen134
-\MPnumerator=\count126
-\makeMPintoPDFobject=\count127
-\everyMPtoPDFconversion=\toks32
+\MPnumerator=\count127
+\makeMPintoPDFobject=\count128
+\everyMPtoPDFconversion=\toks35
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
@@ -2392,16 +2403,18 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/ucsencs.def
+File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
+)
 \openout2 = `title.aux'.
 
-
-(./title.tex
+ (./title.tex
 Package hyperref Info: Option `pageanchor' set `false' on input line 6.
 
 
 pdfTeX warning: pdflatex (file ./img/../img/logo-en.pdf): PDF inclusion: found 
 PDF version <1.5>, but at most version <1.4> allowed
-<img/../img/logo-en.pdf, id=104, 506.4591pt x 156.49065pt>
+<img/../img/logo-en.pdf, id=136, 506.4591pt x 156.49065pt>
 File: img/../img/logo-en.pdf Graphic file (type pdf)
 
 <use img/../img/logo-en.pdf>
@@ -2464,80 +2477,57 @@ Package hyperref Info: Option `pageanchor' set `true' on input line 57.
 
  (./chap01.tex
 Chapter 1.
-
-Underfull \hbox (badness 10000) in paragraph at lines 2--43
-\OT1/lmr/m/n/12 sys-tem.
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2--43
-
- []
+<img/SDS.png, id=210, 823.075pt x 508.90125pt>
+File: img/SDS.png Graphic file (type png)
+ <use img/SDS.png>
+Package pdftex.def Info: img/SDS.png used on input line 22.
+(pdftex.def)             Requested size: 371.30594pt x 229.57806pt.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2--43
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2--43
-
- []
+Package natbib Warning: Citation `sproat1997multilingual' on page 2 undefined o
+n input line 28.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2--43
-\OT1/lmr/m/n/12 guage knowl-edge.
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2--43
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2--43
-\OT1/lmr/m/n/12 dictionary-based.
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2--43
-
- []
+Package natbib Warning: Citation `miro2009multilingual' on page 2 undefined on 
+input line 28.
 
 [2
 
 
-]
-LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 51.
+ <./img/SDS.png>]
+LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 66.
 
  (/usr/share/texmf/tex/latex/lm/ot1lmtt.fd
 File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-Underfull \hbox (badness 10000) in paragraph at lines 51--52
+Underfull \hbox (badness 10000) in paragraph at lines 66--67
 []\OT1/lmtt/m/n/12 System: Hello, /AANDRZHEZH/.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 51--52
+Underfull \hbox (badness 10000) in paragraph at lines 66--67
 \OT1/lmtt/m/n/12 User: You said it wrong, my name is /ONDRZHEI/.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 51--52
+Underfull \hbox (badness 10000) in paragraph at lines 66--67
 \OT1/lmtt/m/n/12 System: /ANDREY/, correct?
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 51--52
+Underfull \hbox (badness 10000) in paragraph at lines 66--67
 \OT1/lmtt/m/n/12 User: No, it is /ONDRZHEI/.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 51--52
+Underfull \hbox (badness 10000) in paragraph at lines 66--67
 \OT1/lmtt/m/n/12 System: Oh, /ONDRZHEI/?
  []
 
-) [3]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) [3] [4]
 \openout2 = `chap02.aux'.
 
  (./chap02.tex
@@ -2574,11 +2564,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 14--33
  []
 
 
-Package natbib Warning: Citation `kubichek1993mel' on page 4 undefined on input
+Package natbib Warning: Citation `kubichek1993mel' on page 5 undefined on input
  line 34.
 
 
-Package natbib Warning: Citation `kubichek1993mel' on page 4 undefined on input
+Package natbib Warning: Citation `kubichek1993mel' on page 5 undefined on input
  line 42.
 
 
@@ -2591,7 +2581,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 34--43
 
  []
 
-[4
+[5
 
 
 
@@ -2611,8 +2601,8 @@ File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 58.
- [5]
-<img/fst_example.png, id=216, 949.5475pt x 607.26875pt>
+ [6]
+<img/fst_example.png, id=265, 949.5475pt x 607.26875pt>
 File: img/fst_example.png Graphic file (type png)
 
 <use img/fst_example.png>
@@ -2628,7 +2618,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 77--91
 
  []
 
-[6 <./img/fst_example.png (PNG copy)>]
+[7 <./img/fst_example.png (PNG copy)>]
 Underfull \hbox (badness 10000) in paragraph at lines 98--135
 \OT1/lmr/m/n/12 suf-fi-cient.
  []
@@ -2653,7 +2643,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 98--135
 
  []
 
-[7]
+[8]
 Underfull \hbox (badness 10000) in paragraph at lines 137--147
 \OT1/lmr/m/n/12 (SLU).
  []
@@ -2678,186 +2668,272 @@ Underfull \hbox (badness 10000) in paragraph at lines 148--166
 
  []
 
-[8]
+[9]
 LaTeX Font Info:    Font shape `OT1/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `OT1/lmtt/b/n' tried instead on input line 201.
+(Font)              Font shape `OT1/lmtt/b/n' tried instead on input line 202.
 
-Underfull \hbox (badness 10000) in paragraph at lines 201--203
+Underfull \hbox (badness 10000) in paragraph at lines 202--204
 [] \OT1/lmtt/b/n/12 <?xml version="1.0"?> <speak version="1.0" xmlns="..."
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 201--203
+Underfull \hbox (badness 10000) in paragraph at lines 202--204
 \OT1/lmtt/b/n/12 xmlns:xsi="..." xsi:schemaLocation="..." xml:lang="en-US">
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 201--203
+Underfull \hbox (badness 10000) in paragraph at lines 202--204
 | \OT1/lmtt/b/n/12 <voice gender="female">Mary had a little lamb,</voice>
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 201--203
+Underfull \hbox (badness 10000) in paragraph at lines 202--204
 | \OT1/lmtt/b/n/12 <voice gender="female" variant="2">
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 201--203
+Underfull \hbox (badness 10000) in paragraph at lines 202--204
 | | \OT1/lmtt/b/n/12 Its fleece was white as snow.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 201--203
+Underfull \hbox (badness 10000) in paragraph at lines 202--204
 | \OT1/lmtt/b/n/12 </voice>
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 201--203
+Underfull \hbox (badness 10000) in paragraph at lines 202--204
 | \OT1/lmtt/b/n/12 <voice name="Mike">I want to be like Mike.</voice>
  []
 
-[9] [10] [11]
-! Undefined control sequence.
-l.298 \boldsymbol{\varphi(g)} = \argmax
-                                       _{\varphi'\in\Phi^*} p(\boldsymbol{g,...
-
-? 
-
-Package natbib Warning: Citation `deri2016grapheme' on page 12 undefined on inp
-ut line 323.
+[10] [11] [12]
+Underfull \hbox (badness 10000) in paragraph at lines 289--299
+\OT1/lmr/m/n/12 bil-ity dis-tri-bu-tion over phonemes.
+ []
 
 
-Overfull \hbox (33.31145pt too wide) in paragraph at lines 317--332
+Underfull \hbox (badness 10000) in paragraph at lines 289--299
+
+ []
+
+
+Package natbib Warning: Citation `deri2016grapheme' on page 13 undefined on inp
+ut line 325.
+
+
+Overfull \hbox (33.31145pt too wide) in paragraph at lines 319--334
 \OT1/lmr/m/n/12 The prob-a-bil-ity dis-tri-bu-tion is then typ-i-cally es-ti-ma
 ted by an Expectation-Maximization|
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 317--332
+Underfull \hbox (badness 10000) in paragraph at lines 319--334
 \OT1/lmr/m/n/12 al-go-rithm.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 317--332
+Underfull \hbox (badness 10000) in paragraph at lines 319--334
 
  []
 
-[12]
-
-Package natbib Warning: Citation `slobada1996dictionary' on page 13 undefined o
-n input line 335.
-
 [13]
 
-Package natbib Warning: Citation `deri2016grapheme' on page 14 undefined on inp
-ut line 390.
+Package natbib Warning: Citation `slobada1996dictionary' on page 14 undefined o
+n input line 337.
 
-[14]) [15]
+
+Underfull \hbox (badness 10000) in paragraph at lines 334--357
+
+ []
+
+[14]
+Underfull \hbox (badness 10000) in paragraph at lines 368--373
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 368--373
+
+ []
+
+
+Overfull \hbox (6.84805pt too wide) in paragraph at lines 386--388
+\OT1/lmr/m/n/12 The au-thors model the joint prob-a-bil-ity of hy-poth-e-sis an
+d ref-er-ence word $\OML/lmm/m/it/12 P\OT1/lmr/m/n/12 (\OT1/lmr/bx/n/12 e\OML/l
+mm/m/it/12 ; \OT1/lmr/bx/n/12 w\OT1/lmr/m/n/12 ) =|
+ []
+
+
+Package natbib Warning: Citation `deri2016grapheme' on page 15 undefined on inp
+ut line 394.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 389--400
+\OT1/lmr/m/n/12 learn-ing as pro-posed in [\OT1/lmr/bx/n/12 ? \OT1/lmr/m/n/12 ]
+.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 389--400
+
+ []
+
+[15]) [16]
 \openout2 = `chap03.aux'.
 
  (./chap03.tex
 Chapter 3.
-
-Underfull \hbox (badness 10000) in paragraph at lines 6--9
-\OT1/lmr/m/n/12 of the de-sired words.
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 6--9
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 13--17
-
- []
-
-[16
+[17
 
 
 
-]
+] <img/ipa_overview.png, id=394, 927.465pt x 594.72188pt>
+File: img/ipa_overview.png Graphic file (type png)
+
+<use img/ipa_overview.png>
+Package pdftex.def Info: img/ipa_overview.png used on input line 64.
+(pdftex.def)             Requested size: 371.30594pt x 238.09325pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: Reference `SSML-trn' on page 18 undefined on input line 75.
+
+<img/ssml_ipa.png, id=399, 602.25pt x 80.3pt>
+File: img/ssml_ipa.png Graphic file (type png)
+ <use img/ssml_ipa.png>
+Package pdftex.def Info: img/ssml_ipa.png used on input line 79.
+(pdftex.def)             Requested size: 412.56496pt x 55.01128pt.
+ [18]
+[19 <./img/ipa_overview.png> <./img/ssml_ipa.png>]
+<img/Lfst.png, id=422, 218.416pt x 113.3836pt>
+File: img/Lfst.png Graphic file (type png)
+ <use img/Lfst.png>
+Package pdftex.def Info: img/Lfst.png used on input line 103.
+(pdftex.def)             Requested size: 371.30594pt x 192.75821pt.
+ [20 <./img/Lfst.png (PNG copy)>]
+
+Package natbib Warning: Citation `ney2000progress' on page 21 undefined on inpu
+t line 115.
+
+
+Package natbib Warning: Citation `lopes2011phoneme' on page 21 undefined on inp
+ut line 138.
+
+[21]) [22] [23]
+\openout2 = `chap04.aux'.
+
+ (./chap04.tex
+Chapter 4.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <14.4> on input line 7.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 7.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 7.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 7.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 11.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 11.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 11.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 18.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 18.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 18.
+
+
+Package natbib Warning: Citation `van2008autonomata' on page 24 undefined on in
+put line 19.
+
+[24
+
+
+
+] [25]
 
 Package amsmath Warning: Foreign command \atopwithdelims;
 (amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 24.
+(amsmath)                 on input line 57.
+
+<img/m1barchart.jpg, id=466, 2409.0pt x 1281.78876pt>
+File: img/m1barchart.jpg Graphic file (type jpg)
+ <use img/m1barchart.jpg>
+Package pdftex.def Info: img/m1barchart.jpg used on input line 61.
+(pdftex.def)             Requested size: 371.30594pt x 197.56036pt.
+
+[26 <./img/m1barchart.jpg>]
+<img/mcd_correlation.png, id=475, 2409.0pt x 2563.5775pt>
+File: img/mcd_correlation.png Graphic file (type png)
+
+<use img/mcd_correlation.png>
+Package pdftex.def Info: img/mcd_correlation.png used on input line 65.
+(pdftex.def)             Requested size: 371.30594pt x 395.12074pt.
+ [27 <./img/mcd_correlation.png>]
+<img/cv_folds.png, id=485, 282.67183pt x 399.79906pt>
+File: img/cv_folds.png Graphic file (type png)
+ <use img/cv_folds.png>
+Package pdftex.def Info: img/cv_folds.png used on input line 71.
+(pdftex.def)             Requested size: 371.30594pt x 525.1864pt.
 
 
-LaTeX Warning: Reference `mcdcorr' on page 17 undefined on input line 29.
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-LaTeX Warning: Reference `mcdcorrwt' on page 17 undefined on input line 29.
+Package natbib Warning: Citation `navarro2001guided' on page 28 undefined on in
+put line 93.
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 23--32
-\OML/lmm/m/it/12 MCD$ \OT1/lmr/m/n/12 will in-crease.
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 23--32
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 23--32
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 23--32
-\OT1/lmr/m/n/12 vec-tor.
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 23--32
-
- []
-
-[17]
-
-Package natbib Warning: Citation `navarro2001guided' on page 18 undefined on in
-put line 33.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 33--35
-\OT1/lmr/m/n/12 as a met-ric.
- []
-
-[18] <img/sample_align.jpg, id=359, 151.56625pt x 69.25874pt>
+[28] [29 <./img/cv_folds.png>]
+<img/sample_align.jpg, id=500, 151.56625pt x 69.25874pt>
 File: img/sample_align.jpg Graphic file (type jpg)
 
 <use img/sample_align.jpg>
-Package pdftex.def Info: img/sample_align.jpg used on input line 59.
+Package pdftex.def Info: img/sample_align.jpg used on input line 120.
 (pdftex.def)             Requested size: 185.65297pt x 84.83582pt.
- <img/bigroccurrs.jpg, id=363, 803.0pt x 602.25pt>
+ <img/bigroccurrs.jpg, id=504, 803.0pt x 602.25pt>
 File: img/bigroccurrs.jpg Graphic file (type jpg)
 
 <use img/bigroccurrs.jpg>
-Package pdftex.def Info: img/bigroccurrs.jpg used on input line 78.
+Package pdftex.def Info: img/bigroccurrs.jpg used on input line 139.
 (pdftex.def)             Requested size: 371.30594pt x 278.48112pt.
 
-<img/confusion_limit.png, id=364, 433.62pt x 433.62pt>
+<img/confusion_limit.png, id=505, 433.62pt x 433.62pt>
 File: img/confusion_limit.png Graphic file (type png)
 
 <use img/confusion_limit.png>
-Package pdftex.def Info: img/confusion_limit.png used on input line 79.
+Package pdftex.def Info: img/confusion_limit.png used on input line 140.
 (pdftex.def)             Requested size: 371.30594pt x 371.32458pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 56--85
-
- []
-
+ [30 <./img/sample_align.jpg>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[19 <./img/sample_align.jpg>]) [20 <./img/bigroccurrs.jpg>] [21 <./img/confusio
-n_limit.png>]
+) [31 <./img/bigroccurrs.jpg>] [32 <./img/confusion_limit.png>]
 \openout2 = `epilog.aux'.
 
- (./epilog.tex) [22
+ (./epilog.tex)
+[33
 
 
 
@@ -2876,53 +2952,53 @@ Underfull \hbox (badness 2005) in paragraph at lines 81--86
 lmr/m/n/12 .  Cam-bridge Uni-ver-sity Press,
  []
 
-[23
+[34
 
 
 
-])) [24] (./thesis.lof)
+])) [35] (./thesis.lof)
 \tf@lof=\write7
 \openout7 = `thesis.lof'.
 
- [25
+ [36
 
 
 ] (./thesis.lot)
 \tf@lot=\write8
 \openout8 = `thesis.lot'.
 
- [26
+ [37
 
-] [27
+] [38
 
-] [28
+] [39
 
 ]
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 165.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 165.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 169.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 169.
 (./thesis.aux (./title.aux) (./chap01.aux) (./chap02.aux) (./chap03.aux)
-(./epilog.aux) (./bibliography.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 165.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 165.
+(./chap04.aux) (./epilog.aux) (./bibliography.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 169.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 169.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 3DA2EBFFC3FFC8376566EDF7AC7AAAB3;3927.
+(rerunfilecheck)             Checksum: BF6C8A468EC616E0E1269FAB9F5AD73F;5317.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 165.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 169.
  ) 
 Here is how much of TeX's memory you used:
- 12445 strings out of 494910
- 170598 string characters out of 6179836
- 242045 words of memory out of 5000000
- 15312 multiletter control sequences out of 15000+600000
- 78279 words of font info for 75 fonts, out of 8000000 for 9000
+ 12784 strings out of 494910
+ 176619 string characters out of 6179836
+ 251380 words of memory out of 5000000
+ 15581 multiletter control sequences out of 15000+600000
+ 80007 words of font info for 81 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 36i,8n,35p,1066b,852s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,10n,35p,1066b,852s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/en
 c/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/s
 hare/texmf/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/share/texmf/fonts/enc/dvips/lm/
@@ -2939,9 +3015,9 @@ ri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/f
 onts/type1/public/lm/lmsy6.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pf
 b></usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf/fonts/ty
 pe1/public/lm/lmtt12.pfb>
-Output written on thesis.pdf (32 pages, 854535 bytes).
+Output written on thesis.pdf (43 pages, 1828270 bytes).
 PDF statistics:
- 541 PDF objects out of 1000 (max. 8388607)
- 130 named destinations out of 1000 (max. 500000)
- 230 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 727 PDF objects out of 1000 (max. 8388607)
+ 175 named destinations out of 1000 (max. 500000)
+ 329 words of extra memory for PDF output out of 10000 (max. 10000000)
 
