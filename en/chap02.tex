@@ -31,7 +31,8 @@ To sum up, we have described how to process the digital audio signal and convert
 We gave a brief overview of the signal processing procedure that is essential to work with the audio signal.
 When we mention the input speech signal, we mean series of MFCC vectors, unless explicitly stated otherwise.
 \section{Mel Cepstral distortion}
-Mel Cepstral Distortion \cite{kubichek1993mel} is a well described measure, that should mirror differences between speech samples.There are some caveats worth stating at the outset.
+\label{MCD-desc}
+Mel Cepstral Distortion \cite{kubichek1993mel} is a well described measure, that should mirror differences between speech samples. There are some caveats worth stating at the outset.
 Firs, there are many other factors that contribute to the perception of voice quality.
 For example it takes no account of speech dynamics, either short-range differentials or long-range prosodic
 effects.
@@ -47,7 +48,7 @@ The $T'$ stands for the number of frames of the shorter of the recordings.
 The common use of MCD involves omitting the $0$-th coefficient, since it corresponds to the intensity of signal and therefore it is not usually desired. The scaling factor $\alpha$ is present for historical reasons.
 \linebreak\linebreak
 The MCD measure has one substantial disadvantage: it does not reflect, that the two compared recordings may not have the same length and, what is more, they can be misaligned.
-Thus, we use a modified algorithm that first aligns the sequences using dynamic time warping and then computes MCD with the result.
+Thus, we use a modified algorithm that first aligns the sequences using Dynamic Time Warping and then computes MCD with the result.
 \section{Finite state transducers}
 \label{fst-desc}
 Finite state transducers (FSTs) \cite{mohri1997finite}, are basically finite state automata that are augmented by addition of output labels to each transition.
@@ -220,7 +221,7 @@ It achieves very good quality, however it allows ony use of one voice in the fre
 
 \end{enumerate}
 \section{Algorithms description}
-\subsection*{Dynamic Time Warping (DTW)}\cite{ratanamahatana2004everything}
+\subsection{Dynamic Time Warping (DTW)}\cite{ratanamahatana2004everything}
 The measurement of similarity between two time series is an important component of many applications.
 Moreover, sometimes we need to align two sequences that describe same data but are of different lengths.
 Both this tasks can be solved with use of DTW.
@@ -261,6 +262,112 @@ max(|C|,|Q|) \le K
 Where $d(x,y)$ is an arbitrary distance metric.
 In our application, we want to align two sequences of phonemes, hence we can treat it as strings and work with repsective distance.
 We choose Levensthein distance to be our metric.
+\subsection{Clustering}
+Cluster analysis or clustering \footnote{https://en.wikipedia.org/wiki/Cluster\_analysis} is the task of grouping a set of objects in such a way that objects in the same group (called a cluster) are more similar to each other than to those in other clusters.
+The measure of similarity can be arbitrary distance measure.
+Usually, euclidean distance is used when considering points in space, however it is not a requirement.
+Clustering is inherently an unsupervised method, we often want to describe unknown data, that is find some structure or local similarities.
+\par
+There exist different methods of clustering.
+\textit{Hierarchical clustering} is based on the core idea of objects being more related to nearby objects than to objects farther away.
+These algorithms connect object" to form clusters based on their distance.
+Hierarchical clustering is a bottom-up method, meaning that it forms clusters iteratively.
+The hierarchical clustering algorithms' result can be represented as a dendrogram, which is a tree diagram representing relations among the explored data.
+An example of dendrogram is given in \figref{dendro}.
+We can make a horizontal cut to derive respective clusters.
+\img{dendrogram.png}{0.9}{An example of dendrogram outputted by hierarchical clustering methods.}{dendro}
+\par
+On the other hand in \textit{Centroid-based clustering}, clusters are represented by a central vector, which may not necessarily be a member of the data set.
+If we fix the number of clusters to $k$, we can see the task as an optimization problem: find the $k$ cluster centers and assign the objects to the nearest cluster center, such that the squared distances from the cluster are minimized.
+Typical algorithm from this group is $k$-means clustering\footnote{https://en.wikipedia.org/wiki/K-means\_clustering}. which is an Expectation-Maximization (EM) algorithm.
+\par
+\textbf{Spectral clustering} \cite{ng2002spectral}
+The task of finding good clusters has been the focus of considerable research in machine learning and pattern recognition.
+Often, EM algorithms are used to learn a mixture density.
+Unfortunately, these aproaches have several drawbacks.
+First, to use parametric density estimators, simplifying assumptions usually need to be made (e.g., that the density of each cluster is Gaussian).
+Second, the log likelihood can have many local minima and therefore multiple restarts are required to find a good solution using iterative algorithms. 
+An alternative is to use spectral methods for clustering.
+Here, one uses the top eigenvectors of a matrix derived from the distance between points.
+Therefore, the mentioned problems are overcomed.
+\pagebreak
+\subsection{Basic notions in speech communication}
+Communication is a process during which some entities exchange information.
+There are different types of communication, we focus here on the communication in natural language.
+When we consider communication, we should define what we understand by a term form.
+This concept deserves some elaboration.
+A proper understanding of this part of communication is essential for our purposes, but thankfully we can rely on established frameworks.
+\par
+The main issue when discussing form, or a message, is to distinguish the general nature of the form from
+any specific instantiation it may have.
+Imagine, someone wants to deliver an information by showing some color.
+If a red card is used, it isn't the card itself that is the important point, rather than the red color was used instead of different color.
+So for example, a different red card could be used successfully  as it
+is not the particular red card itself which is the form, but rather that the card has the property "red"
+and it is this property and its contrasting values that is the basis of the communication system.
+We use the term signal to refer to the physical manifestation of the form.
+Here the term signal is again used in a specific technical sense: it can be thought of as the thing which is stored or the
+thing which is transmitted during communication.
+The idea of "red" and the fact that it contrasts with other colors is the form; the physical light waves that travel are the signal.
+\par
+It is important to see that the relationship between meaning and form, and form and signal
+are quite separate.
+If we assigned meaning only to colors red, blue and green and an orange card would have been showed to us, we would not decode the meaning, although the signal-form translation worked well.
+This situation is similar to that when we read a new word - while are quite capable of using our eyes to read the physical pattern from the page and create an idea of the letters in our head, if we don't know the form-meaning mapping of the word, we can not understand it.
+Finally, we use the term channel or medium to refer to the means by which the message
+is converted and transmitted as a signal.
+\par
+In this work, we deal mainly with the spoken channel and the written channel.
+Encoding is the process of creating a signal from a message. When dealing with speech, we talk
+of speech encoding and when dealing with writing we talk of writing encoding. Speech encoding
+by computer is more commonly known as speech synthesis, which is of course the topic of this
+book.
+The most significant aspect of speech encoding is that the nature of the two representations,
+the message and the speech signal, are dramatically different.
+A word (e.g. $HELLO$) may be composed of four phonemes ($/H\:EH\:L\:OW/$) but the speech signal is a continuously varying acoustic waveform, with no discrete components.
+In this work, we focus on derivation of the first representation and we let the used synthesis frameworks do the speech signal generation.
+So we simplify the speech representation to its phonetic transcription.
+\par
+However, it is important to understand, that we do not change the meaning or even form of the communication, we just want to use different channel for the transmition.
+When we consider the verbal language, we may talk about the duality of form such that we have phonemes which combine to words which combine to form sentences.
+We define three terms that help us to describe the problematics:
+\begin{enumerate}
+\item \textbf{phonemes} are members of the relatively small set of units which can be combined to produce distinct word forms.
+\item Term \textbf{phone} is used to describe a single speech sound, spoken with a single articulatory configuration.
+\item \textbf{allophones} link the phonemes and phones: different ways of realising a single phoneme are called allophones.
+\end{enumerate}
+The duality principle states that verbal language is not one system but two; the first system uses a
+small inventory of forms, phonemes, which sequentially combine to form a much larger inventory
+of words.
+\par
+We have a similar dual structure in written communication, where words are made of \textbf{graphemes}.
+Graphemes are in many ways analogous to phonemes, but differ in that they vary much more from language to language.
+In alphabetic languages like English, graphemes can be thought of as letters or characters; in syllabic writing like Japanese hiragana, each grapheme represents a syllable or mora (unit that determines syllable weight, i.e. stress or accent) and in languages like Chinese each grapheme represents a full word or part of a word.
+We consider alphabetic languages in this work, encoded with the Latin alphabet\footnote{https://en.wikipedia.org/wiki/Latin\_alphabet}.
+However, it is possible to extend the used grapheme-to-phoneme conversion technique \cite{bisani2008joint} to work with other types of languages.
+\par
+To encode the phonemes, phonetic alphabets are used.
+The standard is an International Phonetic Alphabet (IPA)\footnote{https://en.wikipedia.org/wiki/International\_Phonetic\_Alphabet}.
+IPA symbols are composed of one or more elements of two basic types, letters and diacritics.
+The general principle of the IPA is to provide one letter for each distinctive sound (speech segment), although this practice is not followed if the sound itself is complex.
+An example of IPA characters is given in \figref{ipa_overview}.
+\img{ipa_overview.png}{0.9}{Some letter of the IPA alphabet together with their occurences in English words.}{ipa_overview}
+\par
+The problem is that some of the tools we work with use different phonetic alphabets with possibly different rules.
+However, the TTS engines work with IPA, so it is neccessary to convert the transcriptions.
+To overcome this problem, we have derived one-to-one mappings between these sets and IPA.
+This process may introduce some errors, however the alphabets are usually based on similar principles, so it is no so hard to derive this mappings.
+Namely, we used the Arpabet\footnote{https://en.wikipedia.org/wiki/Arpabet}, Timit\footnote{https://catalog.ldc.upenn.edu/docs/LDC93S1/PHONCODE.TXT} and CGN\footnote{https://pdfs.semanticscholar.org/64d5/d612f9c639271a1340820a418fa5baf02770.pdf} phoneme sets.
+\par
+As we have suggested, some speech synthezizers are able to accept input in the SSML format which we introduce in \ref{SSML}.
+However, not all the synthesizers have this ability.
+We use Cereproc to work with utterances written in SSML.
+An example of such utterance is given in \figref{SSML_trn}.
+The problem with providing transcriptions in this way is, that the Cereproc synthesizer ignores the characters defining strech of the phoneme.
+Therefore, we ommit these characters from the transcriptions by mapping the streched phonemes to their base variants
+This leads to worse quality of the pronunciation, however is sufficient to explore if the transcription contains sensible phonemes.
+\img{ssml_ipa.png}{1.0}{An example of the synthesizer's input in SSML, forcing it to use our phonetic transcription.}{SSML_trn}
+\pagebreak
 \section{Related Work}
 \label{relatedwork}
 \subsection{Grapheme-to-phoneme conversion}
@@ -397,4 +504,3 @@ Alternatively, one can derive pronunciations directly from an audio signal.
 This approach has been also explored by some authors, however it usually requires quite low-level modifications of the speech recognizer.
 Also, the authors used the derived pronunciations to enlarge the phonetic dictionary of the recognizer, not to improve the Text-To-Speech sytems.
 We explore methods of merging the mentioned approaches to combine both textual and acoustic information and its usability when confronted with human judgments.
-\section{Thesis overview}

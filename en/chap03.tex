@@ -1,96 +1,28 @@
-\chapter{Methodology}
+\chapter{Proposed approaches}
+\section{Basic overview}
+We aim to improve the pronunciation, that means, we need to derive phonetic transcriptions of a good quality. The straightforward way of achieving this is to use a grapheme-to-phoneme (g2p) module. As we discuss in \ref{g2p-desc} and \ref{relatedwork}, this approach has some limitations, mainly because the pronunciation of some tokens in different languages may vary. However, grapheme-to-phoneme conversion is a well explored area and its output may serve as a sufficiently good baseline.
+In section \ref{relatedwork} we also discuss methods that are able to derive phonetic transcriptions directly from the speech signal, using a speech recognition framework. These methods are somewhat complex and they are typically specific for a particular recognizer. Rather than improving any of these methods, we aim to explore a possibility to combine them. That is, we want to exploit both textual and acoustic information to derive phonetic transcriptions of the desired words.
+\par
+In the desired settings, the acoustic data with user's recordings are obtained online.
+We mean by this a situation. when the system asks the user for a correct pronunciation directly.
+It can be difficult to make user say words we are interested in, so the ultimate goal is to develop an algorithm able to extract those words from a dialogue history or ask user to say them in a not irritating way.
+The Crucial point of this approach is, that the user should not feel bored by the process. For the purpose of this work, we assume that we have already obtained recordings with correct pronunciations and work with it.
+In the real setting we would have to employ a dialogue policy to be able to gather our own recordings or process the history and try to identify respective words.
 \section{Used techniques}
-\subsection{Notion of communication}
-Communication is a process during which some entities exchange information.
-There are different types of communication, we focus here on the communication in natural language.
-When we consider communication, we have to define meaning and form \cite{taylor2009text}.
-The meaning or semantics is difficult to formalize and study.
-However, the Text-To-Speech(TTS) system does not need to understand the utterance.
-The concept of form deserves some elaboration.
-A proper understanding of this part of communication is essential for our purposes, but thankfully we can rely on an established frameworks.
-\par
-The main issue when discussing form, or a message, is to distinguish the general nature of the form from
-any specific instantiation it may have.
-Imagine, someone wants to deliver an information by showing some color.
-If a red card is used, it isn’t the card itself that is the important point, rather that red color was used instead of different color.
-So for example, a different red card could be used successfully  as it
-is not the particular red card itself which is the form, but rather that the card has the property “red”
-and it is this property and its contrasting values that is the basis of the communication system.
-We use the term signal to refer to the physical manifestation of the form.
-Here signal is again used in a specific technical sense: it can be thought of as the thing which is stored or the
-thing which is transmitted during communication.
-The idea of “red” and the fact that it contrasts with other colours is the form; the physical light waves that travel are the signal.
-\par
-It is important to see that the relationship between meaning and form, and form and signal
-are quite separate.
-If we assigned meaning only to colors red, blue and green and an orange card would have been showed to us, we would not decode the meaning, although the signal-form translation worked well.
-This situation is similar to that when we read a new word - while are quite capable of using our eyes to read the physical pattern from the page and create an idea of the letters in our head, if we don’t know the form-meaning mapping of the word, we can not understand it.
-Finally, we use the term channel or medium to refer to the means by which we the message
-is converted and transmitted as a signal.
-\par
-In this work, we deal mainly with the spoken channel and the written channel.
-Encoding is the process of creating a signal from a message. When dealing with speech, we talk
-of speech encoding and when dealing with writing we talk of writing encoding. Speech encoding
-by computer is more commonly known as speech synthesis, which is of course the topic of this
-book.
-The most significant aspect of speech encoding is that the nature of the two representations,
-the message and the speech signal, are dramatically different.
-A word (e.g. $HELLO$) may be composed of four phonemes ($/H\:EH\:L\:OW/$) but the speech signal is a continuously varying acoustic waveform, with no discrete components.
-In this work, we focus on derivation of the first representation and we let the used synthesis frameworks do the speech signal generation.
-So we simplify the speech representation to its phonetic transcription.
-\par
-However, it is important to understand, that we do not change the meaning or even form of the communication, we just want to use different channel for the transmition.
-When we consider the verbal language, we may talk about the duality of form such that we have a phonemes which combine to words which combine to form sentences.
-We define three terms that help us to describe the problematic:
-\begin{enumerate}
-\item \textbf{phonemes} are members of the relatively small (between 15-50) set of units which can be combined to produce distinct word forms.
-\item Term \textbf{phone} is used to describe a single speech sound, spoken with a single articulatory configuration.
-\item \textbf{allophones} link the phonemes and phones: different ways of realising a single phoneme are called allophones.
-\end{enumerate}
-The duality principle states that verbal language is not one system but two; the first system uses a
-small inventory of forms, phonemes, which sequentially combine to form a much larger inventory
-of words.
-\par
-We have a similar dual structure in written communication, where words are made of \textbf{graphemes}.
-Graphemes are in many ways analogous to phonemes, but differ in that they vary much more from language to language. In alphabetic languages like, graphemes can be thought of as letters or characters; in syllabic writing like Japanese hiragana, each grapheme represents a syllable or mora, and in languages like Chinese each grapheme
-represents a full word or part of a word.
-We consider alphabetic languages in this work, encoded with the latin alphabet\footnote{https://en.wikipedia.org/wiki/Latin\_alphabet}.
-However, it is possible to extend the used $grapheme-to-phoneme$ conversion technique \cite{bisani2008joint} to work with other types languages.
-\par
-To encode the phonemes, phonetic alphabets are used. Standard is an International Phonetic Alphabet (IPA)\footnote{https://en.wikipedia.org/wiki/International\_Phonetic\_Alphabet}.
-IPA symbols are composed of one or more elements of two basic types, letters and diacritics.
-The general principle of the IPA is to provide one letter for each distinctive sound (speech segment), although this practice is not followed if the sound itself is complex.
-An example of IPA characters is given in \figref{ipa_overview}.
-\img{ipa_overview.png}{0.9}{Some letter of the IPA alphabet together with their occurences in English words.}{ipa_overview}
-\par
-The problem is, that some of the tools we work with use different phonetic alphabets with possibly different rules.
-However, the TTS engines works with IPA, so it is neccessary to convert the transcriptions.
-To overcome this problem, we have derived one-to-one mappings between these sets and IPA.
-This process may introduce some errors, however the alphabets are usually based on similar principles, so it is no so hard to derive this mappings.
-Namely, we used the Arpabet\footnote{https://en.wikipedia.org/wiki/Arpabet}, Timit\footnote{https://catalog.ldc.upenn.edu/docs/LDC93S1/PHONCODE.TXT} and CGN\footnote{https://pdfs.semanticscholar.org/64d5/d612f9c639271a1340820a418fa5baf02770.pdf} phoneme sets.
-\par
-As we have suggested, some speech synthezizers are able to accept input in the SSML format which we introduce in \ref{SSML}.
-However, not all the synthesizers have this ability.
-We use Cereproc to work with utterances written in SSML.
-An example of such utterance is given in \figref{SSML-trn}.
-The problem with providing transcriptions in this way is, that the Cereproc synthesizer ignores the characters defining strech of the phoneme.
-Therefore, we ommit these characters from the transcriptions by mapping the streched phonemes to their base variants
-This leads to worse quality of the pronunciation, however is sufficient to explore it.
-\img{ssml_ipa.png}{1.0}{An example of the synthesizer's input in SSML, forcing it to use our phonetic transcription.}{SSML_trn}
 \subsection{Phoneme recognition}
 To improve the pronunciation, it is essential to obtain information from the user's recording.
 We need to work on the phonetic level, so we have to gather phonetic transcription of the recording.
-In theory, we could use the standard output of the speech recognizer, i.e. sequence of words and transcribe it phonetically.
-However, this is not desirable, because such procedure adds new source of potential errors, since the $g2p$ module has to be used.
+In theory, we could use the standard output of the speech recognizer, i.e. a sequence of words and transcribe it phonetically.
+However, this is not desirable, because such procedure adds new source of potential errors, because we would have to use some mechanism, $g2p$ module for instance, that would create the transcription.
 Furthermore, since we aim to add new words to the TTS vocabulary, it is likely, that the word is missing also in the vocabulary of the speech recognition system.
-This fact means, that the desired word will not appear in the recognizer's output and thus we cannot obtain any relevant transcription.
-Instead, we can modify decoder used in the speech recognizer in such way, that it outputs sequences of phonemes rather than words.
+This fact means that the desired word will not appear in the recognizer's output and thus we cannot obtain any relevant transcription.
+Instead, we can modify the decoder used in the speech recognizer in such way, that it outputs sequences of phonemes rather than words.
 This can be done in several ways, some of which we introduce in the following text.
 \subsubsection{On the Automatic Speech Recognition (ASR) decoding process}
-We use a Kaldi framework for the ASR task and follow the procedure suggested in the official documentation.
-Kaldi constructs a Finite State Transducer for purposes of the decoding process \footnote{http://kaldi-asr.org/doc/graph.html}
+We use the Kaldi framework for the ASR task and follow the procedure suggested in the official documentation.
+Kaldi constructs a Finite State Transducer for purposes of the decoding process\footnote{http://kaldi-asr.org/doc/graph.html}.
 This transducer is created as a composition of four other FSTs, $HCLG = H \circ C \circ L \circ G$.
-The meanings of the parts are:
+The meanings of the parts are as follows:
 \begin{itemize}
 \item $G$ is an acceptor (i.e. its input and output symbols are the same) that encodes the grammar or language model.
 \item $L$ is the lexicon; its output symbols are words and its input symbols are phones.
@@ -100,9 +32,10 @@ The meanings of the parts are:
 As we can see, the $G$ FST brings information contained in the language model to the decoding graph.
 We provide an example in \figref{Lfst} which shows, that the $L$ transducer determines the output elements.
 Hence, by modification of $G$ and $L$ we can change the output set of the decoded tokens.
-\img{Lfst.png}{0.9}{An example of the finite state transducer representing the lexicon}{Lfst}
+\img{Lfst.png}{0.9}{An example of the finite state transducer representing the lexicon\cite{mohri2002weighted}}{Lfst}
 \subsubsection{Evaluation}
-In ASR systems, the most common phone recognition evaluation measures are phone error rate (PER), or the related performance metric, phone accuracy rate.
+\label{p-eval}
+In ASR systems, the most common phone recognition evaluation measures are Phone Error Rate (PER), or the related performance metric, phone accuracy rate.
 The latter is defined by the following expression:
 \begin{equation}
 Accracy = \frac{N_T - S - D - I}{N_T} \times 100\%
@@ -110,50 +43,117 @@ Accracy = \frac{N_T - S - D - I}{N_T} \times 100\%
 where $N_T$ is the total number of phonemes in the gold utterance and $S, D$ and $I$ are the substitution, deletion and insertion errors, respectively.
 From this perspective, we can see it as related to Levensthein distance of the gold and test sequences.
 Then, we can define $PER \: = \: 100\% - Accuracy$.
+\par
 Another measure is correctness, which is similar to accuracy, but does not consider insertion errors.
 The number of insertion, deletion and substitution errors is computed using the best alignment between two token sequences: the manually aligned (gold) and the recognized (test).
 An alignment resulting from search strategies based on dynamic programming is normally used successfully for a large number of speech recognition tasks \cite{ney2000progress}.
-We use a $sclite$ utility \footnote{http://www1.icsi.berkeley.edu/Speech/docs/sctk-1.2/sclite.htm} to measure the PER.
+We use a $sclite$ utility\footnote{http://www1.icsi.berkeley.edu/Speech/docs/sctk-1.2/sclite.htm} to measure PER.
 \subsubsection{Modifying the Language Model}
-Language Model (LM) is an essential part of the ASR engine.
+Language Model (LM) is an essential part of every ASR engine.
 It provides probabilities that a particular word occur in the considered context. 
-For example we can imagine model, that assigns probability to every possible n-gram.
+For example we can imagine a model that assigns probability to every possible n-gram.
 The easiest approach is to use a so called 0-gram LM.
 It simply distributes the probability mass uniformly among the words.
+\par
 Obviously, this model is not very good.
 If we want to employ prior knowledge about domain, we can use collected textual data and estimate probabilities of $n$-grams.
-If we want to decode phonemes, we can construct a language model, that describes probabilities of phoneme occurrences instead of words.
+If we want to decode phonemes, we can construct a language model that describes probabilities of phoneme occurrences instead of words.
+\par
 We can then modify $L$ and $G$ transducers to change the output of the recognizer to phonemes.
 Ideally, we would use a set of name transcriptions to train the language model.
-However, it is difficult to get such corpus that would be also large enough to robustly estimate the LM parameters. So we create artificial training dataset by transcribing written text with a $g2p$ module.
+However, it is difficult to get such corpus that would be also large enough to robustly estimate the LM parameters.
+So we create an artificial training dataset by transcribing written text with a $g2p$ module.
 Alternatively, we could use phonetic alignments that are created during the decoding process and can be extracted from the recognizer.
-However, we did not choose this option, since the transcriptions that are obtained this way are not accurate enough, mainly because the word recognition errors.
+However, we did not choose this option, since the transcriptions that are obtained this way are not accurate enough, mainly because of the word recognition errors.
 \par
 Creation of the decoding graph works with vocabulary and phonetic dictionary.
-The vocabulary contains list of known words and the dictionary respective phonetic transcriptions. 
+The vocabulary contains a list of known words and the dictionary respective phonetic transcriptions. 
 To change the transducers in the above mentioned way, we reduce the vocabulary to list of phonemes and setting the dictionary mapping to be identity.
 This way we force the decoder to output phonemes.
 \subsubsection{Timit dataset}
-The above approach has a disadvantage, that it is difficult to obtain language model of good quality without a proper corpus of transcriptions.
+The above approach has a disadvantage lying in the fact that it is difficult to obtain a language model of good quality without a proper corpus of transcriptions.
 This corpus may be found as a part of the timit dataset \cite{lopes2011phoneme}.
 In fact, the Kaldi framework contains scripts, that train a model using this dataset.
 The timit dataset has got transcriptions labeled with granularity of individual phonemes.
-This means, that we can train the phonetic recognizer directly.
-Problem is, that different set of phonemes is used but we can solve it by mapping the phonemes to IPA.
+This means we can train the phonetic recognizer directly.
+Problem is that different set of phonemes is used but we can solve it by mapping the phonemes to IPA.
 Worse is the fact, that the phone error rate measured on different data gives poor results.
-This can be caused by the fact, that dataset is not very big and thus the model can have problems accomodating to different acoustic conditions.  
-\subsubsection{Modelling phoneme bigrams}
+This can be caused by the fact that the dataset is not very big and thus the model can have problems accomodating to different acoustic conditions.  
+\subsubsection{Modeling phoneme bigrams}
 The decoding graph is context dependent. 
-It means, that decoder takes into account both the right and the left context of the phonemes. 
+It means that the decoder takes into account both the right and the left context of the phonemes. 
 In order to model the pronunciation on various positions in the word, each phoneme is represented in several variants, depending in which part of the word it is located ($beginning, end, inside$). 
 One option is to model each phoneme as a singleton as we have done in previous.
 Alternatively, we can create a decoding graph, that models bigrams of phonemes.
 This way the information about the context is preserved.
 Moreover, we can model the input more accurately and distinguish pauses between words from space between phonemes. 
 This approach proved to yield the best results.
-
-\section{Overview and key insight}
-We aim to improve the pronunciation, that means, we need to derive phonetic transcriptions of good quality. Straightforward way of achieving this is to use a $grapheme-to-phoneme (g2p)$ module. As we discuss in \ref{g2p-desc} and \ref{relatedwork}, this approach has some limitations, mainly because the pronunciation of some tokens in different languages may vary. However, grapheme-to-phoneme conversion is a well explored area and its output may serve as sufficiently good baseline. In \ref{relatedwork} we also discuss methods, that are able to derive phonetic transcriptions directly from the speech signal, using a speech recognition framework. These methods are somewhat complex and they are typically specific for a particular recognizer. Rather than improving any of these methods, we aim to explore a possibility to combine them. That is, we want to exploit both textual and acoustic information to derive phonetic transcriptions of the desired words.
+\subsubsection{Exploring the speech recognizer}
+The decoding process in Automatic Speech Recognition yields a list of hypotheses, ordered by their confidence scores, so called $n$-best list.
+Usually, the best hypothesis is chosen and used since it is the most relevant result.
+However, interesting information may be found deeper of the list.
+We explore this theory in the following paragraphs.
 \par
-In the desired settings, the acoustica data with user's recordings are obtained online. It can be difficult to make user say words we are interested in, so the ultimate goal is to develop algorithm, that is able to extract those words from a dialogue history or ask user to say them. Crucial point of this approach is, that the user should not feel bored by the process. For a purpose of this work, we assume that we have already obtained recordings with correct pronunciations and work with it. In real setting we would have to employ dialogue policy to be able to gather our own recordings or process the history and try to identify respective words.
-\section{TTS evaluation}
+In section \ref{p-eval} we have introduced Phone Error Rate (PER).
+We extend the term here and define \textbf{Oracle Phone Error Rate}:
+\begin{equation}
+OPER = \minop_{h \in hypotheses} PER(h, gold)
+\end{equation}
+We can see that Oracle Phone Error Rate is PER of the best hypothesis (if we consider the hypothesis with the lowest PER as the best one.)
+In real setup we obviously does not have such oracle that would tell us the best hypothesis, so we have no other option but looking at the top of the $n$-best list, computing PER per each hypothesis and choosing the closest one.
+Hence we approximate the true Oracle PER, since if we explore "sufficiently many" best alternatives, the probability that we did not see the best one is very low.
+We give an overview of our results in \figref{OPER}.
+\img{OPER.png}{0.9}{A plot of Oracle Phone Error Rate dependency on the depth of the $n$-best list we explore. We can see, that the Oracle PER decreases with the depth, so it makes sense to try to exploit the hypotheses located deeper.}{OPER}
+\par
+Using Oracle Phone Error Rate to evaluate the recognizer is basically cheating, since in real decoding process, we are not given the gold transcription which we could use to pick the best hypothesis.
+Nevertheless, it indicates some properties of the decoder, namely that the hypothesis located at the top is not always the best one.
+We explore this phenomenon further by looking at the particular position of the closest (best) hypothesis.
+In \figref{besthyp} we plot the histogram showing, number of times the closest hypothesis appeared in particular depth.
+We can see, that relevant hypotheses can be found in bigger depth.
+\img{besthypdistr.png}{0.9}{Histogram that visualizes the distribution of the hypothesis, that is the closest to the gold reference utterance in terms of Phone Error Rate. The bars show the number of times the best hypothesis was found on the particular position. Two settings are included in this figure: the green bars describe situation, when first five positions were used, the blue ones were measured with nine positions}{besthyp}
+
+\section{Text-to-speech systems' evaluation}
+The TTS evaluation\cite{huang2001spoken} is a desired task since we often want to choose between two or more engines.
+However the task introduces several challenges some of which we mention in this section.
+We need to define a metric in order to evaluate the TTS.
+Such a metric will be dependend on particular task's setting and may consist of several variables.
+We can describe a taxonomy of different evaluation methods, depending from which point of view we look at it we distinguish between:
+\begin{itemize}
+\item \textit{Black box vs. Glass box evaluation} - whether we evaluate the TTS system as a whole or look at particular modules of it.
+\item \textit{Human vs. automated} There are two fundamentally distinct ways of evaluating
+speech synthesizers: one is to use human subjects; the other to automate the evaluation process.
+Nowadays, it is necessary to employ humans in the evaluation process, mainly to evaluate the quality of integration and functionality of the system.
+\item \textit{Global vs. analytic} approach tell us whether we rate global aspects such as naturalness and overall quality or more analytic aspects like vowel and consonant clarity, tempo or appropriateness of stresses and accents.
+\end{itemize}
+\par
+A critical measurement of a TTS system is whether or not human listeners can understand
+the text read by the system. So called \textit{intelligibility} tests were developed to measure this aspect.
+For example Diagnostic Rhyme Test is used that uses set composed of pairs of similair words.
+Those are synthesized with a TTS engine and the listeners try to correctly distinguish between them.
+The intelligibility is the evaluated and compared to listening human speakers.
+An example set of words that may be used for such test is given in \figref{rhymetest}.
+\img{rhymetest.png}{0.9}{An example set of words used to perform the Diagnostic Rhyme Test}{rhymetest}
+\par
+While a TTS system has to be intelligible, this does not guarantee user acceptance, because
+its quality may be far from that of a human speaker.
+That is the reason, why methods like Mean Opinion Score (MOS) are frequently used.
+MOS is human-subject judgment testing that asks the subjects to rate several samples on the scale of 1 to 5 (1 = Bad, 2 = Poor, 3 = Fair, 4 = Good, 5 = Excellent).
+The scores are averaged, resulting in an overall MOS rating.
+We have used this method of labeling to annotate our sample dataset.
+\par
+Normalized MOS scores for different TTS systems can be obtained without any preference judgments.
+Nevertheless, sometimes comparisons are desired, especially for systems that are informally judged to be fairly close in quality.
+So called Category Rating (CCR) method, may be used.
+In this method, listeners are presented with a pair of speech samples on each trial. The order of the system A system B samples is chosen at random for each trial, providing, that half of the trials, the system A sample is followed by the system B and the order is reversed in the remaining trials.
+Listeners rate the pair with labels meaning, that the second utterance is:
+\begin{itemize}
+\item 3 - much better
+\item 2 - better
+\item 1 slightly better
+\item 0 about the same
+\item -1 slightly worse
+\item -2 worse
+\item -3 much worse
+\end{itemize}
+Sometimes the granularity can be reduced as much as simply "prefer A/prefer B".
+We use this method to tell which transcription is better.

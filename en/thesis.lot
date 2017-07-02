@@ -2,5 +2,5 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces The table contains results of linear regression model training on aggregated MFCC vectors. Correlation with human judgment and $R^2$ measure for respective cross-validation folds are shown.}}{25}{table.4.1}
-\contentsline {table}{\numberline {4.2}{\ignorespaces The table contains results of linear regression model training on aggregated MFCC vectors. Correlation with human judgment and $R^2$ measure for respective cross-validation folds are shown.}}{28}{table.4.2}
+\contentsline {table}{\numberline {4.1}{\ignorespaces The table contains results of linear regression model training on aggregated MFCC vectors. Correlation with human judgment and $R^2$ measure for respective cross-validation folds are shown.}}{29}{table.4.1}
+\contentsline {table}{\numberline {4.2}{\ignorespaces The table contains results of linear regression model training on aggregated MFCC vectors. Correlation with human judgment and $R^2$ measure for respective cross-validation folds are shown.}}{32}{table.4.2}

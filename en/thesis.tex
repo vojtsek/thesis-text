@@ -36,6 +36,7 @@
 
 %% Further useful packages (included in most LaTeX distributions)
 \usepackage{amsmath}        % extensions for typesetting of math
+\usepackage{amssymb}
 \usepackage{amsfonts}       % math fonts
 \usepackage{amsthm}         % theorems, definitions, etc.
 \usepackage{bbding}         % various symbols (squares, asterisks, scissors, ...)
@@ -52,7 +53,8 @@
 \usepackage{paralist}       % improved enumerate and itemize
 \usepackage[usenames]{xcolor}  % typesetting in color
 \usepackage[mathletters]{ucs}
-\DeclareMathOperator*{\argmax}{argmax} 
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\minop}{min}  
 \graphicspath{{img/}}
 \newcommand{\figref}[1]{Figure \ref{#1}}
 \newcommand{\tabref}[1]{\hyperref[#1]{Table \ref{#1}}}
