@@ -10,6 +10,7 @@ The Crucial point of this approach is, that the user should not feel bored by th
 In the real setting we would have to employ a dialogue policy to be able to gather our own recordings or process the history and try to identify respective words.
 \section{Used techniques}
 \subsection{Phoneme recognition}
+\label{ph-rec}
 To improve the pronunciation, it is essential to obtain information from the user's recording.
 We need to work on the phonetic level, so we have to gather phonetic transcription of the recording.
 In theory, we could use the standard output of the speech recognizer, i.e. a sequence of words and transcribe it phonetically.
@@ -89,6 +90,7 @@ This way the information about the context is preserved.
 Moreover, we can model the input more accurately and distinguish pauses between words from space between phonemes. 
 This approach proved to yield the best results.
 \subsubsection{Exploring the speech recognizer}
+\label{nbest-detail}
 The decoding process in Automatic Speech Recognition yields a list of hypotheses, ordered by their confidence scores, so called $n$-best list.
 Usually, the best hypothesis is chosen and used since it is the most relevant result.
 However, interesting information may be found deeper of the list.
@@ -110,8 +112,16 @@ Nevertheless, it indicates some properties of the decoder, namely that the hypot
 We explore this phenomenon further by looking at the particular position of the closest (best) hypothesis.
 In \figref{besthyp} we plot the histogram showing, number of times the closest hypothesis appeared in particular depth.
 We can see, that relevant hypotheses can be found in bigger depth.
-\img{besthypdistr.png}{0.9}{Histogram that visualizes the distribution of the hypothesis, that is the closest to the gold reference utterance in terms of Phone Error Rate. The bars show the number of times the best hypothesis was found on the particular position. Two settings are included in this figure: the green bars describe situation, when first five positions were used, the blue ones were measured with nine positions}{besthyp}
-
+\img{besthypdistr.png}{0.9}{Histogram that visualizes the distribution of the hypothesis, that is the closest to the gold reference utterance in terms of Phone Error Rate. The bars show the number of times the best hypothesis was found on the particular position. Two settings are included in this figure: the green bars describe situation, when first five positions were used, the blue ones were measured using nine positions}{besthyp}
+\par
+The observations we have made in the previous text indicates that there is a substantial piece of information contained in the phoneme recognizer's $n$-best list.
+The problem of the $n$-best list is, that many pairs of hypothesis differs only in a few positions.
+That is because of the nature of the procedures used for the decoding.
+It is quite intuitive, that hypothesis that differ only in one position have similar probabilities.
+We would like to use the information but we are not interested in many hypotheses that are nearly the same.
+So we propose to clusterize the hypotheses contained in the $n$-best list.
+The goal is to obtain a more compact version of the list with high variability among items.
+We adress this issue again in section TODO: ref, giving results and examples.  
 \section{Text-to-speech systems' evaluation}
 The TTS evaluation\cite{huang2001spoken} is a desired task since we often want to choose between two or more engines.
 However the task introduces several challenges some of which we mention in this section.

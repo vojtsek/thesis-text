@@ -150,7 +150,7 @@ TODO: why?
 The disadvantage of this approach is that it relies quite heavily on the alignment process, which is imperfect, so sometimes it can mark as confused pair of bigrams, that is not correct.
 Also id occurences of some bigrams are very sparse, then its scores may be estimated poorly.
 Another possible problem is, that it relies on the corpuses with phonetic transcriptions and then it is specific to certain pair of languages.
-\subsubsection{Measure combination}
+\subsection{Measure combination}
 We have seen that neither of the measures correlates well with the annotators' labeling.
 Despite this fact, it may by interesting to explore, whether the combination of the measures can work better.
 As described in the introduction to this section, we combine the measured values to one feature vector that represents the word.
@@ -160,14 +160,24 @@ The measured $MSE$ was $0.43$ and $R^2$ was $0.58$.
 We remind, that the human labels are discrete values in the interval $[1,5]$, so the $MSE$ value is good, saying that we differ from the human label by less than $0.5$.
 \par
 We can choose a threshold and state, that if the model's predicted value is greater than the threshold, the respective word is hard to pronounce and we should try to improve the pronunciation.
-If we plot the results, as in \figref{combined}, we can see, that setting the threshold to value 2.5, which is exactly  in the middle of the scale is reasonable choice.
-Reformulating the problem as a binary classification task gives us another insight.
-We thus have to decide if a given example is pronounced correctly or not.
+We could empirically determine a threshold separating difficult words from the easier ones.
+If we plot the results, as in \figref{combined}, we can see, that setting the threshold to value 2.5, which is exactly in the middle of the scale, is reasonable choice.
+Thus we can reformulate the problem as a binary classification task which gives us another insight.
+Simply, we have to decide if a given example will be pronounced correctly or not.
 We aim to identify incorrectly pronounced words and we refer to these words as positive examples.
-Thus we can compute the $precision and recall$~\footnote{https://en.wikipedia.org/wiki/Precision\_and\_recall} and obtain the $F_1 - score$\footnote{https://en.wikipedia.org/wiki/F1\_score} 0.93.
+Thus we can compute the $precision and recall$~\footnote{https://en.wikipedia.org/wiki/Precision\_and\_recall} and obtain the \textit{$F_1$ score}\footnote{https://en.wikipedia.org/wiki/F1\_score} 0.86.
 Based on these experiments, our method has reasonable behavior and may be used to identify difficult recordings confidently.
 \img{identify-predictions.png}{1.0}{Plot of the labels given by humans (vertical axis) and predicted values (horizontal axis). The vertical line represents the threshold with respect to the predictions, the horizontal dashed line ilustrates true division.}{combined}
-\subsubsection{Discussion}
+\par
+Since we have approached the problem as a binary classification task, we can also train a classifier.
+We train a Logistic Regression classifier and determine a classification threshold by plotting the Receiver Operating Characteristics line - \figref{roc}.
+Since we want to identify the bad transcriptions, we focus on $Recall$ more.
+We choose threshold as plotted and obtain \textit{$F_1$ score} 0.85.
+This is slightly worse the the \textit{$F_1$} obtained from the linear regression model.
+Based on this fact, the linear regression model is at least comparable to the binary classifier in the classification task.
+In addition, it gives us additional information, that is a quantification of pronunciation difficulty.
+\img{roc.png}{0.9}{A Receiver Operating Characteristics line of Logistic Regression classifier. The green dashed line indicates a random choice, the red point corresponds to the chosen threshold.}{roc}
+\subsection{Discussion}
 We proposed and explored three measures for a purpose of recognition of words that are difficult to pronounce for a TTS system.
 Our goal is to develop a method that would identify such words before they are introduced to the user.
 Exploration of these measures showed, that they does not correlate well with the human judgments.
@@ -175,3 +185,147 @@ Nevertheless, the experiments indicate, that the measures are complementary in t
 If we determine a threshold, we can use this model for classification purposes.
 Although the results are promising, the computation process that preceeds the creation of the feature vector is not very convenient.
 We have to have access to speech engines, non-trivial phonetic corpuses ($M_3$) and phoneme recognizer ($M_2$).
+\section{Improving the pronunciation}
+\subsection{Overview}
+We now briefly remind the task we consider.
+It may occur, that the TTS system pronounce certain words incorrectly.
+This is caused by the fact, that these words are not present in the vocabulary, that is, we do not have access to respective phonetic transcriptions.
+Thus we need to derive these transcriptions somehow.
+\par
+We can use a $g2p$ module which we introduce in section \ref{g2p-desc}.
+However as we discuss there, the $g2p$ is not able to handle pronunciation of groups of graphemes that should be pronounced differently than in the language the TTS is trained on.
+Also, we do not have access to information, which language we should use to get the correct pronunciations.
+Therefore, the use of $g2p$ is not possible or at least very problematic.
+We have also discussed methods (section \ref{pronunc-spoken}), that derive pronunciation from spoken examples directly.
+However, such methods usually require quite substantial modifications to the speech recognizer.
+\subsection{Exploiting the speech recgonizer}
+We try to exploit information obtained from the speech recognizer to improve the pronunciations.
+The very first step in the derivation process is to use the $g2p$ module and obtain baseline phonetic transcriptions from it.
+Next, we need to get the phonetic transcription.
+Hence, we feed the spoken version of the utterance into a speech recognizer and decode output as we describe in section \ref{ph-rec}.
+In \ref{nbest-detail} we notice, that an interesting piece of information is contained in the  recognizer's $n$-best list.
+We propose to exploit the information by clustering hypotheses in $n$-best list to a fixed number of clusters.
+Thus we obtain more compact yet sufficiently variable version of it.
+We then want to use this compressed list to choose the best transcription as we discuss in detail later.
+\subsubsection{Compressing the $n$-best list}
+To cluster the items, we first need to choose the clustering method.
+We explore two methods here, namely \textit{kmeans} and \textit{spectral clustering}.
+We now briefly dicsuss pros and cons of each.
+\begin{itemize}
+\item \textit{Kmeans clustering} works with vectors in euclidean space and thus understandably uses \textit{euclidean distance}.
+We thus transform the hypotheses into $count\: vectors$.
+$Count\:vector$ is a vector that represents strings as eucliden vectors.
+Each position in it represents one character from the alphabet and the number on that position is the number of occurences of this character in the string.
+This aprroach does not capture the context of the occurences, but i can be extended to capture the occurences of $bigrams$ (i.e. character pairs) in the same way.
+\item In case of \textit{spectral clustering}, we have to decide, which distance metric we will use.
+Since the hypotheses that we want to work with are sequences of phonemes (i.e. strings), either \textit{Hamming}~\footnote{https://en.wikipedia.org/wiki/Hamming\_distance} or \textit{Levenshtein\_distance}~\footnote{https://en.wikipedia.org/wiki/Levenshtein\_distance} come into consideration.
+However, the \textit{Hamming} distance is not usable, because it counts number of different positions in two strings of the same length.
+Unfortunately, this is not the case of the hypotheses gathered from the decoder.
+Thus we use \textit{Levenshtein} distance to be our metric.
+\end{itemize}
+\par
+For ilustration, we give examples of the resulting clustering in \figref{cluster-spect} or \figref{cluster-kmeans}, respectively.
+It is difficult to decide, which method is more appropriate.
+Based on results and observations, we choose the \textit{kmeans clustering} to be our clustering method.
+The clusters derived by \textit{kmeans} appears to be more similair and coherent, especially if we use longer list of hypotheses.
+We do not show longer lists here for readability purposes.
+\img{spectral-clusters.png}{0.9}{An example of clustering hypotheses of the phone recognizer with spectral clustering algorithm. The input was spoken czech word "\v{C}okol\'{a}da".}{cluster-spect}
+\img{kmeans-clusters.png}{0.9}{An example of clustering hypotheses of the phone recognizer with kmeans clustering algorithm. The input was spoken czech word "\v{C}okol\'{a}da".}{cluster-kmeans}
+\subsubsection{Choosing the best transcription}
+We are now in the situation that we have a fixed-length list of hypotheses and we want to choose the most apropriate one.
+Therefore, we formulated the task as a problem of classification.
+How can we determine the best hypothesis?
+We want to choose one that is the closest to the reference phonetic transcription in terms of \textit{Levenshtein} distance.
+\par
+We want to approach the problem as a machine learning task - train a model, that classifies a list of $N$ items (hyptoheses) to class $1\dots N$, provided that the list belongs to class $k$ if the hypothesis on the $k-th$ position is the best.
+This is just different way of saying, that we want to choose the best hypothesis among others.
+Nevertheless, the list of hypotheses alone does not provide sufficient information for the classifier.
+Hence, we base our decision not only on the list of hypotheses but also on the ortographic form of the word.
+\par
+In this experiment, we fix the length of the list to five.
+The data for this experiment comes from the $D_3$ dataset.
+Each spoken name was recognized with our recognizer, 20-best list was clusterized and 5 representatives were chosen.
+In order to explore the model behavior we actually created two datasets.
+The first one was created according to the procedure we have described previously.
+In the second one however, the reference phonetic transcription has been mixed among the hypotheses, replacing one of the alternatives.
+The latter setting should be much easier to deal with, because the reference transcription is different from the rest.
+Ideally, the reference should be chosen every time.
+We include the second version of the dataset to find out, if the model has an ability to choose correctly using our proposed input.
+\par
+The sequences can vary in length, but the models need the inputs to be of fixed length.
+Thus we have to encode the data somehow to achieve this.
+One option is to use the Bag of $N$-grams (BoN) technique.
+BoN is similar to Bag of Words\footnote{https://en.wikipedia.org/wiki/Bag-of-words\_model}.
+It is used to transform arbritrary-lengtth finite strings coming from a finite alphabet into fixed length vectors.
+First, the number of occurrences of respective $n$-grams in the sequence is counted.
+Since the alphabet is finite, the number of $n$-grams is limited and we can construct an integer vector and assign each $n$-gram fixed position in it (i.e. enumerate the $n$-grams).
+The desired semantics is, that the number on the $i^{th}$ position expresses the number of occurences of the $i^{th}$ $n$-gram in the string.
+We provide example of the decoding in \figref{bon}.
+\par
+In general, the $n$ can be chosen arbitrarily, nevertheless, the length of the vector increases exponentially with respect to $n$, because number of $n$-grams over an alphabet od size $m$ is $m^n$.
+High dimensional vectors are not very suitable for most of machine learning techniques because of the data sparsity and many model parameters.
+Thus we choose $n \le 3$.
+In our experiments we include all shorter n-grams in the feature vector, i.e. if we choose $n=3$ we track not only number of trigrams but also bigrams and unigrams.
+\img{bon-encoding.png}{0.9}{An example of encoding word \textit{"moon"} using BoN technique with $n\:=\:1$. The reduced Latin alphabet was used.}{bon}
+\par
+After transformation to the fixed-length vectors, the encoded hypotheses are shuffled and concatenated, so a feature vector is formed.
+The items are shuffled to prevent the model learning to give meaning to the ordering.
+Rather it should learn to choose the best transcription according to its relationship with other transcriptions and the reference.
+Supposing that we have used $l$ hypotheses, the feature vector looks like:
+$$h_{\pi(1)}.h_{\pi(2)}.\dots.h_{\pi(l)}$$
+Where $\pi: \{1\dots l\} \rightarrow \{1\dots l\}$ is a random permutation and the dots between hypotheses represents a concatenation operation, no separator characters are used.
+Thus, if the size of alphabet is $K$, we choose a maximal $n$-gram and use $l$ hypotheses, the length of each feature vector is $L = (K + K^2 + \dots + K^n) \times (l+1)$.
+\par
+Next, we have to add target labels to the feature vectors.
+Levenshtein distance of each hypothesis and reference phonetic transcription is computed and the hypothesis with the smallest distance is marked as the best.
+The index of this hypothesis is then used as a target label.
+It is correct to use a reference transcription in the data preparation phase to derive a label, it does not mean that we use it in the training phase.
+\par
+To solve the classification task, machine learning theory gives us a large portfolio of methods.
+We try several classifiers, namely Support Vector Machines, Logistic Regression, Random Forest and Multi Layer Perceptron.
+In the experiment settings, we have used hypotheses lists of length 4.
+Datasets of different sizes were used, all created from a subset of the $D_3$ dataset.
+We can see the dependency of accuracy on the dataset size in the \figref{size-acc}.
+The data were split to training, validation and test sets in ratio $7:2:1$.
+Overview of the respective accuracies is given in Table \ref{tabacc}.
+\begin{table}
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+ \hline
+ \textbf{Classifier} & \textbf{Acc. with gold} & \textbf{Acc. no gold} \\ \hline
+ Most Frequent Class & 0.26 & 0.43 \\ \hline 
+ Linear regression & \textbf{0.987} & \textbf{0.53} \\ \hline
+ Random Forest & 0.99 & \textcolor{red}{0.40}\\ \hline
+ SVC linear & 0.98 & 0.48 \\ \hline
+ SVC rbf & 0.97 & \textcolor{red}{0.41} \\ \hline
+ SVC polynomial & 0.26 & \textcolor{red}{0.41} \\ \hline
+ Multi Layer Perceptron & \textbf{0.99} & 0.45 \\ \hline
+ \end{tabular}
+\end{center}
+\label{tabacc}
+\caption{Test set accuracies of various models both with and without the reference transcription included. The baseline is set by trivial classifier, which assigns each example the most frequent label. Red values indicates, that the model does not outperform the baseline, bold values are the beast achieved results.}
+\end{table}
+\img{size_acc.png}{0.9}{The dependency of the Linear Regression model accuracy on the size of the data it is trained on. The red dashed line represents the performance of trivial classifier. We can see, that with sufficient data, the model outperforms the baseline.}{size-acc}
+\paragraph{Discussion}
+We can see, that the classifiers perform much better when the reference transcription is included in the data.
+This can be caused by the fact, tha the reference transcription should be quite different from the rest, so it is supposed to be easily recognizable.
+Also, the distribution of classes is nearly uniform when the reference is included.
+This is in contrast with the real settings, because there the distribution is biased, even after shuffling as we can see in \figref{best-distr}.
+\par
+Some of the models used did not even outperform the trivial classifer that chooses always the most frequent class.
+Nevertheless, some of them did, namely the Logistic Regression, Multi Layer Perceptron and Support Vector Classifier with linear kernel.
+Therefore it makes sense to include the process of selection of the best hypotheses from the $n$-best list.
+\img{distribution.png}{0.9}{Distribution of target classes in the dataset. Although the hypotheses lists have been shuffled, the distribution is biased, making the task more difficult.}{best-distr}
+\subsection{Combining acoustic and textual information}
+In the previous, we have managed to derive phonetic transcriptions and tried to 
+Looking at the ASR transcriptions gives us intuition, that even the best ones are too different from the desired transcriptions.
+Thus we only employ it to improve the $g2p$'s output, because it is close to the correct transcription, just with some mistakes.
+The idea is to identify phones, where the $g2p$ is unsure and replace these with the respective counterparts in the ASR's output.
+First, we use DTW to align the $g2p$ hypothesis and pick positions, where many changes occurs.
+Then we align it with the ASR transcription and do the replacement.
+\linebreak \linebreak
+The recordings should be scored by humans to explore how good they are. The annotation process' layout was as it follows. Set of 100 samples was picked from the \textbf{D3} dataset. Names were synthesized using four different inputs: combined transcription, the gold transcription, the original ortographic form and the best hypotheses chosen by the model. Each annotator was given these  transcriptions and labeled its quality of pronunciation on the scale 1-5. We explored the data, however we were not able to prove that any of the first three pronunciations was significantly better than the others.
+This can be caused by the imperfection of the way how TTS handles the phonetic input.
+Empirically, it handles the ortographic forms better, since it translates it internally.
+The scoring of the annotators was also very uncorrelated, since the process relies on subjective measures.
+Nevertheless, we proved, that using ASR transcriptions directly gives significantly worse results.

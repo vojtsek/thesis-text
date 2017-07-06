@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.16)  2 JUL 2017 20:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.16)  6 JUL 2017 14:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2333,7 +2333,9 @@ Package hyperref Info: Option `breaklinks' set `true' on input line 123.
 \c@thm=\count120
 \c@defn=\count121
 ) (./thesis.aux (./title.aux) (./chap01.aux) (./chap02.aux)
-(./chap03.aux) (./chap04.aux) (./epilog.aux) (./bibliography.aux))
+(./chap03.aux) (./chap04.aux) (./epilog.aux)
+No file bibliography.aux.
+)
 \openout1 = `thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 129.
@@ -2354,8 +2356,7 @@ LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 129.
 LaTeX Font Info:    ... okay on input line 129.
 LaTeX Font Info:    Try loading font information for OT1+lmr on input line 129.
 
-
-(/usr/share/texmf/tex/latex/lm/ot1lmr.fd
+ (/usr/share/texmf/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 \AtBeginShipoutBox=\box29
@@ -2417,7 +2418,7 @@ Package hyperref Info: Option `pageanchor' set `false' on input line 6.
 
 pdfTeX warning: pdflatex (file ./img/../img/logo-en.pdf): PDF inclusion: found 
 PDF version <1.5>, but at most version <1.4> allowed
-<img/../img/logo-en.pdf, id=140, 506.4591pt x 156.49065pt>
+<img/../img/logo-en.pdf, id=164, 506.4591pt x 156.49065pt>
 File: img/../img/logo-en.pdf Graphic file (type pdf)
 
 <use img/../img/logo-en.pdf>
@@ -2467,34 +2468,34 @@ Package hyperref Info: Option `pageanchor' set `true' on input line 57.
 
 ] [3
 
-]) (./thesis.toc)
+]) (./thesis.toc [1
+
+
+
+])
 \tf@toc=\write6
 \openout6 = `thesis.toc'.
 
- [1
-
-
-
-]
+ [2]
 \openout2 = `chap01.aux'.
 
  (./chap01.tex
 Chapter 1.
-<img/SDS.png, id=215, 823.075pt x 508.90125pt>
+<img/SDS.png, id=249, 823.075pt x 508.90125pt>
 File: img/SDS.png Graphic file (type png)
  <use img/SDS.png>
 Package pdftex.def Info: img/SDS.png used on input line 22.
 (pdftex.def)             Requested size: 371.30594pt x 229.57806pt.
 
 
-Package natbib Warning: Citation `sproat1997multilingual' on page 2 undefined o
+Package natbib Warning: Citation `sproat1997multilingual' on page 3 undefined o
 n input line 28.
 
 
-Package natbib Warning: Citation `miro2009multilingual' on page 2 undefined on 
+Package natbib Warning: Citation `miro2009multilingual' on page 3 undefined on 
 input line 28.
 
-[2
+[3
 
 
  <./img/SDS.png>]
@@ -2528,13 +2529,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 66--67
  []
 
 
+Package natbib Warning: Citation `Arpabet' on page 4 undefined on input line 67
+.
+
+
+Package natbib Warning: Citation `Arpabet' on page 4 undefined on input line 67
+.
+
+
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) [3] [4]
+) [4] [5]
 \openout2 = `chap02.aux'.
 
  (./chap02.tex
 Chapter 2.
+
+Package natbib Warning: Citation `taylor2009text' on page 6 undefined on input 
+line 4.
+
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10> on input line 22.
 LaTeX Font Info:    External font `lmex10' loaded for size
@@ -2567,11 +2580,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 14--33
  []
 
 
-Package natbib Warning: Citation `kubichek1993mel' on page 5 undefined on input
+Package natbib Warning: Citation `kubichek1993mel' on page 6 undefined on input
  line 35.
 
 
-Package natbib Warning: Citation `kubichek1993mel' on page 5 undefined on input
+Package natbib Warning: Citation `kubichek1993mel' on page 6 undefined on input
  line 43.
 
 
@@ -2584,7 +2597,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 35--44
 
  []
 
-[5
+[6
 
 
 
@@ -2598,14 +2611,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 46--52
 
  []
 
+
+Package natbib Warning: Citation `mohri1997finite' on page 7 undefined on input
+ line 54.
+
 LaTeX Font Info:    Try loading font information for OMS+lmr on input line 59.
 (/usr/share/texmf/tex/latex/lm/omslmr.fd
 File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 59.
- [6]
-<img/fst_example.png, id=270, 949.5475pt x 607.26875pt>
+
+
+Package natbib Warning: Citation `mohri2009weighted' on page 7 undefined on inp
+ut line 66.
+
+[7] <img/fst_example.png, id=295, 949.5475pt x 607.26875pt>
 File: img/fst_example.png Graphic file (type png)
 
 <use img/fst_example.png>
@@ -2621,7 +2642,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 78--92
 
  []
 
-[7 <./img/fst_example.png (PNG copy)>]
+[8 <./img/fst_example.png (PNG copy)>]
 Underfull \hbox (badness 10000) in paragraph at lines 99--136
 \OT1/lmr/m/n/12 suf-fi-cient.
  []
@@ -2646,7 +2667,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 99--136
 
  []
 
-[8]
+[9]
+
+Package natbib Warning: Citation `taylor2009text' on page 10 undefined on input
+ line 138.
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 138--148
 \OT1/lmr/m/n/12 (SLU).
  []
@@ -2657,9 +2683,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 138--148
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 149--167
-\OT1/lmr/m/n/12 ut-ter-ance.
- []
+Package natbib Warning: Citation `van2016wavenet' on page 10 undefined on input
+ line 150.
+
+
+Package natbib Warning: Citation `wang2017tacotron' on page 10 undefined on inp
+ut line 150.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 149--167
@@ -2671,7 +2700,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 149--167
 
  []
 
-[9]
+[10]
+
+Package natbib Warning: Citation `yao2015sequence' on page 11 undefined on inpu
+t line 172.
+
+
+Package natbib Warning: Citation `bisani2008joint' on page 11 undefined on inpu
+t line 173.
+
+
+Package natbib Warning: Citation `schlippe2012grapheme' on page 11 undefined on
+ input line 176.
+
+
+Package natbib Warning: Citation `taylor1997ssml' on page 11 undefined on input
+ line 181.
+
 LaTeX Font Info:    Font shape `OT1/lmtt/bx/n' in size <12> not available
 (Font)              Font shape `OT1/lmtt/b/n' tried instead on input line 203.
 
@@ -2709,7 +2754,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 203--205
 | \OT1/lmtt/b/n/12 <voice name="Mike">I want to be like Mike.</voice>
  []
 
-[10] [11] <img/dendrogram.png, id=332, 421.575pt x 316.18124pt>
+[11]
+
+Package natbib Warning: Citation `ratanamahatana2004everything' on page 12 unde
+fined on input line 224.
+
+[12] <img/dendrogram.png, id=342, 421.575pt x 316.18124pt>
 File: img/dendrogram.png Graphic file (type png)
 
 <use img/dendrogram.png>
@@ -2720,11 +2770,15 @@ Package pdftex.def Info: img/dendrogram.png used on input line 278.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Package natbib Warning: Citation `ng2002spectral' on page 12 undefined on input
+Package natbib Warning: Citation `ng2002spectral' on page 13 undefined on input
  line 284.
 
-[12] [13 <./img/dendrogram.png (PNG copy)>] [14]
-<img/ipa_overview.png, id=357, 927.465pt x 594.72188pt>
+[13] [14 <./img/dendrogram.png (PNG copy)>] [15]
+
+Package natbib Warning: Citation `bisani2008joint' on page 16 undefined on inpu
+t line 347.
+
+<img/ipa_overview.png, id=367, 927.465pt x 594.72188pt>
 File: img/ipa_overview.png Graphic file (type png)
 
 <use img/ipa_overview.png>
@@ -2734,7 +2788,7 @@ Package pdftex.def Info: img/ipa_overview.png used on input line 354.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<img/ssml_ipa.png, id=363, 602.25pt x 80.3pt>
+<img/ssml_ipa.png, id=373, 602.25pt x 80.3pt>
 File: img/ssml_ipa.png Graphic file (type png)
  <use img/ssml_ipa.png>
 Package pdftex.def Info: img/ssml_ipa.png used on input line 369.
@@ -2743,7 +2797,29 @@ Package pdftex.def Info: img/ssml_ipa.png used on input line 369.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[15] [16 <./img/ipa_overview.png> <./img/ssml_ipa.png>]
+[16]
+
+Package natbib Warning: Citation `kaplan1994regular' on page 17 undefined on in
+put line 379.
+
+
+Package natbib Warning: Citation `sejnowski1988nettalk' on page 17 undefined on
+ input line 383.
+
+[17 <./img/ipa_overview.png> <./img/ssml_ipa.png>]
+
+Package natbib Warning: Citation `dedina1991pronounce' on page 18 undefined on 
+input line 393.
+
+
+Package natbib Warning: Citation `lucassen1984information' on page 18 undefined
+ on input line 397.
+
+
+Package natbib Warning: Citation `bisani2008joint' on page 18 undefined on inpu
+t line 403.
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 396--406
 \OT1/lmr/m/n/12 bil-ity dis-tri-bu-tion over phonemes.
  []
@@ -2753,9 +2829,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 396--406
 
  []
 
-[17]
+[18]
 
-Package natbib Warning: Citation `deri2016grapheme' on page 18 undefined on inp
+Package natbib Warning: Citation `deri2016grapheme' on page 19 undefined on inp
 ut line 432.
 
 
@@ -2775,110 +2851,114 @@ Underfull \hbox (badness 10000) in paragraph at lines 426--441
  []
 
 
-Package natbib Warning: Citation `slobada1996dictionary' on page 18 undefined o
-n input line 444.
+Package natbib Warning: Citation `slobada1996dictionary' on page 19 undefined o
+n input line 445.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 441--464
-
- []
-
-[18]
-Underfull \hbox (badness 10000) in paragraph at lines 475--480
-
- []
+Package natbib Warning: Citation `mcgraw2013learning' on page 19 undefined on i
+nput line 457.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 475--480
+Underfull \hbox (badness 10000) in paragraph at lines 441--465
 
  []
 
+[19]
+Underfull \hbox (badness 10000) in paragraph at lines 476--481
 
-Overfull \hbox (6.84805pt too wide) in paragraph at lines 493--495
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 476--481
+
+ []
+
+
+Package natbib Warning: Citation `reddy2011learning' on page 20 undefined on in
+put line 482.
+
+
+Overfull \hbox (6.84805pt too wide) in paragraph at lines 494--496
 \OT1/lmr/m/n/12 The au-thors model the joint prob-a-bil-ity of hy-poth-e-sis an
 d ref-er-ence word $\OML/lmm/m/it/12 P\OT1/lmr/m/n/12 (\OT1/lmr/bx/n/12 e\OML/l
 mm/m/it/12 ; \OT1/lmr/bx/n/12 w\OT1/lmr/m/n/12 ) =|
  []
 
-[19]
+[20]
 
-Package natbib Warning: Citation `deri2016grapheme' on page 20 undefined on inp
-ut line 501.
+Package natbib Warning: Citation `deri2016grapheme' on page 21 undefined on inp
+ut line 502.
 
 )
-Underfull \hbox (badness 10000) in paragraph at lines 496--138
-\OT1/lmr/m/n/12 learn-ing as pro-posed in [\OT1/lmr/bx/n/12 ? \OT1/lmr/m/n/12 ]
-.
+Underfull \hbox (badness 10000) in paragraph at lines 497--138
+\OT1/lmr/m/n/12 learn-ing as pro-posed in \OT1/lmr/bx/n/12 ?\OT1/lmr/m/n/12 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 496--138
+Underfull \hbox (badness 10000) in paragraph at lines 497--138
 
  []
 
-[20]
+[21]
 \openout2 = `chap03.aux'.
 
  (./chap03.tex
 Chapter 3.
-[21
+[22
 
 
 
-] <img/Lfst.png, id=445, 218.416pt x 113.3836pt>
+] <img/Lfst.png, id=441, 218.416pt x 113.3836pt>
 File: img/Lfst.png Graphic file (type png)
  <use img/Lfst.png>
-Package pdftex.def Info: img/Lfst.png used on input line 35.
+Package pdftex.def Info: img/Lfst.png used on input line 36.
 (pdftex.def)             Requested size: 371.30594pt x 192.75821pt.
 
 
-Package natbib Warning: Citation `mohri2002weighted' on page 22 undefined on in
-put line 35.
+Package natbib Warning: Citation `mohri2002weighted' on page 23 undefined on in
+put line 36.
+
+[23 <./img/Lfst.png (PNG copy)>]
+
+Package natbib Warning: Citation `ney2000progress' on page 24 undefined on inpu
+t line 50.
 
 
-Package natbib Warning: Citation `mohri2002weighted' on page 22 undefined on in
-put line 35.
+Package natbib Warning: Citation `lopes2011phoneme' on page 24 undefined on inp
+ut line 76.
 
-[22 <./img/Lfst.png (PNG copy)>]
-
-Package natbib Warning: Citation `ney2000progress' on page 23 undefined on inpu
-t line 49.
-
-
-Package natbib Warning: Citation `lopes2011phoneme' on page 23 undefined on inp
-ut line 75.
-
-[23] <img/OPER.png, id=465, 2409.0pt x 1281.78876pt>
+[24] <img/OPER.png, id=461, 2409.0pt x 1281.78876pt>
 File: img/OPER.png Graphic file (type png)
  <use img/OPER.png>
-Package pdftex.def Info: img/OPER.png used on input line 106.
+Package pdftex.def Info: img/OPER.png used on input line 108.
 (pdftex.def)             Requested size: 371.30594pt x 197.56036pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<img/besthypdistr.png, id=467, 2409.0pt x 1281.78876pt>
+<img/besthypdistr.png, id=463, 2409.0pt x 1281.78876pt>
 File: img/besthypdistr.png Graphic file (type png)
 
 <use img/besthypdistr.png>
-Package pdftex.def Info: img/besthypdistr.png used on input line 113.
+Package pdftex.def Info: img/besthypdistr.png used on input line 115.
 (pdftex.def)             Requested size: 371.30594pt x 197.56036pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
+[25]
 
-Package natbib Warning: Citation `huang2001spoken' on page 24 undefined on inpu
-t line 116.
+Package natbib Warning: Citation `huang2001spoken' on page 26 undefined on inpu
+t line 126.
 
-[24] [25 <./img/OPER.png> <./img/besthypdistr.png>]
-<img/rhymetest.png, id=484, 410.9754pt x 237.0456pt>
+[26 <./img/OPER.png> <./img/besthypdistr.png>]
+<img/rhymetest.png, id=480, 410.9754pt x 237.0456pt>
 File: img/rhymetest.png Graphic file (type png)
  <use img/rhymetest.png>
-Package pdftex.def Info: img/rhymetest.png used on input line 135.
+Package pdftex.def Info: img/rhymetest.png used on input line 145.
 (pdftex.def)             Requested size: 371.30594pt x 214.16734pt.
 
-[26 <./img/rhymetest.png>]) [27]
+[27 <./img/rhymetest.png>]) [28]
 \openout2 = `chap04.aux'.
 
  (./chap04.tex
@@ -2922,34 +3002,34 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 19.
 
 
-Package natbib Warning: Citation `van2008autonomata' on page 28 undefined on in
+Package natbib Warning: Citation `van2008autonomata' on page 29 undefined on in
 put line 20.
 
-[28
+[29
 
 
 
-] [29]
+] [30]
 
 Package amsmath Warning: Foreign command \atopwithdelims;
 (amsmath)                \frac or \genfrac should be used instead
 (amsmath)                 on input line 61.
 
-<img/m1barchart.png, id=510, 2409.0pt x 1281.78876pt>
+<img/m1barchart.png, id=506, 2409.0pt x 1281.78876pt>
 File: img/m1barchart.png Graphic file (type png)
  <use img/m1barchart.png>
 Package pdftex.def Info: img/m1barchart.png used on input line 65.
 (pdftex.def)             Requested size: 412.56496pt x 219.505pt.
 
-[30 <./img/m1barchart.png>]
-<img/mcd_correlation.png, id=520, 2409.0pt x 2563.5775pt>
+[31 <./img/m1barchart.png>]
+<img/mcd_correlation.png, id=516, 2409.0pt x 2563.5775pt>
 File: img/mcd_correlation.png Graphic file (type png)
 
 <use img/mcd_correlation.png>
 Package pdftex.def Info: img/mcd_correlation.png used on input line 69.
 (pdftex.def)             Requested size: 371.30594pt x 395.12074pt.
- [31 <./img/mcd_correlation.png>]
-<img/cv_folds.png, id=530, 282.67183pt x 399.79906pt>
+ [32 <./img/mcd_correlation.png>]
+<img/cv_folds.png, id=526, 282.67183pt x 399.79906pt>
 File: img/cv_folds.png Graphic file (type png)
  <use img/cv_folds.png>
 Package pdftex.def Info: img/cv_folds.png used on input line 75.
@@ -2959,21 +3039,21 @@ Package pdftex.def Info: img/cv_folds.png used on input line 75.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Package natbib Warning: Citation `navarro2001guided' on page 32 undefined on in
+Package natbib Warning: Citation `navarro2001guided' on page 33 undefined on in
 put line 97.
 
-<img/mcdphcorr.jpg, id=531, 2409.0pt x 1281.78876pt>
+<img/mcdphcorr.jpg, id=527, 2409.0pt x 1281.78876pt>
 File: img/mcdphcorr.jpg Graphic file (type jpg)
  <use img/mcdphcorr.jpg>
 Package pdftex.def Info: img/mcdphcorr.jpg used on input line 104.
 (pdftex.def)             Requested size: 371.30594pt x 197.56036pt.
 
-[32]
+[33]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[33 <./img/cv_folds.png>]
-<img/sample_align.jpg, id=547, 151.56625pt x 69.25874pt>
+[34 <./img/cv_folds.png>]
+<img/sample_align.jpg, id=543, 151.56625pt x 69.25874pt>
 File: img/sample_align.jpg Graphic file (type jpg)
 
 <use img/sample_align.jpg>
@@ -2983,14 +3063,14 @@ Package pdftex.def Info: img/sample_align.jpg used on input line 126.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[34 <./img/mcdphcorr.jpg>] <img/bigroccurrs.jpg, id=560, 803.0pt x 602.25pt>
+[35 <./img/mcdphcorr.jpg>] <img/bigroccurrs.jpg, id=556, 803.0pt x 602.25pt>
 File: img/bigroccurrs.jpg Graphic file (type jpg)
 
 <use img/bigroccurrs.jpg>
 Package pdftex.def Info: img/bigroccurrs.jpg used on input line 146.
 (pdftex.def)             Requested size: 371.30594pt x 278.48112pt.
 
-<img/confusion_limit.png, id=561, 433.62pt x 433.62pt>
+<img/confusion_limit.png, id=557, 433.62pt x 433.62pt>
 File: img/confusion_limit.png Graphic file (type png)
 
 <use img/confusion_limit.png>
@@ -3003,64 +3083,125 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<img/identify-predictions.png, id=565, 578.16pt x 433.62pt>
+<img/identify-predictions.png, id=561, 578.16pt x 433.62pt>
 File: img/identify-predictions.png Graphic file (type png)
 
 <use img/identify-predictions.png>
-Package pdftex.def Info: img/identify-predictions.png used on input line 169.
+Package pdftex.def Info: img/identify-predictions.png used on input line 170.
 (pdftex.def)             Requested size: 412.56496pt x 309.42061pt.
- [35 <./img/sample_align.jpg>]
+ [36 <./img/sample_align.jpg>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-) [36 <./img/bigroccurrs.jpg>] [37 <./img/confusion_limit.png>] [38 <./img/iden
-tify-predictions.png>]
+<img/roc.png, id=570, 578.16pt x 433.62pt>
+File: img/roc.png Graphic file (type png)
+ <use img/roc.png>
+Package pdftex.def Info: img/roc.png used on input line 179.
+(pdftex.def)             Requested size: 371.30594pt x 278.47525pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[37 <./img/bigroccurrs.jpg>] [38 <./img/confusion_limit.png>] [39 <./img/identi
+fy-predictions.png>] [40 <./img/roc.png>]
+<img/spectral-clusters.png, id=605, 451.82976pt x 307.85883pt>
+File: img/spectral-clusters.png Graphic file (type png)
+
+<use img/spectral-clusters.png>
+Package pdftex.def Info: img/spectral-clusters.png used on input line 232.
+(pdftex.def)             Requested size: 371.30594pt x 253.00017pt.
+
+<img/kmeans-clusters.png, id=606, 451.82976pt x 323.22331pt>
+File: img/kmeans-clusters.png Graphic file (type png)
+
+<use img/kmeans-clusters.png>
+Package pdftex.def Info: img/kmeans-clusters.png used on input line 233.
+(pdftex.def)             Requested size: 371.30594pt x 265.6268pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[41 <./img/spectral-clusters.png (PNG copy)>]
+<img/bon-encoding.png, id=617, 511.9125pt x 216.81pt>
+File: img/bon-encoding.png Graphic file (type png)
+
+<use img/bon-encoding.png>
+Package pdftex.def Info: img/bon-encoding.png used on input line 269.
+(pdftex.def)             Requested size: 371.30594pt x 157.25764pt.
+ [42 <./img/kmeans-clusters.png (PNG copy)>]
+<img/size_acc.png, id=626, 578.16pt x 433.62pt>
+File: img/size_acc.png Graphic file (type png)
+ <use img/size_acc.png>
+Package pdftex.def Info: img/size_acc.png used on input line 308.
+(pdftex.def)             Requested size: 371.30594pt x 278.47525pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[43 <./img/bon-encoding.png>]
+<img/distribution.png, id=635, 578.16pt x 433.62pt>
+File: img/distribution.png Graphic file (type png)
+ <use img/distribution.png>
+Package pdftex.def Info: img/distribution.png used on input line 318.
+(pdftex.def)             Requested size: 371.30594pt x 278.47525pt.
+
+[44 <./img/size_acc.png>])
+Underfull \hbox (badness 10000) in paragraph at lines 320--140
+
+ []
+
+[45 <./img/distribution.png>] [46]
 \openout2 = `epilog.aux'.
 
- (./epilog.tex) [39
+ (./epilog.tex) [47
 
 
 
 ]
 \openout2 = `bibliography.aux'.
 
- (./bibliography.tex (./thesis.bbl
-Underfull \hbox (badness 10000) in paragraph at lines 9--12
+ (./bibliography.tex
+(./thesis.bbl
+Underfull \hbox (badness 1028) in paragraph at lines 9--12
 []\OT1/lmr/m/n/12 Arpabet overview.  []$\OT1/lmtt/m/n/12 https : / / nlp . stan
-ford . edu / courses / lsa352 /
+ford . edu / courses / lsa352 / arpabet .
  []
 
 
-Underfull \hbox (badness 2005) in paragraph at lines 81--86
-[]\OT1/lmr/m/n/12 P. Tay-lor.  \OT1/lmr/m/it/12 Text-to-Speech Syn-the-sis\OT1/
-lmr/m/n/12 .  Cam-bridge Uni-ver-sity Press,
+Underfull \hbox (badness 2744) in paragraph at lines 95--99
+[]\OT1/lmr/m/n/12 A^^?aron van den Oord, Sander Diele-man, Heiga Zen, Karen Si-
+monyan,
  []
 
-[40
+[48
 
 
 
-])) [41] (./thesis.lof
+])) [49] (./thesis.lof
 
-Package natbib Warning: Citation `mohri2002weighted' on page 42 undefined on in
+Package natbib Warning: Citation `Arpabet' on page 50 undefined on input line 3
+.
+
+
+Package natbib Warning: Citation `mohri2002weighted' on page 50 undefined on in
 put line 11.
 
-[42
+[50
 
 
 ])
 \tf@lof=\write7
 \openout7 = `thesis.lof'.
 
- [43] (./thesis.lot)
+ [51] (./thesis.lot)
 \tf@lot=\write8
 \openout8 = `thesis.lot'.
 
- [44
+ [52
 
-] [45
+] [53
 
-] [46
+] [54
 
 ]
 
@@ -3069,22 +3210,23 @@ Package natbib Warning: There were undefined citations.
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 171.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 171.
 (./thesis.aux (./title.aux) (./chap01.aux) (./chap02.aux) (./chap03.aux)
-(./chap04.aux) (./epilog.aux) (./bibliography.aux))
+(./chap04.aux) (./epilog.aux) (./bibliography.aux
+
+Package natbib Warning: Citation(s) may have changed.
+(natbib)                Rerun to get citations correct.
+
+))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 171.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 171.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 74CC40D9BD49A643038265423946263C;5669.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
+(rerunfilecheck)             Checksum: 882C3949489F20FFDFB38E8BF432D130;6754.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 171.
  ) 
 Here is how much of TeX's memory you used:
- 13057 strings out of 494910
- 179657 string characters out of 6179836
- 251965 words of memory out of 5000000
- 15825 multiletter control sequences out of 15000+600000
+ 13126 strings out of 494910
+ 180761 string characters out of 6179836
+ 251368 words of memory out of 5000000
+ 15865 multiletter control sequences out of 15000+600000
  80007 words of font info for 81 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  36i,10n,35p,1066b,852s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -3104,9 +3246,9 @@ ri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/f
 onts/type1/public/lm/lmsy6.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pf
 b></usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf/fonts/ty
 pe1/public/lm/lmtt12.pfb>
-Output written on thesis.pdf (50 pages, 2403654 bytes).
+Output written on thesis.pdf (58 pages, 2646406 bytes).
 PDF statistics:
- 821 PDF objects out of 1000 (max. 8388607)
- 195 named destinations out of 1000 (max. 500000)
- 367 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 926 PDF objects out of 1000 (max. 8388607)
+ 220 named destinations out of 1000 (max. 500000)
+ 445 words of extra memory for PDF output out of 10000 (max. 10000000)
 

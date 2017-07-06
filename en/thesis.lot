@@ -2,5 +2,6 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces The table contains results of linear regression model training on aggregated MFCC vectors. Correlation with human judgment and $R^2$ measure for respective cross-validation folds are shown.}}{29}{table.4.1}
-\contentsline {table}{\numberline {4.2}{\ignorespaces The table contains results of linear regression model training on aggregated MFCC vectors. Correlation with human judgment and $R^2$ measure for respective cross-validation folds are shown.}}{32}{table.4.2}
+\contentsline {table}{\numberline {4.1}{\ignorespaces The table contains results of linear regression model training on aggregated MFCC vectors. Correlation with human judgment and $R^2$ measure for respective cross-validation folds are shown.}}{30}{table.4.1}
+\contentsline {table}{\numberline {4.2}{\ignorespaces The table contains results of linear regression model training on aggregated MFCC vectors. Correlation with human judgment and $R^2$ measure for respective cross-validation folds are shown.}}{33}{table.4.2}
+\contentsline {table}{\numberline {4.3}{\ignorespaces Test set accuracies of various models both with and without the reference transcription included. The baseline is set by trivial classifier, which assigns each example the most frequent label. Red values indicates, that the model does not outperform the baseline, bold values are the beast achieved results.}}{44}{table.4.3}
