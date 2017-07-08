@@ -45,6 +45,19 @@ So we get training examples and we are able to improve the TTS system by process
 Moreover, the derived pronunciations can be used to improve the recognition ability of the ASR module, since it is also dictionary-based.
 Thus if we enlarge the vocabulary, the ASR has got access to more possibilities and can recognize the new words correctly.
 \par
+\begin{center}
+\begin{figure}[h]
+\texttt{System: Hello, /AANDRZHEZH/.\linebreak
+User: You said it wrong, my name is /ONDRZHEI/.\linebreak
+System: /ANDREY/, correct?\linebreak
+User: No, it is /ONDRZHEI/.\linebreak
+System: Oh, /ONDRZHEI/?\linebreak
+User: That's right.
+}
+\caption{Sample dialogue illustrating how the pronunciation correction process may look like. The dialogue system pronounces user's name incorrectly. User then correct it and the system learns. The transcriptions of the user's name are given in ARPABET.}
+\label{dialogsample}
+\end{figure}
+\end{center}
 There are several issues, that are related with the OOV words so methods of deriving correct pronunciations has got potentially very useful applications.
 As it has been said, it can be used to enlarge vocabularies of TTS or ASR systems.
 This may potentially lead to better pronunciation in case of TTS.
@@ -55,16 +68,3 @@ It is related with respective dialogue policy and concrete applications.
 Theoretically, the method can work with just one gold example, however, it is better to obtain more recordings in general.
 In \figref{dialogsample} we provide basic example of simple dialogue, illustrating how real application could look like.
 However, in this work we assume the user's recording(s) have been gathered already and we do not discuss the dialogue policy.
-\begin{center}
-\begin{figure}[h]
-\texttt{System: Hello, /AANDRZHEZH/.\linebreak
-User: You said it wrong, my name is /ONDRZHEI/.\linebreak
-System: /ANDREY/, correct?\linebreak
-User: No, it is /ONDRZHEI/.\linebreak
-System: Oh, /ONDRZHEI/?\linebreak
-User: That's right.
-}
-\caption{Sample dialogue illustrating the pronunciation correction. The transcriptions of the user's name are given in ARPABET\citep{Arpabet}}
-\label{dialogsample}
-\end{figure}
-\end{center}

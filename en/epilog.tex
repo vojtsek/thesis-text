@@ -1,2 +1,46 @@
 \chapter*{Conclusion}
 \addcontentsline{toc}{chapter}{Conclusion}
+\section{Summary and discussion}
+The problem of missing phonetic transcriptions (pronunciations) of words is a not solved issue yet.
+So called Out-of-vocabulary words still occur, causing incorrect pronunciation of the Text-to-speech systems.
+There are possibilities how to derive correct pronunciations of unknown words, using either textual ($g2p$) or acoustic information.
+We disccus it in section \ref{relatedwork}.
+\par
+In this work, we try to come up with slightly different approach.
+First we explore the issue of identyfying words that are difficult to pronounce in \ref{ident-diff}.
+This task is justified, because if the system can identify difficult words itself, it can initialize the process of obtaining the correct transcription and thus provide better user experience.
+We measure the difficulty using diferrent synthesizer's engines and exploit differences in their outputs.
+We also employ the knowledge of languages we can deal with to find outwhich confusions in the pronunciation are the most common.
+Using this data, we create a feature vector per each word, from which we learn to predict the difficulty.
+Some of the features are computed in the unsupervised way, which is important, because we thus do not need any labeled data.
+\par
+Although the individual features does not correlate much with the human ratings, their combination give good results.
+However, the process of computing the features is quite demanding, because we need to synthesize the words and the process it.
+Also, the $M_3$ measure which relies on the language information suffers from the fact, that we need to know, which languages are compared, which is not true in general.
+\par
+Second, we propose a method to combine the textual information from the $g2p$ module with the acoustic information obtained from the phoneme recognizer.
+In \ref{nbest-detail} we notice, that the phoneme recognizer's best hypothesis is not always the best in terms of phone error rate.
+We come up with procedure to extract substantial information from the recognizer's $n$-best list and learn to choose the most appropriate hypothesis (\ref{choosing-best}).
+\par
+We then explore basic approach to the combination (\ref{combine}) and evaluate the results.
+We also propose further improvements of this method and discuss the drawbacks.
+The disadvantage of these approaches is in the fact that they rely on the alignment process quite heavily.
+We use Dynamic Time Warping, which sometimes creates alignments with mistakes thus represents a weak spot.
+\par
+Another weak spot of our experiments are sizes of the datasets.
+We created the data ourselves and it had to be rated.
+Because of the difficulties of the procedure, the datasets are small.
+Thus the presented outcomes are rather proof of concept than strong results.
+\section{Future Work}
+\paragraph{Data}
+If we want to confirm our results and make it more valuable, we have to obtain larger datasets.
+This process would involve employment of some crowdsourcing platform and careful processing of the results.
+\paragraph{Predicting Difficulty}
+We should focus on simplification of the method proposed for the prediction of difficulty of the pronunciation.
+Methods of Machine Learning could be explored to substitute the current process.
+If it was successful, we would not need different synthesis engines.
+Also, regarding the $M_3$ computation process, it could be extended to consider multiple languages and thus become more universal.
+\paragraph{Combining the text and acoustics}
+In section \ref{combine} we have mentioned the future work in this area.
+We should explore, how the weighting factors should be derived when combining Finite State Transducers obtained from the $g2p$ and the decoder.
+Also, we should focus on the alignment process and use maybe use some more sophisticated method than Dynamic Time Warping.

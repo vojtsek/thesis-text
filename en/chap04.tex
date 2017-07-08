@@ -7,15 +7,13 @@ We aim for this, because we would like to explore such words.
 They should be difficult to pronounce for the text-to-speech engine and thus there is space for an improvement.
 \subsection{Dataset \textbf{$D_1$} - artificial}
 Dataset D1 contains 100 randomly chosen Dutch Names.
-Their recordings were used to derive phonetic transcriptions and we created three other transcriptions, as we describe further in section TODO.
-Annotators first listened each word read by native speaker and then listened the synthesized recordings and rated it with a label one to five.
 \subsection{Dataset \textbf{$D_2$} - artificial}
-D2 is also manually annotated set of 110 words.
+$D_2$ is also manually annotated set of 110 words.
 70 words are English, remaining 40 are Czech.
 Czech words were chosen to contain lot of diacritic hence to be difficult to pronounce for TTS trained on English.
-Each word was synthesized by four engines described in the beginning of this section.
+Each word was synthesized by four TTS engines.
 Each recording was then manually annotated.
-\textbf{Data labeling}. Labeling of $2_1$  was performed by three annotators. Each of them had to listen each of the words three times, each time synthesized by different engine. He then labeled each of the recording with a discrete number ranging from one to five. The recordings labels were averaged. Thus we obtain labels per each recording and we have three labels in total for each word. We average these three labels and obtain a score between one and five, that describes overall quality of the word's pronunciation.
+\paragraph{Labeling}. Labeling of $D_2$  was performed by three annotators. Each of them had to listen each of the words three times, each time synthesized by different engine. He then labeled each of the recording with a discrete number ranging from one to five. The recordings labels were averaged. Thus we obtain labels per each recording and we have three labels in total for each word. We average these three labels and obtain a score between one and five, that describes overall quality of the word's pronunciation.
 \subsection{Dataset \textbf{$D_3$} - Autonomata Spoken Name Corpus}
 The Autonomata Spoken Names Corpus \cite{van2008autonomata} is a database of approximately 5.000 read-aloud first names, surnames, street names, city names and control words.
 It was  published by Dutch-Flemish HLT Agency\footnote{http://tst-centrale.org/nl/}.
@@ -31,16 +29,16 @@ However, the criterions were defined quite vaguely, that is they were not told w
 Therefore, the ratings were quite diverse and they were subjective according to respective annotators' preferences.
 \par
 Because of that, we have explored how individual annotators' ratings correlate.
-We sum up the results in \ref{annotators}
+We sum up the results for the $D_2$ dataset in Table \ref{annotators}
 \begin{table}
 \begin{center}
 \begin{tabular}{ |c|c|c|c|c|c| } 
  \hline
  \textbf{Annotators} & \textbf{Rec. 1} & \textbf{Rec. 2} & \textbf{Rec. 3} & \textbf{Rec. 4} & \textbf{mean} \\ \hline
-\textbf{$A_1$ vs $A_2$} & 0.51 & 0.30 & 0.47 & 0.63 & \textbf{0.48} \\ \hline
-\textbf{$A_1$ vs $A_3$} & 0.44 & 0.44 & 0.34 & 0.59 & \textbf{0.45} \\ \hline 
-\textbf{$A_2$ vs $A_3$} & 0.48 & 0.34 & 0.38 & 0.57 & \textbf{0.44} \\ \hline 
-\textbf{mean} & \textbf{0.48} & \textbf{0.36} & \textbf{0.40} & \textbf{0.60} &  \\ \hline 
+\textbf{$A_1$ vs $A_2$} & 0.85 & 0.77 & 0.85 & 0.63 & \textbf{0.78} \\ \hline
+\textbf{$A_1$ vs $A_3$} & 0.84 & 0.82 & 0.83 & 0.67 & \textbf{0.79} \\ \hline 
+\textbf{$A_2$ vs $A_3$} & 0.92 & 0.89 & 0.93 & 0.88 & \textbf{0.91} \\ \hline 
+\textbf{mean} & \textbf{0.87} & \textbf{0.83} & \textbf{0.87} & \textbf{0.73} &  \\ \hline 
  \end{tabular}
 \end{center}
 \label{annotators}
@@ -48,6 +46,7 @@ We sum up the results in \ref{annotators}
 \end{table}
 
 \section{Identifying difficult words}
+\label{ident-diff}
 If we want to improve pronunciation of the synthesized recordings, we should first identify words that are mispronounced. Obviously, we could let the TTS system pronounce each word in a best effort style and  the user would identify mistakes and correct them. This approach hase several drawbacks. First, the communication with the user is rather complicated, since the incorrectly pronounced word has to be isolated prior to obtaining the correct pronunciation.
 Second, it may be unpleasant for the user if he or she has to undergo this process and hear the incorrect pronunciation. Thus, it would be better if we could recognize the possibly difficult words somehow. It would mean that we can ask the user directly for the correct pronunciation of the word. We explore this issue in the rest of this section.
 \subsection{Measuring the difficulty}
@@ -186,14 +185,14 @@ If we determine a threshold, we can use this model for classification purposes.
 Although the results are promising, the computation process that preceeds the creation of the feature vector is not very convenient.
 We have to have access to speech engines, non-trivial phonetic corpuses ($M_3$) and phoneme recognizer ($M_2$).
 \section{Improving the pronunciation}
+\label{pron-improvement}
 \subsection{Overview}
 We now briefly remind the task we consider.
 It may occur, that the TTS system pronounce certain words incorrectly.
 This is caused by the fact, that these words are not present in the vocabulary, that is, we do not have access to respective phonetic transcriptions.
 Thus we need to derive these transcriptions somehow.
-\par
 We can use a $g2p$ module which we introduce in section \ref{g2p-desc}.
-However as we discuss there, the $g2p$ is not able to handle pronunciation of groups of graphemes that should be pronounced differently than in the language the TTS is trained on.
+However as we discuss there, the $g2p$ is not able to handle pronunciations of groups of graphemes that should be pronounced differently than in the language the TTS is trained on.
 Also, we do not have access to information, which language we should use to get the correct pronunciations.
 Therefore, the use of $g2p$ is not possible or at least very problematic.
 We have also discussed methods (section \ref{pronunc-spoken}), that derive pronunciation from spoken examples directly.
@@ -207,6 +206,48 @@ In \ref{nbest-detail} we notice, that an interesting piece of information is con
 We propose to exploit the information by clustering hypotheses in $n$-best list to a fixed number of clusters.
 Thus we obtain more compact yet sufficiently variable version of it.
 We then want to use this compressed list to choose the best transcription as we discuss in detail later.
+\subsubsection{Getting the recognizer}
+First of all, we have to get our speech recognizer.
+We use Kaldi \footnote{http://kaldi-asr.org/} speech recognition toolkit for the model training and subsequent decoding.
+In section \ref{asr-decoding} we describe, how we can modify the deocding graph to output phonemes.
+Thus we are not limited by the choice of acoustic model, we simply do the necessary modifications to the decoding graph.
+\par
+We have explored, how well different methods perform.
+In \tabref{PERtable} we provide short summary of the results.
+\figref{decoderPER} shows dependency of the Oracle Phone Error Rate on the depth of the nbest list.
+The problem with evaluation is, that the reference must contain phonetic transcritptions.
+We have used our $g2p$ module to obtain them.
+Thus our transcriptions are not ground truth and our evaluation is biased.
+However, the conditions are equal for each setting so it can help us to choose.
+We now present shortly the mentioned methods, details can be found in section \ref{ph-rec}:
+\begin{itemize}
+\item $DecoderVocab$ was created by changing the vocabulary that is used for decoding. Thus, there does not exist a mapping from phoneme sequences to words as usual, each phoneme is mapped to itself instead. The acoustics were modeled using Gaussian Mixture Models\footnote{http://kaldi-asr.org/doc/model.html}.
+\item $DecoderBi$ refers to decoder created to model bigrams of phonemes, that is, it includes contextual information. The acoustics were modeled using Gaussian Mixture Models\footnote{http://kaldi-asr.org/doc/model.html}.
+\item $DecoderBi\:-\:chain$ has same type of decoding graph, but the acoustic part of the decoder was obtained from the Kaldi chain model\footnote{http://kaldi-asr.org/doc/chain.html}.
+\item $Timit$ decoder was trained on the Timit dataset\footnote{https://catalog.ldc.upenn.edu/ldc93s1} directly. This dataset has a vocabulary that contains phonemes, its language model is bulit on phonemes too.
+That menas the decoder outputs phonetic representantion of words.
+\end{itemize}
+For training, a subset of Librispeech corpus\footnote{http://www.openslr.org/12/} or Timit{https://catalog.ldc.upenn.edu/ldc93s1} were used. The evaluation was done on the TODO:ptien-ny.
+Based on the results, we choose the decoder acoustic part of which is modelled by the chain model and the decoding graph models phones as bigrams.
+\begin{table}
+\centering
+\begin{tabular}{ |c|c|c|c| } 
+ \hline
+ Decoder type & Phoneme Error Rate & Oracle PER (3best) & Oracle PER (5best) \\ 
+ \hline
+ DecoderVocab & 90.1 & - & - \\ 
+ \hline
+ DecoderBi & 66.3 & - & - \\
+ \hline
+ DecoderBi - chain & \textbf{61.47} & \textbf{60.20} & \textbf{59.69} \\
+ \hline
+ Timit & 72.1 & - & - \\
+ \hline
+\end{tabular}
+\label{PERtable}
+\caption{Overview of results in terms of Phone Error Rate (PER) or Oracle PER, respectively. We measured the Oracle PER only on the most succesful decoder. The best results are showed in bold.}
+\end{table}
+\img{decoderPER.png}{0.9}{Dependency of decoder's Oracle Phone Error Rate on the depth of the $n$-best list we explore. The bigger part of the list is exploited, the lower is the error rate.}{decoderPER}
 \subsubsection{Compressing the $n$-best list}
 To cluster the items, we first need to choose the clustering method.
 We explore two methods here, namely \textit{kmeans} and \textit{spectral clustering}.
@@ -232,6 +273,7 @@ We do not show longer lists here for readability purposes.
 \img{spectral-clusters.png}{0.9}{An example of clustering hypotheses of the phone recognizer with spectral clustering algorithm. The input was spoken czech word "\v{C}okol\'{a}da".}{cluster-spect}
 \img{kmeans-clusters.png}{0.9}{An example of clustering hypotheses of the phone recognizer with kmeans clustering algorithm. The input was spoken czech word "\v{C}okol\'{a}da".}{cluster-kmeans}
 \subsubsection{Choosing the best transcription}
+\label{choosing-best}
 We are now in the situation that we have a fixed-length list of hypotheses and we want to choose the most apropriate one.
 Therefore, we formulated the task as a problem of classification.
 How can we determine the best hypothesis?
@@ -317,15 +359,51 @@ Nevertheless, some of them did, namely the Logistic Regression, Multi Layer Perc
 Therefore it makes sense to include the process of selection of the best hypotheses from the $n$-best list.
 \img{distribution.png}{0.9}{Distribution of target classes in the dataset. Although the hypotheses lists have been shuffled, the distribution is biased, making the task more difficult.}{best-distr}
 \subsection{Combining acoustic and textual information}
-In the previous, we have managed to derive phonetic transcriptions and tried to 
-Looking at the ASR transcriptions gives us intuition, that even the best ones are too different from the desired transcriptions.
-Thus we only employ it to improve the $g2p$'s output, because it is close to the correct transcription, just with some mistakes.
-The idea is to identify phones, where the $g2p$ is unsure and replace these with the respective counterparts in the ASR's output.
-First, we use DTW to align the $g2p$ hypothesis and pick positions, where many changes occurs.
-Then we align it with the ASR transcription and do the replacement.
-\linebreak \linebreak
-The recordings should be scored by humans to explore how good they are. The annotation process' layout was as it follows. Set of 100 samples was picked from the \textbf{D3} dataset. Names were synthesized using four different inputs: combined transcription, the gold transcription, the original ortographic form and the best hypotheses chosen by the model. Each annotator was given these  transcriptions and labeled its quality of pronunciation on the scale 1-5. We explored the data, however we were not able to prove that any of the first three pronunciations was significantly better than the others.
-This can be caused by the imperfection of the way how TTS handles the phonetic input.
-Empirically, it handles the ortographic forms better, since it translates it internally.
-The scoring of the annotators was also very uncorrelated, since the process relies on subjective measures.
-Nevertheless, we proved, that using ASR transcriptions directly gives significantly worse results.
+\label{combine}
+In the previous, we have managed to derive phonetic transcriptions and pick the most appropriate one.
+Problem is that even the best transcriptions are too different from the desired ones.
+They cannot be used directly as input for the TTS.
+However, they capture pronunciations of some of the desired parts and thus can bring in some essential information.
+On the other hand, $g2p$'s output, is close to the correct transcription, just with some mistakes.
+As we discussed in section \ref{g2p-desc}, it is difficult to correct these mistakes only with $g2p$, but there is a possibility to employ the phonetic transcriptions.
+The idea is to identify positions, where the $g2p$ is unsure and replace these with the respective counterparts in the speech recognizer's output.
+\par
+The question also arises, how to evaluate the acquired transcriptions once we have them.
+In section \ref{tts-eval} we introduce the A-B testing.
+This is suitable for our purpose, however, we first have to choose, to what we want to compare.
+Clearly we cannot compare to the original transcription, since it is supposed to be the correct one.
+The baseline is actually set by the $g2p$ output - we want to outperform it.
+Therefore we synthesize transcriptions from the $g2p$ as well as the improved ones. And we let the raters choose which one is better.
+\par
+One option how to identify such positions is to let the $g2p$ give more alternatives.
+We then align those alternatives using Dynamic Time Warping Algorithm and pick positions, where many alternatives are possible.
+We assume, that confidence of such positions is low.
+Then we align the $g2p$ outputs with the ASR transcription and do the replacement on respective positions.
+\par
+We propose an alternative to the previous approach which is more exact.
+After some modifications to the $g2p$ module, we can make it output posterior probabilities of the individual characters.
+Similarly, we can obtaind posterior probabilities from the ASR decoder's output.
+That means, if we have transcription $\mathbf{W}$ composed of phonemes:
+$\mathbf{W} = w_1\dots w_n$, we obtain probabilities $\mathbf{P}(w_i \vert w_1 \dots w_{i-1})$.
+We can obtain an $n$-best lists from both the decoder and the $g2p$ module.
+Thus we can combine the information and create Finite State Transducer the represents all the possilbe paths as ilustrated in the \figref{fst-combined}.
+\par
+The idea is, that if the $g2p$ has low confidence at some poisition $i$, we replace the position by the respective part of decoder's output, if it is more confident here.
+however, the problem is, that the transcriptions may be of different length.
+Thus we have to employ Dynamic Time Warping (DTW) algorithm again to align the transcriptions.
+\img{fst-combined.png}{0.55}{An ilustrative example of the FST combined from the $g2p$ (top) and speech decoder (bottom). A part of input is chosen corresponding to the syllable "\v{C}O" and the chosen path is highlighted. It can be seen, that the path goes through both the decoder's and $g2p$'s hypotheses.}{fst-combined}
+\par
+It is not straightforward how to use the DTW.
+Another problem is, that although we obtained posterior probabilities, the $g2p$ and the decoder treat their graphs differently, namely the decoder assigns greater probabilities to the individual phonemes, thus restricting number of alternatives.
+Therefore, we have to weight the decoder's probabilites if we want to combine the results.
+We could for example try to train a model that would learn the weighting factor.
+We left this research for future work.
+Nevertheless, we ran some preliminary experiments showing, that it is promising way to go, as showed in \figref{preliminary}.
+\img{preliminary.png}{0.65}{An example of the preliminary result derived from combined FST. We can see, that the $g2p$ transcription is rather incorrect. We higlight groups of phonemes, where the transcription is changed so it is more similair to the original. However we can see that some other phonemes were replaced inocrrectly and the result is far from perfect yet. The transcriptions are given in IPA.}{preliminary}
+\paragraph{Discussion}
+We have proposed two methods of combining the acoustic and textual information.
+Both methods suffer from the fact that the transcriptions are of different length and misaligned.
+The use of Dynamic Time Warping algorithm may not be good enough.
+The resulting alignments are not always desired since it may pair two phonemes that should not be aligned.
+Also, the method that combines the FST's is not exact yet, mainly we did not derive the weighting factors for the speech decoder's hypotheses.
+However, looking at the ratings and preliminary results, this is a promising way to go.

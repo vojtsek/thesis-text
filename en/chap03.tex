@@ -20,7 +20,8 @@ This fact means that the desired word will not appear in the recognizer's output
 Instead, we can modify the decoder used in the speech recognizer in such way, that it outputs sequences of phonemes rather than words.
 This can be done in several ways, some of which we introduce in the following text.
 \subsubsection{On the Automatic Speech Recognition (ASR) decoding process}
-We use the Kaldi framework for the ASR task and follow the procedure suggested in the official documentation.
+\label{asr-decoding}
+We use the Kaldi framework\footnote{http://kaldi-asr.org/} for the ASR task and follow the procedure suggested in the official documentation.
 Kaldi constructs a Finite State Transducer for purposes of the decoding process\footnote{http://kaldi-asr.org/doc/graph.html}.
 This transducer is created as a composition of four other FSTs, $HCLG = H \circ C \circ L \circ G$.
 The meanings of the parts are as follows:
@@ -123,6 +124,7 @@ So we propose to clusterize the hypotheses contained in the $n$-best list.
 The goal is to obtain a more compact version of the list with high variability among items.
 We adress this issue again in section TODO: ref, giving results and examples.  
 \section{Text-to-speech systems' evaluation}
+\label{tts-eval}
 The TTS evaluation\cite{huang2001spoken} is a desired task since we often want to choose between two or more engines.
 However the task introduces several challenges some of which we mention in this section.
 We need to define a metric in order to evaluate the TTS.

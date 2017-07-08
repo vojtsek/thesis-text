@@ -1,12 +1,13 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {1.1}{\ignorespaces A high level architecture of spoken dialogue system.}}{3}{figure.1.1}
-\contentsline {figure}{\numberline {1.2}{\ignorespaces Sample dialogue illustrating the pronunciation correction. The transcriptions of the user's name are given in ARPABET\citep {Arpabet}}}{5}{figure.1.2}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Sample dialogue illustrating how the pronunciation correction process may look like. The dialogue system pronounces user's name incorrectly. User then correct it and the system learns. The transcriptions of the user's name are given in ARPABET.}}{4}{figure.1.2}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Example of Finite State Transducers and their composition}}{8}{figure.2.1}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Example of SSML code}}{12}{figure.2.2}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces An example of dendrogram outputted by hierarchical clustering methods.}}{14}{figure.2.3}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Some letter of the IPA alphabet together with their occurences in English words.}}{17}{figure.2.4}
-\contentsline {figure}{\numberline {2.5}{\ignorespaces An example of the synthesizer's input in SSML, forcing it to use our phonetic transcription.}}{17}{figure.2.5}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Overview of a typical statistical Text-to-speech system architecture. The text is first analysed and translated to phonetic transcription. Then, the acoustic parameters are estimated. Finally, the speech is synthesized.}}{11}{figure.2.2}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Example of SSML code}}{12}{figure.2.3}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces An example of dendrogram outputted by hierarchical clustering methods.}}{14}{figure.2.4}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Some letter of the IPA alphabet together with their occurences in English words.}}{17}{figure.2.5}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces An example of the synthesizer's input in SSML, forcing it to use our phonetic transcription.}}{17}{figure.2.6}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces An example of the finite state transducer representing the lexicon\cite {mohri2002weighted}}}{23}{figure.3.1}
 \contentsline {figure}{\numberline {3.2}{\ignorespaces A plot of Oracle Phone Error Rate dependency on the depth of the $n$-best list we explore. We can see, that the Oracle PER decreases with the depth, so it makes sense to try to exploit the hypotheses located deeper.}}{26}{figure.3.2}
@@ -22,8 +23,11 @@
 \contentsline {figure}{\numberline {4.7}{\ignorespaces Visualization of the confusion matrix computed from the results.}}{38}{figure.4.7}
 \contentsline {figure}{\numberline {4.8}{\ignorespaces Plot of the labels given by humans (vertical axis) and predicted values (horizontal axis). The vertical line represents the threshold with respect to the predictions, the horizontal dashed line ilustrates true division.}}{39}{figure.4.8}
 \contentsline {figure}{\numberline {4.9}{\ignorespaces A Receiver Operating Characteristics line of Logistic Regression classifier. The green dashed line indicates a random choice, the red point corresponds to the chosen threshold.}}{40}{figure.4.9}
-\contentsline {figure}{\numberline {4.10}{\ignorespaces An example of clustering hypotheses of the phone recognizer with spectral clustering algorithm. The input was spoken czech word "\v {C}okol\'{a}da".}}{41}{figure.4.10}
-\contentsline {figure}{\numberline {4.11}{\ignorespaces An example of clustering hypotheses of the phone recognizer with kmeans clustering algorithm. The input was spoken czech word "\v {C}okol\'{a}da".}}{42}{figure.4.11}
-\contentsline {figure}{\numberline {4.12}{\ignorespaces An example of encoding word \textit {"moon"} using BoN technique with $n\tmspace +\medmuskip {.2222em}=\tmspace +\medmuskip {.2222em}1$. The reduced Latin alphabet was used.}}{43}{figure.4.12}
-\contentsline {figure}{\numberline {4.13}{\ignorespaces The dependency of the Linear Regression model accuracy on the size of the data it is trained on. The red dashed line represents the performance of trivial classifier. We can see, that with sufficient data, the model outperforms the baseline.}}{44}{figure.4.13}
-\contentsline {figure}{\numberline {4.14}{\ignorespaces Distribution of target classes in the dataset. Although the hypotheses lists have been shuffled, the distribution is biased, making the task more difficult.}}{45}{figure.4.14}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Dependency of decoder's Oracle Phone Error Rate on the depth of the $n$-best list we explore. The bigger part of the list is exploited, the lower is the error rate.}}{42}{figure.4.10}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces An example of clustering hypotheses of the phone recognizer with spectral clustering algorithm. The input was spoken czech word "\v {C}okol\'{a}da".}}{43}{figure.4.11}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces An example of clustering hypotheses of the phone recognizer with kmeans clustering algorithm. The input was spoken czech word "\v {C}okol\'{a}da".}}{43}{figure.4.12}
+\contentsline {figure}{\numberline {4.13}{\ignorespaces An example of encoding word \textit {"moon"} using BoN technique with $n\tmspace +\medmuskip {.2222em}=\tmspace +\medmuskip {.2222em}1$. The reduced Latin alphabet was used.}}{44}{figure.4.13}
+\contentsline {figure}{\numberline {4.14}{\ignorespaces The dependency of the Linear Regression model accuracy on the size of the data it is trained on. The red dashed line represents the performance of trivial classifier. We can see, that with sufficient data, the model outperforms the baseline.}}{46}{figure.4.14}
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Distribution of target classes in the dataset. Although the hypotheses lists have been shuffled, the distribution is biased, making the task more difficult.}}{47}{figure.4.15}
+\contentsline {figure}{\numberline {4.16}{\ignorespaces An ilustrative example of the FST combined from the $g2p$ (top) and speech decoder (bottom). A part of input is chosen corresponding to the syllable "\v {C}O" and the chosen path is highlighted. It can be seen, that the path goes through both the decoder's and $g2p$'s hypotheses.}}{48}{figure.4.16}
+\contentsline {figure}{\numberline {4.17}{\ignorespaces An example of the preliminary result derived from combined FST. We can see, that the $g2p$ transcription is rather incorrect. We higlight groups of phonemes, where the transcription is changed so it is more similair to the original. However we can see that some other phonemes were replaced inocrrectly and the result is far from perfect yet. The transcriptions are given in IPA.}}{48}{figure.4.17}

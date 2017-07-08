@@ -145,14 +145,15 @@ To obtain prosodic information, sophisticated techniques need to be involved, si
 Another difficulties stem from the fact, that we often need to read numbers, or characters with special meanings such as dates or mathematical equations.
 The problem of converting text into speech has been heavily explored in the past and the TTS systems (engines) are very sophisticated nowadays.
 The subsequent section, describes briefly the typical architecture of TTS systems.
-\subsection*{TTS system architecture}
+\subsection{TTS system architecture}
 Let us now describe a common use of TTS system.
 The architecture usually consists of several modules, although some end-to-end systems base on neural networks have appeared recently (\cite{van2016wavenet}, \cite{wang2017tacotron}).
+We give an overview of the typical TTS architecture in \figref{ttsarch}.
 First, the input text is divided into sentences and each sentence is further tokenized, based on whitespace characters, punctuation etc.
 Then, the non-natural language tokens are decoded and transformed into text form.
 We then try to get rid of ambiguity and do prosodic analysis.
 Although much of the information is missing from the text, we use algorithms to determine the phrasing, prominence patterns and tuning the intonation of the utterance.
-\linebreak\linebreak
+\par
 Next is the synthesis phase. The first stage in the synthesis phase is to take the words we have just found and encode them as phonemes.
 There are two main approaches how to deal with the synthesis phase.
 More traditional approach is so called \textbf{unit concatenation}.
@@ -160,11 +161,12 @@ This approach uses a database of short prerecorded segments of speech (roughly 3
 These segments are then concatenated together with some use of signal processing so they fit together well.
 An alternative is to use machine learning techniques to infer the specification-to-parameter mapping from data.
 While this and the concatenative approach can both be described as data-driven, in the concatenative approach we are effectively memorizing the data, whereas in the statistical approach we are attempting to learn general properties of the data.
-\linebreak\linebreak
+\par
 Trained models are able to transform the phonemes into audio signal representation.
 This representation is then synthesized into waveforms using a vocoder module.
 Although unit concatenation approaches generally achieve better results, the statistical ones are more flexible and have good possibilities to fine tuning or postprocessing.
-\subsection*{Grapheme to Phoneme conversion and its drawbacks}
+\img{TTSarch.png}{0.9}{Overview of a typical statistical Text-to-speech system architecture. The text is first analysed and translated to phonetic transcription. Then, the acoustic parameters are estimated. Finally, the speech is synthesized.}{ttsarch}
+\subsection{Grapheme to Phoneme conversion and its drawbacks}
 \label{g2p-desc}
 In the stage of converting graphemes (i.e. text) to phonemes, a $g2p$ module is commonly used.
 The g2p task is to derive pronunciations from ortographic transcription.
