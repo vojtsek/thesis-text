@@ -8,7 +8,7 @@ When performing digital signal processing, we are usually concerned with three k
 \begin{enumerate}
 \item To remove the influence of phase, because the ear is not sensitive to phase information in speech, and we can use frequency domain representation.
 \item Performing source/filter separation, so that we can study the \textit{spectral envelope} of sounds.
-Spectral envelope characterizes the frequency spectrum of the signal, which is essential for the speech recogniton and processing.
+Spectral envelope characterizes the frequency spectrum of the signal, which is essential for the speech recognition and processing.
 \item We often wish to transform these spectral envelopes and source signals into more efficient representations.
 \end{enumerate}
 Overview of the main standard processing steps follows.
@@ -26,7 +26,7 @@ In fact, the \textit{mel scale}\footnote{https://en.wikipedia.org/wiki/Mel\_scal
 Further, the so called \textit{cepstrum}\footnote{https://en.wikipedia.org/wiki/Cepstrum} is computed from the log magnitude spectrum, by performing inverse Fourier transformation.
 Cepstrum can be represented by coefficients, number of which can be chosen.
 Those are called the \textit{Mel Frequency Cepstral Coefficients(MFCCs)}.
-To sum up, we have described how to process the digital audio signal and convert it into discrete series of overlaping frames, each of which is represented by a fixed-length vector of MFCCs.
+To sum up, we have described how to process the digital audio signal and convert it into discrete series of overlapping frames, each of which is represented by a fixed-length vector of MFCCs.
 \linebreak\linebreak
 We gave a brief overview of the signal processing procedure that is essential to work with the audio signal.
 When we mention the input speech signal, we mean series of MFCC vectors, unless explicitly stated otherwise.
@@ -36,7 +36,7 @@ Mel Cepstral Distortion \cite{kubichek1993mel} is a well described measure, that
 Firs, there are many other factors that contribute to the perception of voice quality.
 For example it takes no account of speech dynamics, either short-range differentials or long-range prosodic
 effects.
-Morevoer, distortions in the pitch contour are ignored.
+Moreover, distortions in the pitch contour are ignored.
 However, it should reflect the differences in speech quality and pronunciation.
 \linebreak\linebreak
 As we have described in the previous section, the audio sample can be described by its $cepstrum$.
@@ -82,7 +82,7 @@ However, this is not used in practice.
 An example of weighted FST is given in \figref{fst_example}.
 \linebreak\linebreak
 Finite state transducers have been used widely in many areas, especially linguistics.
-They can represent local phenomena encountered in the study of language and they usage often leads to compact represantations.
+They can represent local phenomena encountered in the study of language and they usage often leads to compact representations.
 Moreover, it is also very good from the computational point of view, since it advantageous in terms of time and space efficiency.
 Whole area of algorithms has been described that consider FSTs.
 One of the most important is $determinization$, which determinize paths in the FST and thus allows the time complexity to be linear in the length of input.
@@ -124,9 +124,9 @@ Its nodes represent acoustic units and edges are assigned costs.
 This assignment corresponds to the likelihood determined by the acoustic model as well as the language model, so the FST is a composition of theses two.
 Decoding the output is realized as searching the best path through this lattice.
 \linebreak\linebreak
-The decoding graph is costructed in such a way that the path can contain only words present in the vocabulary the language model is built on.
+The decoding graph is constructed in such a way that the path can contain only words present in the vocabulary the language model is built on.
 Thus, each possible path consists of valid words.
-Because of that, we can see the word as a basic unsplittable unit, although it is actually composed from phones, or triphones respectively.
+Because of that, we can see the word as a basic unit that can't be further split although it is actually composed from phones, or triphones respectively.
 However, we can build an FST that allows to construct the path from phones and thus recognize the input on the phonetic level.
 Also the search algorithm preserves alternative paths so in the end it gives us not only the best path but also list of alternative hypotheses.
 We call it the $n$-best list.
@@ -164,8 +164,8 @@ While this and the concatenative approach can both be described as data-driven, 
 \par
 Trained models are able to transform the phonemes into audio signal representation.
 This representation is then synthesized into waveforms using a vocoder module.
-Although unit concatenation approaches generally achieve better results, the statistical ones are more flexible and have good possibilities to fine tuning or postprocessing.
-\img{TTSarch.png}{0.9}{Overview of a typical statistical Text-to-speech system architecture. The text is first analysed and translated to phonetic transcription. Then, the acoustic parameters are estimated. Finally, the speech is synthesized.}{ttsarch}
+Although unit concatenation approaches generally achieve better results, the statistical ones are more flexible and have good possibilities to fine tuning or post processing.
+\img{TTSarch.png}{0.9}{Overview of a typical statistical Text-to-speech system architecture. The text is first analyzed and translated to phonetic transcription. Then, the acoustic parameters are estimated. Finally, the speech is synthesized.}{ttsarch}
 \subsection{Grapheme to Phoneme conversion and its drawbacks}
 \label{g2p-desc}
 In the stage of converting graphemes (i.e. text) to phonemes, a $g2p$ module is commonly used.
@@ -262,8 +262,8 @@ max(|C|,|Q|) \le K
 \sum_{i=0}^K d(\sigma (C,i), \sigma(Q,i) is minimal
 \end{equation}
 Where $d(x,y)$ is an arbitrary distance metric.
-In our application, we want to align two sequences of phonemes, hence we can treat it as strings and work with repsective distance.
-We choose Levensthein distance to be our metric.
+In our application, we want to align two sequences of phonemes, hence we can treat it as strings and work with respective distance.
+We choose Levenshtein distance to be our metric.
 \subsection{Clustering}
 Cluster analysis or clustering \footnote{https://en.wikipedia.org/wiki/Cluster\_analysis} is the task of grouping a set of objects in such a way that objects in the same group (called a cluster) are more similar to each other than to those in other clusters.
 The measure of similarity can be arbitrary distance measure.
@@ -274,7 +274,7 @@ There exist different methods of clustering.
 \textit{Hierarchical clustering} is based on the core idea of objects being more related to nearby objects than to objects farther away.
 These algorithms connect object" to form clusters based on their distance.
 Hierarchical clustering is a bottom-up method, meaning that it forms clusters iteratively.
-The hierarchical clustering algorithms' result can be represented as a dendrogram, which is a tree diagram representing relations among the explored data.
+The hierarchical clustering algorithms' result can be represented as a $dendrogram$, which is a tree diagram representing relations among the explored data.
 An example of dendrogram is given in \figref{dendro}.
 We can make a horizontal cut to derive respective clusters.
 \img{dendrogram.png}{0.9}{An example of dendrogram outputted by hierarchical clustering methods.}{dendro}
@@ -286,12 +286,12 @@ Typical algorithm from this group is $k$-means clustering\footnote{https://en.wi
 \textbf{Spectral clustering} \cite{ng2002spectral}
 The task of finding good clusters has been the focus of considerable research in machine learning and pattern recognition.
 Often, EM algorithms are used to learn a mixture density.
-Unfortunately, these aproaches have several drawbacks.
+Unfortunately, these approaches have several drawbacks.
 First, to use parametric density estimators, simplifying assumptions usually need to be made (e.g., that the density of each cluster is Gaussian).
 Second, the log likelihood can have many local minima and therefore multiple restarts are required to find a good solution using iterative algorithms. 
 An alternative is to use spectral methods for clustering.
-Here, one uses the top eigenvectors of a matrix derived from the distance between points.
-Therefore, the mentioned problems are overcomed.
+Here, the top eigenvectors of a matrix derived from the distance between points are used.
+Therefore, the mentioned problems are solved.
 \pagebreak
 \subsection{Basic notions in speech communication}
 Communication is a process during which some entities exchange information.
@@ -336,7 +336,7 @@ We define three terms that help us to describe the problematics:
 \begin{enumerate}
 \item \textbf{phonemes} are members of the relatively small set of units which can be combined to produce distinct word forms.
 \item Term \textbf{phone} is used to describe a single speech sound, spoken with a single articulatory configuration.
-\item \textbf{allophones} link the phonemes and phones: different ways of realising a single phoneme are called allophones.
+\item \textbf{allophones} link the phonemes and phones: different ways of realizing a single phoneme are called allophones.
 \end{enumerate}
 The duality principle states that verbal language is not one system but two; the first system uses a
 small inventory of forms, phonemes, which sequentially combine to form a much larger inventory
@@ -353,20 +353,20 @@ The standard is an International Phonetic Alphabet (IPA)\footnote{https://en.wik
 IPA symbols are composed of one or more elements of two basic types, letters and diacritics.
 The general principle of the IPA is to provide one letter for each distinctive sound (speech segment), although this practice is not followed if the sound itself is complex.
 An example of IPA characters is given in \figref{ipa_overview}.
-\img{ipa_overview.png}{0.9}{Some letter of the IPA alphabet together with their occurences in English words.}{ipa_overview}
+\img{ipa_overview.png}{0.9}{Some letter of the IPA alphabet together with their occurrences in English words.}{ipa_overview}
 \par
 The problem is that some of the tools we work with use different phonetic alphabets with possibly different rules.
-However, the TTS engines work with IPA, so it is neccessary to convert the transcriptions.
+However, the TTS engines work with IPA, so it is necessary to convert the transcriptions.
 To overcome this problem, we have derived one-to-one mappings between these sets and IPA.
 This process may introduce some errors, however the alphabets are usually based on similar principles, so it is no so hard to derive this mappings.
 Namely, we used the Arpabet\footnote{https://en.wikipedia.org/wiki/Arpabet}, Timit\footnote{https://catalog.ldc.upenn.edu/docs/LDC93S1/PHONCODE.TXT} and CGN\footnote{https://pdfs.semanticscholar.org/64d5/d612f9c639271a1340820a418fa5baf02770.pdf} phoneme sets.
 \par
-As we have suggested, some speech synthezizers are able to accept input in the SSML format which we introduce in \ref{SSML}.
+As we have suggested, some speech synthesizers are able to accept input in the SSML format which we introduce in \ref{SSML}.
 However, not all the synthesizers have this ability.
 We use Cereproc to work with utterances written in SSML.
 An example of such utterance is given in \figref{SSML_trn}.
-The problem with providing transcriptions in this way is, that the Cereproc synthesizer ignores the characters defining strech of the phoneme.
-Therefore, we ommit these characters from the transcriptions by mapping the streched phonemes to their base variants
+The problem with providing transcriptions in this way is, that the Cereproc synthesizer ignores the characters defining stretch of the phoneme.
+Therefore, we omit these characters from the transcriptions by mapping the stretched phonemes to their base variants
 This leads to worse quality of the pronunciation, however is sufficient to explore if the transcription contains sensible phonemes.
 \img{ssml_ipa.png}{1.0}{An example of the synthesizer's input in SSML, forcing it to use our phonetic transcription.}{SSML_trn}
 \pagebreak
@@ -402,7 +402,7 @@ The prediction of the next phoneme is based on a symmetric window of letters and
 Authors then construct regression tree, the leafs of which carry probability distribution over phonemes.
 \linebreak\linebreak
 \label{g2p-jseq}
-A popular approach based on probability modelling is to employ so called \textit{joint sequence models} \cite{bisani2008joint}.
+A popular approach based on probability modeling is to employ so called \textit{joint sequence models} \cite{bisani2008joint}.
 We use an open-source implementation of such a model in our work.
 This approach formalizes the task as follows:
 \begin{equation}
@@ -437,7 +437,7 @@ This method relies on the existence of a conversion mapping between these two la
 Also it requires to do the conversion for every new language.
 In theory, a model can be created, that is able to transcribe grapheme sequences into an appropriate phonetic representation and can handle multiple languages.
 However, it needs to somehow obtain information, which language the input sequence comes from, which is not straightforwardly doable.
-This method has several drawbacks, because the language is not always known and the set of known languages is limited, so it does not realy solve the OOV problem.
+This method has several drawbacks, because the language is not always known and the set of known languages is limited, so it does not really solve the OOV problem.
 Also, it potentially requires a lot of training data.
 Moreover, if we want to learn a new pronunciation of just one word, it's more convenient to do it in a different way.
 \subsection{Learning pronunciation from spoken examples}.
@@ -451,7 +451,7 @@ Thus the overall performance of the recognizer may be degraded since the phoneti
 The method is proposed, that relies on the use of both phoneme and word-level speech recognizer.
 The phoneme recognizer is constructed using smoothed bigram Language model.
 We discuss the phoneme recognizers in more detail in \ref{ASR-phn}.
-The algorithm collects all occurences of words in the database and creates phonetic transcriptions using the recognizer.
+The algorithm collects all occurrences of words in the database and creates phonetic transcriptions using the recognizer.
 It then sorts the variants, rejects some of them an creates an $n-best$ list which is added to the dictionary.
 The recognizer can then be retrained, allowing multiple pronunciations for each word.
 Thus the recognition performance can be improved by an automatic procedure without the need for using the phonological rules.
@@ -459,11 +459,11 @@ Thus the recognition performance can be improved by an automatic procedure witho
 In the work of McGraw et al. \cite{mcgraw2013learning}, the concept of Pronunciation Mixture Models is introduced.
 The authors use a special kind of speech recognizer, the search space of which has four primary hierarchical components: a language model $G$, a phoneme lexicon $L$, phonological rules $P$ that expand the phoneme pronunciations to their phone variations, and a mapping from phone sequences to context-dependent model labels
 $C$.
-All of the components metioned can be with advantage represented as FSTs and thus the full decoder network can be represented as a composition of these components: $R = C\circ P \circ L \circ G$.
-A probabilistic lexicon is considered, meaning, that several pronunciations are allowed for each word and there is no hard limitation that would force the recognzier to choose one.
+All of the components mentioned can be with advantage represented as FSTs and thus the full decoder network can be represented as a composition of these components: $R = C\circ P \circ L \circ G$.
+A probabilistic lexicon is considered, meaning, that several pronunciations are allowed for each word and there is no hard limitation that would force the recognizer to choose one.
 Instead, a kind of soft voting is considered, meaning, that each transcription is used with certain probability.
-Also, joint-sequence modelling is considered, as we introduced in \ref{g2p-jseq}, so each transcription is considered together with its orotgraphic form.
-That means, that we can describe the log-likehood of $M$ utterances $ D = \{\mathbf{u}_i,\mathbf{W}_i\}$ where $\mathbf{u}_i$ are speech data and $\mathbf{W}_i$ their transctiptions as follows:
+Also, joint-sequence modeling is considered, as we introduced in \ref{g2p-jseq}, so each transcription is considered together with its orotgraphic form.
+That means, that we can describe the log-likelihood of $M$ utterances $ D = \{\mathbf{u}_i,\mathbf{W}_i\}$ where $\mathbf{u}_i$ are speech data and $\mathbf{W}_i$ their transcriptions as follows:
 \begin{equation}
 \mathcal{L}(\Theta\vert D) = \sum_{i=1}^M log \sum_{B \in \mathcal{B}} P(\mathbf{u}_i,\mathbf{B},\mathbf{W}_i;\Theta)
 \end{equation}
@@ -478,7 +478,7 @@ P(\mathbf{u}_i\vert\mathbf{B})P(\mathbf{B}\vert\mathbf{W}_i;\Theta)P(\mathbf{W}_
 \end{equation}
 The model parameters are then estimated using the EM-algorithm.
 Parameters related to the language model, can be initialized with use of graphone language model.
-Several technical issues has to be dealed with, however the Pronunciation Mixture Models can be trained on the same data as traditional ASR engines and can be used to obtain phonetic transcriptions from audio data.
+Several technical issues has to be dealt with, however the Pronunciation Mixture Models can be trained on the same data as traditional ASR engines and can be used to obtain phonetic transcriptions from audio data.
 \linebreak\linebreak
 
 Similar approach is considered in the work of Reddy and Gouvea \cite{reddy2011learning}, except they do not have access to acoustic models or phone lattices.
@@ -505,5 +505,5 @@ The latter problem can be partially solved by transfer learning as proposed in \
 \linebreak\linebreak
 Alternatively, one can derive pronunciations directly from an audio signal.
 This approach has been also explored by some authors, however it usually requires quite low-level modifications of the speech recognizer.
-Also, the authors used the derived pronunciations to enlarge the phonetic dictionary of the recognizer, not to improve the Text-To-Speech sytems.
+Also, the authors used the derived pronunciations to enlarge the phonetic dictionary of the recognizer, not to improve the Text-To-Speech systems.
 We explore methods of merging the mentioned approaches to combine both textual and acoustic information and its usability when confronted with human judgments.

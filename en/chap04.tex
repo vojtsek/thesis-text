@@ -292,6 +292,7 @@ Based on the results, we choose the decoder acoustic part of which is modelled b
 \end{table}
 \img{decoderPER.png}{0.9}{Dependency of decoder's Oracle Phone Error Rate on the depth of the $n$-best list we explore. The bigger part of the list is exploited, the lower is the error rate.}{decoderPER}
 \subsubsection{Compressing the $n$-best list}
+\label{nbest-clust}
 To cluster the items, we first need to choose the clustering method.
 We explore two methods here, namely \textit{kmeans} and \textit{spectral clustering}.
 We now briefly dicsuss pros and cons of each.

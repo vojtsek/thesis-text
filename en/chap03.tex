@@ -40,10 +40,10 @@ Hence, by modification of $G$ and $L$ we can change the output set of the decode
 In ASR systems, the most common phone recognition evaluation measures are Phone Error Rate (PER), or the related performance metric, phone accuracy rate.
 The latter is defined by the following expression:
 \begin{equation}
-Accracy = \frac{N_T - S - D - I}{N_T} \times 100\%
+Accuracy = \frac{N_T - S - D - I}{N_T} \times 100\%
 \end{equation}
 where $N_T$ is the total number of phonemes in the gold utterance and $S, D$ and $I$ are the substitution, deletion and insertion errors, respectively.
-From this perspective, we can see it as related to Levensthein distance of the gold and test sequences.
+From this perspective, we can see it as related to Levenshtein distance of the gold and test sequences.
 Then, we can define $PER \: = \: 100\% - Accuracy$.
 \par
 Another measure is correctness, which is similar to accuracy, but does not consider insertion errors.
@@ -74,13 +74,13 @@ To change the transducers in the above mentioned way, we reduce the vocabulary t
 This way we force the decoder to output phonemes.
 \subsubsection{Timit dataset}
 The above approach has a disadvantage lying in the fact that it is difficult to obtain a language model of good quality without a proper corpus of transcriptions.
-This corpus may be found as a part of the timit dataset \cite{lopes2011phoneme}.
+This corpus may be found as a part of the Timit dataset \cite{lopes2011phoneme}.
 In fact, the Kaldi framework contains scripts, that train a model using this dataset.
-The timit dataset has got transcriptions labeled with granularity of individual phonemes.
+The Timit dataset has got transcriptions labeled with granularity of individual phonemes.
 This means we can train the phonetic recognizer directly.
 Problem is that different set of phonemes is used but we can solve it by mapping the phonemes to IPA.
 Worse is the fact, that the phone error rate measured on different data gives poor results.
-This can be caused by the fact that the dataset is not very big and thus the model can have problems accomodating to different acoustic conditions.  
+This can be caused by the fact that the dataset is not very big and thus the model can have problems accommodating to different acoustic conditions.  
 \subsubsection{Modeling phoneme bigrams}
 The decoding graph is context dependent. 
 It means that the decoder takes into account both the right and the left context of the phonemes. 
@@ -122,13 +122,13 @@ It is quite intuitive, that hypothesis that differ only in one position have sim
 We would like to use the information but we are not interested in many hypotheses that are nearly the same.
 So we propose to clusterize the hypotheses contained in the $n$-best list.
 The goal is to obtain a more compact version of the list with high variability among items.
-We adress this issue again in section TODO: ref, giving results and examples.  
+We address this issue again in section \ref{nbest-clust}, giving results and examples.  
 \section{Text-to-speech systems' evaluation}
 \label{tts-eval}
 The TTS evaluation\cite{huang2001spoken} is a desired task since we often want to choose between two or more engines.
 However the task introduces several challenges some of which we mention in this section.
 We need to define a metric in order to evaluate the TTS.
-Such a metric will be dependend on particular task's setting and may consist of several variables.
+Such a metric will be dependent on particular task's setting and may consist of several variables.
 We can describe a taxonomy of different evaluation methods, depending from which point of view we look at it we distinguish between:
 \begin{itemize}
 \item \textit{Black box vs. Glass box evaluation} - whether we evaluate the TTS system as a whole or look at particular modules of it.
@@ -140,7 +140,7 @@ Nowadays, it is necessary to employ humans in the evaluation process, mainly to 
 \par
 A critical measurement of a TTS system is whether or not human listeners can understand
 the text read by the system. So called \textit{intelligibility} tests were developed to measure this aspect.
-For example Diagnostic Rhyme Test is used that uses set composed of pairs of similair words.
+For example Diagnostic Rhyme Test is used that uses set composed of pairs of similar words.
 Those are synthesized with a TTS engine and the listeners try to correctly distinguish between them.
 The intelligibility is the evaluated and compared to listening human speakers.
 An example set of words that may be used for such test is given in \figref{rhymetest}.
@@ -194,6 +194,6 @@ recall = \frac{TP}{TP + FN}
 In other words, \textit{precision} describes how many selected examples are relevant, while \textit{recall} tells us how many relevant examples were actually selected.
 Finally, we can define:
 \begin{equation}
-F-score = 2 \times \frac{precison \times recall}{precision + recall}
+F-score = 2 \times \frac{precision \times recall}{precision + recall}
 \end{equation}
 That is, the \textit{F-score}, sometimes called \textit{$F_1$ score} is a harmonic mean of \textit{precision} and \textit{recall.}
