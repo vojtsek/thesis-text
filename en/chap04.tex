@@ -1,19 +1,24 @@
 \chapter{Experiments}
-\section{Data}
+\section{Used Datasets}
 \label{data-desc}
-Although quite a lot of speech datasets have been published, we were interested in datasets that would contain a lot of OOV words.
-We mean by this, that it contains a lot of words, that are not present in a vocabulary of the speech recognition and text-to-speech that we have used.
-We aim for this, because we would like to explore such words.
-They should be difficult to pronounce for the text-to-speech engine and thus there is space for an improvement.
+We are interested in datasets that would contain a lot of Out-of-vocabulary words.
+This is desirable for us, because it means the the dataset contains a lot of words, that are not present in a vocabulary of the speech recognition and text-to-speech (TTS) that we have used.
+When it comes to pronunciation of such words, text-to-speech usually performs poorly.
+They should be difficult to pronounce for the TTS engine and thus there is space for an improvement.
+We created two datasets ourselves, we call them $artificial$ in the following text.
 \subsection{Dataset \textbf{$D_1$} - artificial}
-Dataset D1 contains 100 randomly chosen Dutch Names.
+Dataset $D_1$ contains 100 randomly chosen Dutch Names.
+We take the ortographic transcription of these names and create two phonetic transcriptions.
+The first is obtained from our $g2p$ module, the other is created with the procedure described in \ref{combine}.
+Both transcriptions were then synthesized using the $Cereproc$ engine and rated by judgers using the CCR method introduced in \ref{tts-eval}.
 \subsection{Dataset \textbf{$D_2$} - artificial}
-$D_2$ is also manually annotated set of 110 words.
+$D_2$ is also manually labeled set of 110 words.
 70 words are English, remaining 40 are Czech.
 Czech words were chosen to contain lot of diacritic hence to be difficult to pronounce for TTS trained on English.
-Each word was synthesized by four TTS engines.
+Each word was synthesized by four TTS engines, namely $Cereproc$, $MaryTTS$, $gTTS$ and $Pico$.
 Each recording was then manually annotated.
-\paragraph{Labeling}. Labeling of $D_2$  was performed by three annotators. Each of them had to listen each of the words three times, each time synthesized by different engine. He then labeled each of the recording with a discrete number ranging from one to five. The recordings labels were averaged. Thus we obtain labels per each recording and we have three labels in total for each word. We average these three labels and obtain a score between one and five, that describes overall quality of the word's pronunciation.
+\paragraph{Labeling}. Labeling of $D_2$  was performed by three annotators. Each of them had to listen every word four times, each time synthesized by different engine. He then labeled each of the recording with a discrete number ranging from one to five. The recordings labels were averaged. Thus we obtain labels per each recording and we have four labels in total for each word. We average these four labels and obtain a score between one and five, that describes overall quality of the word's pronunciation.
+We thus obtain data that are suitable for our purpose, meaning, that we can explore methods of the label prediction and find out, if they correspond to the raters' opinion.
 \subsection{Dataset \textbf{$D_3$} - Autonomata Spoken Name Corpus}
 The Autonomata Spoken Names Corpus \cite{van2008autonomata} is a database of approximately 5.000 read-aloud first names, surnames, street names, city names and control words.
 It was  published by Dutch-Flemish HLT Agency\footnote{http://tst-centrale.org/nl/}.
@@ -21,15 +26,25 @@ The corpus consists of a Dutch part and a Flemish part.
 Besides the speech data, the corpus also comprises phonetic transcriptions, speaker information and lists containing the orthography of the read names.
 Spoken utterances of 240 speakers living in the Netherlands (NL) or in Flanders (FL) are included in the corpus.
 Since we have both ortographic and phonetic transcriptions available in addition to the audio recording, the dataset is ideal for our purposes, because we can evaluate the quality of our transcriptions.
+\subsection{Librispeech}
+The Librispeech dataset\footnote{http://www.openslr.org/12/} was used to train our model for Automatic Speech Recognition.
+It is a corpus of approximately 1000 hours of read English speech.
+\subsection{Timit}
+The Timit dataset\footnote{https://catalog.ldc.upenn.edu/ldc93s1} is also a dataset for speech recognition. It is rather small containing 6300 spoken sentences, making 5.4 hours of audio in total.
+All sentences were manually segmented at the phone level. 
+\subsection{TODO: ptien}
+\subsection{Carnegie Mellon University Dictionary}
+The CMU dictionary is a pronouncing dictionary constisting of 134 000 words and their phonetic transcriptions.
+Its phoneme set is based on the Arpabet\footnote{https://en.wikipedia.org/wiki/Arpabet} symbol set developed for speech recognition uses.
 \subsection{Annotation procedure}
-We have created some datasets ($D_1$, $D_2$) ourselves, so we had to obtain annotations for it.
+We have collected some datasets ($D_1$, $D_2$) ourselves and we had to obtain ratings for it.
 Hence, we asked three annotators to label the recordings.
 They were given instructions to judge the recordings with respect to quality of the pronunciation, not the sound quality of the recording .
-However, the criterions were defined quite vaguely, that is they were not told which aspects of pronunciation they should focus on.
-Therefore, the ratings were quite diverse and they were subjective according to respective annotators' preferences.
-\par
+However, the criteria were defined quite vaguely.
+The raters were not told which aspects of pronunciation they should focus on.
+Therefore, the ratings may be subjective according to respective annotators' preferences.
 Because of that, we have explored how individual annotators' ratings correlate.
-We sum up the results for the $D_2$ dataset in Table \ref{annotators}
+We sum up the results for the $D_1$ dataset in TODO and for the $D_2$ in Table \ref{annotatorstbl}.
 \begin{table}
 \begin{center}
 \begin{tabular}{ |c|c|c|c|c|c| } 
@@ -41,13 +56,13 @@ We sum up the results for the $D_2$ dataset in Table \ref{annotators}
 \textbf{mean} & \textbf{0.87} & \textbf{0.83} & \textbf{0.87} & \textbf{0.73} &  \\ \hline 
  \end{tabular}
 \end{center}
-\label{annotators}
-\caption{The table contains results of linear regression model training on aggregated MFCC vectors. Correlation with human judgment and $R^2$ measure for respective cross-validation folds are shown.}
+\label{annotatorstbl}
+\caption{The table contains correlations that were observed among the raters.}
 \end{table}
 
 \section{Identifying difficult words}
 \label{ident-diff}
-If we want to improve pronunciation of the synthesized recordings, we should first identify words that are mispronounced. Obviously, we could let the TTS system pronounce each word in a best effort style and  the user would identify mistakes and correct them. This approach hase several drawbacks. First, the communication with the user is rather complicated, since the incorrectly pronounced word has to be isolated prior to obtaining the correct pronunciation.
+If we want to improve pronunciation of the synthesized recordings, we should first identify words that are mispronounced. Obviously, we could let the TTS system pronounce each word in a best effort style and  the user would identify mistakes and correct them. This approach has several drawbacks. First, the communication with the user is rather complicated, since the incorrectly pronounced word has to be isolated prior to obtaining the correct pronunciation.
 Second, it may be unpleasant for the user if he or she has to undergo this process and hear the incorrect pronunciation. Thus, it would be better if we could recognize the possibly difficult words somehow. It would mean that we can ask the user directly for the correct pronunciation of the word. We explore this issue in the rest of this section.
 \subsection{Measuring the difficulty}
 In order to estimate the difficulty of each word's pronunciation, we propose three measures in this section. The key idea is that we obtain values for each of this measures and then combine them in one feature vector that represents the recording.
@@ -60,17 +75,25 @@ M_1(k) = \frac{1}{N}\sum_{(i,j)}{MCD(r_{ki},r_{kj})}
 Where $N = {3\choose2}$, $(i,j)$ stands for every combination of synthesizers, $r_{ki}$ is name {k} synthesized by engine {i} and $MCD$ is the Mel Cepstral Distortion.
 The key idea motivating this measure is that if there is a problem with a pronunciation of some part of the word, every synthesizer has to deal with it somehow. It is likely, that each of them will do it in sligthly different way. This implies that the pairwise $MCD$ will increase.
 \par
-Nevertheless, the process of computing the value of $M_1$ introduces some problems. The troubles stem from the fact, that there is a high variability in the data obtained from the synthesizers. That is, one synthesizer's output may differ greatly from the others, so it biases the result. We can see the effect in \figref{m1variation}. If we had enough synthetizers, we could afford to ignore values of the outliers and thus smooth the results.
-\img{m1barchart.png}{1.0}{An example demonstrating, how the measured $M_1$ between two recordings can vary. Red and blue bars represent respective recordings, their height corresponds to the measured $M_1$. On the left, there are measurings using only two synthesizers ($\sim MCD $), in the betwwen, there are triples and the most right column corresponds to four synthesizers. One outlying example can negatively influence the relevancy of the measure. While the recording represented by the red columns has quite similar MCD between every pair, the other one has outliers and thus the resulting value has got low confidence.}{m1variation}
+Nevertheless, the process of computing the value of $M_1$ introduces some problems. The troubles stem from the fact, that there is a high variability in the data obtained from the synthesizers.
+That is, one synthesizer's output may differ greatly from the others, presumably if there is a big flaw in this synthesizer's pronunciation.
+This influence the resulting measure heavily.
+We can see the effect in \figref{m1variation}.
+A solution to this problem may be, that we detect the outlying values and get rid of them.
+However, it is unclear, whether this is always desired.
+It can be the case, that the big difference between synthesizers' outputs occurs because the pronunciation is really difficult.
+\img{m1barchart.png}{1.0}{An example demonstrating, how the measured $M_1$ between two recordings can vary. Red and blue bars represent respective recordings, their heights correspond to the measured $M_1$. On the left, there are measurings using only two synthesizers ($\sim MCD $), in the betwwen, there are triples and the most right column corresponds to four synthesizers. One outlying example can negatively influence the relevancy of the measure. While the recording represented by the red columns has quite similar MCD between every pair, the other one has outliers and thus the resulting value has got low confidence.}{m1variation}
 \par
-We tested, how good is the correlation of $M_1$ measure and human judgement. First, we synthesized the words by different synthesizers. Each recording created this way was then labeled by a human. Set of recordings for each word was then used to compute $M_1$ value and this was compared with the mean of the respective human judgements. Results on our sample dataset with the use of the $0$-th coefficient and without it are shown in \figref{mcdcorr}. Based on these results, it may seem that the $M_1$ measure is not very good, the best correlation was $0.471$. However, it may add a useful piece of information to the feature vector.
+We tested, how good is the correlation of $M_1$ measure and human judgment. First, we synthesized the words by different synthesizers. Each recording created this way was then labeled by a human. Set of recordings for each word was then used to compute $M_1$ value and this was compared with the mean of the respective human ratings. Results on our sample dataset with the use of the $0$-th coefficient and without it are shown in \figref{mcdcorr}. Based on these results, it may seem that the $M_1$ measure is not very good, the best correlation was $0.471$. However we further combine it with other measures.
+In section \ref{mcomb} we show, that it adds a useful piece of information to the feature vector.
 \par
 \img{mcd_correlation.png}{0.9}{Plot of the $M_1$ measure correlation with human judgments. Points are horizontally spaced and colored according to gold labels. The vertical axis shows $M_1$ value. The blue lines represents estimate yielded by least square fit. The top figure includes the 0-th mel cepstral coefficient, while the figure on the bottom does not.}{mcdcorr}
-The $MCD$ has one property that can be looked at as a disadvantage: It does not weight its coefficients, more accurately it weights all with the same weights. We propose to change this - for example a linear model could be trained, that finds the combination of MFCC's that corresponds the best. The coefficients derived by this model would be difficult to interpret without further research. However, we can train it and try to use it instead of typical $MCD$. The disadvantage of this approach is that we need labeled data, while the previous method works in an unsupervised way.
+The $MCD$ has one property that can be looked at as a disadvantage: It does not weight its coefficients, more accurately it weights all with the same weights. We propose to change this - for example a linear model could be trained, that finds the combination of MFCC's that corresponds the best. The coefficients derived by this model would be difficult to interpret without further research. However, we can train it and try to use it instead of typical $MCD$.
 \par
-We want to supply the computation of $M_1$ by a linear model prediction. To train such a model, we must first prepare the data. We use the~$D_1$ dataset described in section \ref{data-desc}. Since we want to use a simple linear model, we need to work with fixed size vectors. Nevertheless, the input data are variable-length sequences of vectors. We first transform each synthesized recording by summing all its mel cepstral coefficients. Thus we get ~$N$~$M$-sized vectors, where~$N$ is the number of synthesizers used and $M$ is the order of mel cepstral analysis. We then compute differences in each position between every pair of recognizers and sum those to obtain one resulting vector of length~$M$. We use labels obtained from annotators normalized to interval $[0, 1]$ as a target variable. We then evaluate the model using 8-fold cross-validation. The results are shown in \figref{cvfolds}. The correlations and~$R^2$ for respective folds are shown in Table \ref{cv}.
+We want to supply the computation of $M_1$ by a linear model prediction. To train such a model, we must first prepare the data. We use the~$D_1$ dataset described in section \ref{data-desc}.
+\img{mcdexample.png}{0.9}{The process of aggregating the values obtained from mel cepstral analysis. Each recording is represented by sequence of $M$-sized vectors. These sequences are summed, thus the representation is flattened into one vector of length $M$.}{mcdexample}
 \par
-We can train a model that works with untransformed data representation, that is all the full sequences. The input has a big dimension, however, the number of parametres is not that big, because we want to train only one scale factor per one position in the MFCC vector. TODO
+Since we want to use a simple linear model, we need to work with fixed size vectors. Nevertheless, the input data are variable-length sequences of vectors. We first transform each synthesized recording by summing all its mel cepstral coefficients. Thus we get ~$N$~$M$-sized vectors, where~$N$ is the number of synthesizers used and $M$ is the order of mel cepstral analysis. This step is visualized in \figref{mcdexample}. We then compute differences in each position between every pair of recognizers and sum those to obtain one resulting vector of length~$M$. We use labels obtained from annotators normalized to interval $[0, 1]$ as a target variable. We then evaluate the model using 5-fold cross-validation. The results are shown in \figref{cvfolds}. The correlations and~$R^2$ for respective folds are shown in Table \ref{cv}.
 \img{cv_folds.png}{0.9}{Plots of the correlation of the measure computed by model in cross-validation folds. The predicted values are on the vertical axis, the horizontal position represents the human judgments. The blue lines shows least-squares fit. Although the training data are rather small, it shows, that the model can output meaningful values.}{cvfolds}
 \begin{table}
 \begin{center}
@@ -93,7 +116,7 @@ We can train a model that works with untransformed data representation, that is 
 \caption{The table contains results of linear regression model training on aggregated MFCC vectors. Correlation with human judgment and $R^2$ measure for respective cross-validation folds are shown.}
 \end{table}
 \subsubsection{$M_2$ measure - averaged phonetic distance}
-Another measure we can possibly use is based on phonetic transcriptions. We first recognize the recordings with a phoneme recognizer, thus we obtain a sequence of characters per each recording. We can compute pairwise distances of these transcriptions, using for example Levensthein \cite{navarro2001guided} or Hamming distance, which we normalize. The motivation is similar to the $M_1$ measure. Assuming the difficult words have positions that are problematic for the TTS engine, the recognized phonemes on these positions should differ and thus the distance between transcriptions should increase. Four our purposes, we have used Levenshtein distance as a metric.
+Another measure we can possibly use is based on phonetic transcriptions. We first recognize the recordings with a phoneme recognizer, thus we obtain a sequence of characters per each recording. We can compute pairwise distances of these transcriptions, using Levenshtein \cite{navarro2001guided} distance which we normalize by the length of the word. The motivation is similar to the $M_1$ measure. Assuming the difficult words have positions that are problematic for the TTS engine, the recognized phonemes on these positions should differ and thus the distance between transcriptions should increase. Four our purposes, we have used Levenshtein distance as a metric.
 \par
 The M2 measure is described by equation:
 \begin{equation}
@@ -102,7 +125,7 @@ M_2(k) = \frac{1}{N}\sum_{(i,j)}{\frac{LD(Hyp(r_{ki}),Hyp(r_{kj}))}{max(len(r_{k
 Where $N = {3\choose2}$, $(i,j)$ stands for every combination of synthesizers and $r_{ki}$ is name $\{k\}$ synthesized by engine $\{i\}$. $LD$ means Levenshtein Distance and $Hyp$ represents the best hypothesis from the phonetic recognizer. Note, that we normalize the distance by length of the longer transcription.
 \img{mcdphcorr.jpg}{0.9}{Scatterplot showing relation between the $M_1$ and $M_2$ measures. We can see, that the measures are rather uncorrelated. However, they can still be complementary.}{mcdphcorr}
 
-\subsubsection{$M_3$ measure - occurence of bad bigrams}
+\subsubsection{$M_3$ measure - occurrence of confusable bigrams}
 The $M_3$ measure is based on a different approach.
 We want to learn the typical mistakes of a grapheme-to-phoneme converter, more specificaly we want to explore which groups of graphemes are difficult to transcribe for the $g2p$.
 We suppose that words with many occurences of such groups are difficult to pronounce.
@@ -115,6 +138,7 @@ We can then prepare for computation of $M_3$ in three stages:
 \item Identify problematic parts.
 \end{enumerate}
 Stage 3 needs further description.
+\par
 We obtained list of triples, $i^{th}$ of which is structured:
 \begin{center}
 (word $w_i$ from $C_2$, original transcription $t^o_i$, transcription $t^h_i$ derived by $G_1$)
@@ -122,15 +146,20 @@ We obtained list of triples, $i^{th}$ of which is structured:
 We can then use the Dynamic Time Warping algorithm to obtain pairwise alignments of these sequences, illustrated on \figref{sample_dtw_alignment}
 In fact, we first transform the phoneme sequences into sequences of bigrams.
 This is because graphemes and phonemes are not in one-to-one correspondence and bigrams capture the relations better.
-\img{sample_align.jpg}{0.45}{Sample alignment of two phonetic sequences}{sample_dtw_alignment}
+\img{sample_align.jpg}{0.35}{Sample alignment of two phonetic sequences}{sample_dtw_alignment}
 Once we have the alignments, we can identify positions, in which the original transcriptions from $C_2$ differ from the hypothesis derived in Stage 2.
 Respective bigrams from the original word can then be identified.
 For each bigram, we count number of times it was marked as difficult.
 Each word can then be scored according to number of bad bigrams it contains.
-To evaluate the $M_3$ measure, the MaryTTS framework was used, because we can extract phonetic transcriptions from it and thus use its $g2p$ module.
+\par
+To evaluate the $M_3$ measure, we have to synthesize the words, have them rated and compare the ratings with the measure.
+MaryTTS framework was used, because we can extract phonetic transcriptions from it and thus use its $g2p$ module.
 This means that we are able to derive the transcriptions with exactly the same module that is used in the synthesizer.
 We have also used the Cereproc engine.
+The words were chosen as a subset of the Autonomata Corpus.
+\par
 Because we do not have access to the $g2p$ that Cereproc uses, we trained our own model on the CMU dictionary\footnote{http://www.speech.cs.cmu.edu/cgi-bin/cmudict}.
+We use a subsets of Autonomata corpus as the dataset of foreign worlds.
 The data was then processed and the confusion matrix was created, containing number of times, respective bigrams are confused with each other.
 The matrix turns out to be quite sparse, which is not surprising, since the majority of bigram pairs are interchanged with probability nearly zero.
 \par
@@ -141,32 +170,38 @@ The shape of the curve corresponds to the fact that many bigrams do not occur a 
 \par
 The correlation of this measure and annotations was $0.20$ for the MaryTTS and $0.31$ for the Cereproc, respectively.
 Intuitively, if we have access to the $g2p$ module, which is the MaryTTS case, it is expectable, that the results would be better.
-However, this turns out not to be true, which is surprising.
+However, this turns out not to be true.
+It may be caused by the fact, that the recordings created by Cereproc are of better quality in general, so the ratings are better as well.
 \img{bigroccurrs.jpg}{0.9}{Frequencies of confusing respective bigrams, i.e. how many times it occurs in some confused pair. We can see, that the majority of bigrams has very low frequencies.}{bigram_scores}
 \img{confusion_limit.png}{0.9}{Visualization of the confusion matrix computed from the results.}{bigram_conf}
-TODO: why?
-\par
-The disadvantage of this approach is that it relies quite heavily on the alignment process, which is imperfect, so sometimes it can mark as confused pair of bigrams, that is not correct.
-Also id occurences of some bigrams are very sparse, then its scores may be estimated poorly.
-Another possible problem is, that it relies on the corpuses with phonetic transcriptions and then it is specific to certain pair of languages.
 \subsection{Measure combination}
-We have seen that neither of the measures correlates well with the annotators' labeling.
+\label{mcomb}
+We have seen that neither of the measures correlates well with the annotators' labeling (\figref{mcdcorr}).
 Despite this fact, it may by interesting to explore, whether the combination of the measures can work better.
 As described in the introduction to this section, we combine the measured values to one feature vector that represents the word.
-We then train a $Ridge\: Regression$ model using the averaged human labels as a target variable.
+However, it does not make much sense to include the $M_3$ measure, since it is language-dependent.
+Namely, it captures only the specific differences between English and Dutch.
+Since our dataset contains OOV words from Czech, we do not include $M_3$ to the feature vector.
+We use a \textit{Ridge regression}~\cite{hoerl1970ridge} model, which is a regularized version of the linear regression.
+It adds to the objective function quadratic norm of the weight vector.
+We train the model using averaged human labels as a target variable.
 We have used 5 fold cross validation and measured the $R^2$ and $Mean Squared Error (MSE)$, which we averaged over all the folds.
-The measured $MSE$ was $0.43$ and $R^2$ was $0.58$.
-We remind, that the human labels are discrete values in the interval $[1,5]$, so the $MSE$ value is good, saying that we differ from the human label by less than $0.5$.
+The measured $MSE$ was $0.39$ and $R^2$ was $0.58$.
+We remind, that the human labels are discrete values in the interval $[1,5]$, so the $MSE$ value is good, saying that we differ from the human label by $0.6$ in average.
+We plot the differences from true labels in \figref{ident-box}.
+\img{identify-predictions-boxplot.png}{0.9}{A boxplot showing difference of the predicted labels from human ratings. We can see, that majority of predictions differ by 0.8 at maximum.}{ident-box}
 \par
-We can choose a threshold and state, that if the model's predicted value is greater than the threshold, the respective word is hard to pronounce and we should try to improve the pronunciation.
+We are interested not as much in the label prediction, as in the identification of words that are difficult to pronounce.
+To achieve this, we can choose a threshold and claim that if the model's predicted value is greater than the threshold, the respective word is hard to pronounce and we should try to improve the pronunciation.
 We could empirically determine a threshold separating difficult words from the easier ones.
-If we plot the results, as in \figref{combined}, we can see, that setting the threshold to value 2.5, which is exactly in the middle of the scale, is reasonable choice.
+If we plot the results, as in \figref{meas-combined}, we can see, that setting the threshold to value 2.5, which is exactly in the middle of the scale, is reasonable choice.
 Thus we can reformulate the problem as a binary classification task which gives us another insight.
 Simply, we have to decide if a given example will be pronounced correctly or not.
 We aim to identify incorrectly pronounced words and we refer to these words as positive examples.
-Thus we can compute the $precision and recall$~\footnote{https://en.wikipedia.org/wiki/Precision\_and\_recall} and obtain the \textit{$F_1$ score}\footnote{https://en.wikipedia.org/wiki/F1\_score} 0.86.
-Based on these experiments, our method has reasonable behavior and may be used to identify difficult recordings confidently.
-\img{identify-predictions.png}{1.0}{Plot of the labels given by humans (vertical axis) and predicted values (horizontal axis). The vertical line represents the threshold with respect to the predictions, the horizontal dashed line ilustrates true division.}{combined}
+\par
+Thus we can compute the \textit{precision and recall} and obtain the \textit{$F_1$ score} 0.86.
+Based on these experiments, our method has reasonable results and may be used to identify difficult recordings confidently.
+\img{identify-predictions.png}{1.0}{Plot of the labels given by humans (vertical axis) and predicted values (horizontal axis). The vertical line represents the threshold with respect to the predictions, the horizontal dashed line ilustrates true division.}{meas-combined}
 \par
 Since we have approached the problem as a binary classification task, we can also train a classifier.
 We train a Logistic Regression classifier and determine a classification threshold by plotting the Receiver Operating Characteristics line - \figref{roc}.
@@ -182,8 +217,16 @@ Our goal is to develop a method that would identify such words before they are i
 Exploration of these measures showed, that they does not correlate well with the human judgments.
 Nevertheless, the experiments indicate, that the measures are complementary in the sense, that if we combine them in a feature vector, we can train a model that predicts reasonable values.
 If we determine a threshold, we can use this model for classification purposes.
-Although the results are promising, the computation process that preceeds the creation of the feature vector is not very convenient.
+Although the results are promising, the computation process that precedes the creation of the feature vector is not very convenient.
 We have to have access to speech engines, non-trivial phonetic corpuses ($M_3$) and phoneme recognizer ($M_2$).
+We also have trained a model that substitutes the MCD computation.
+It yields meaningful results, however the disadvantage of this approach is that we need labeled data, while the previous method works in an unsupervised way.
+\par
+As for the $M_3$, its disadvantage is that it relies quite heavily on the alignment process, which is imperfect.
+Because og that, it can sometimes mark as confused pair of bigrams that is not correctly aligned.
+Also id occurrences of some bigrams are very sparse, then its scores may be estimated poorly.
+Another possible problem is, that it relies on the corpuses with phonetic transcriptions and then it is specific to certain pair of languages.
+It did not prove to be very useful.
 \section{Improving the pronunciation}
 \label{pron-improvement}
 \subsection{Overview}
@@ -396,7 +439,7 @@ Thus we have to employ Dynamic Time Warping (DTW) algorithm again to align the t
 It is not straightforward how to use the DTW.
 Another problem is, that although we obtained posterior probabilities, the $g2p$ and the decoder treat their graphs differently, namely the decoder assigns greater probabilities to the individual phonemes, thus restricting number of alternatives.
 Therefore, we have to weight the decoder's probabilites if we want to combine the results.
-We could for example try to train a model that would learn the weighting factor.
+We could for example try to train a model that would learn the weights.
 We left this research for future work.
 Nevertheless, we ran some preliminary experiments showing, that it is promising way to go, as showed in \figref{preliminary}.
 \img{preliminary.png}{0.65}{An example of the preliminary result derived from combined FST. We can see, that the $g2p$ transcription is rather incorrect. We higlight groups of phonemes, where the transcription is changed so it is more similair to the original. However we can see that some other phonemes were replaced inocrrectly and the result is far from perfect yet. The transcriptions are given in IPA.}{preliminary}
@@ -405,5 +448,5 @@ We have proposed two methods of combining the acoustic and textual information.
 Both methods suffer from the fact that the transcriptions are of different length and misaligned.
 The use of Dynamic Time Warping algorithm may not be good enough.
 The resulting alignments are not always desired since it may pair two phonemes that should not be aligned.
-Also, the method that combines the FST's is not exact yet, mainly we did not derive the weighting factors for the speech decoder's hypotheses.
+Also, the method that combines the FST's is not exact yet, mainly we did not derive the weights for the speech decoder's hypotheses.
 However, looking at the ratings and preliminary results, this is a promising way to go.

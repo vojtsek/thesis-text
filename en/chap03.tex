@@ -169,3 +169,31 @@ Listeners rate the pair with labels meaning, that the second utterance is:
 \end{itemize}
 Sometimes the granularity can be reduced as much as simply "prefer A/prefer B".
 We use this method to tell which transcription is better.
+\section{Evaluating classifiers}
+Basic measure that is used to evaluate classifiers' performance is \textit{accuracy}.
+It is a fraction of correctly classified examples over the total number of examples.
+However, more descriptive measures are need sometimes.
+In this work, we use the \textit{F-score}, which is computed using terms \textit{precision} and \textit{recall}~\cite{sokolova2006beyond}.
+To explain this terms, we first need to introduce some others.
+Suppose, we have binary classification task, that is we want to identify positive and negative examples.
+In this settings, four types of situations may occur:
+\begin{itemize}
+\item \textit{True Positive(TP)} - classifier identified positive example as positive
+\item \textit{False Positive(FP)} - classifier identified negative example as positive
+\item \textit{True Negative(TN)} - classifier identified negative example as negative
+\item \textit{False Negative(FN)} - classifier identified positive examples as negative
+\end{itemize}
+\par
+With this terminology, we can define:
+\begin{equation}
+precision = \frac{TP}{TP + FP}
+\end{equation}
+\begin{equation}
+recall = \frac{TP}{TP + FN}
+\end{equation}
+In other words, \textit{precision} describes how many selected examples are relevant, while \textit{recall} tells us how many relevant examples were actually selected.
+Finally, we can define:
+\begin{equation}
+F-score = 2 \times \frac{precison \times recall}{precision + recall}
+\end{equation}
+That is, the \textit{F-score}, sometimes called \textit{$F_1$ score} is a harmonic mean of \textit{precision} and \textit{recall.}

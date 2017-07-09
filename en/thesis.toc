@@ -29,37 +29,38 @@
 \contentsline {subsubsection}{Modeling phoneme bigrams}{25}{section*.13}
 \contentsline {subsubsection}{Exploring the speech recognizer}{25}{section*.14}
 \contentsline {section}{\numberline {3.3}Text-to-speech systems' evaluation}{27}{section.3.3}
-\contentsline {chapter}{\numberline {4}Experiments}{29}{chapter.4}
-\contentsline {section}{\numberline {4.1}Data}{29}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Dataset \textbf {$D_1$} - artificial}{29}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Dataset \textbf {$D_2$} - artificial}{29}{subsection.4.1.2}
-\contentsline {paragraph}{Labeling}{29}{section*.15}
-\contentsline {subsection}{\numberline {4.1.3}Dataset \textbf {$D_3$} - Autonomata Spoken Name Corpus}{29}{subsection.4.1.3}
-\contentsline {subsection}{\numberline {4.1.4}Annotation procedure}{30}{subsection.4.1.4}
-\contentsline {section}{\numberline {4.2}Identifying difficult words}{30}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Measuring the difficulty}{30}{subsection.4.2.1}
-\contentsline {subsubsection}{$M_1$ measure - averaged Mel Cepstral Distortion}{31}{section*.16}
-\contentsline {subsubsection}{$M_2$ measure - averaged phonetic distance}{33}{section*.17}
-\contentsline {subsubsection}{$M_3$ measure - occurence of bad bigrams}{35}{section*.18}
-\contentsline {subsection}{\numberline {4.2.2}Measure combination}{36}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Discussion}{38}{subsection.4.2.3}
-\contentsline {section}{\numberline {4.3}Improving the pronunciation}{39}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Overview}{39}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}Exploiting the speech recgonizer}{39}{subsection.4.3.2}
-\contentsline {subsubsection}{Getting the recognizer}{40}{section*.19}
-\contentsline {subsubsection}{Compressing the $n$-best list}{41}{section*.20}
-\contentsline {subsubsection}{Choosing the best transcription}{42}{section*.21}
-\contentsline {paragraph}{Discussion}{45}{section*.22}
-\contentsline {subsection}{\numberline {4.3.3}Combining acoustic and textual information}{46}{subsection.4.3.3}
-\contentsline {paragraph}{Discussion}{48}{section*.23}
-\contentsline {chapter}{Conclusion}{49}{chapter*.24}
-\contentsline {section}{\numberline {4.4}Summary and discussion}{49}{section.4.4}
-\contentsline {section}{\numberline {4.5}Future Work}{49}{section.4.5}
-\contentsline {paragraph}{Data}{49}{section*.25}
-\contentsline {paragraph}{Predicting Difficulty}{50}{section*.26}
-\contentsline {paragraph}{Combining the text and acoustics}{50}{section*.27}
-\contentsline {chapter}{Bibliography}{51}{chapter*.28}
-\contentsline {chapter}{List of Figures}{53}{chapter*.29}
-\contentsline {chapter}{List of Tables}{56}{chapter*.30}
-\contentsline {chapter}{List of Abbreviations}{57}{chapter*.31}
-\contentsline {chapter}{Attachments}{58}{chapter*.32}
+\contentsline {section}{\numberline {3.4}Evaluating classifiers}{28}{section.3.4}
+\contentsline {chapter}{\numberline {4}Experiments}{30}{chapter.4}
+\contentsline {section}{\numberline {4.1}Used Datasets}{30}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Dataset \textbf {$D_1$} - artificial}{30}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Dataset \textbf {$D_2$} - artificial}{30}{subsection.4.1.2}
+\contentsline {paragraph}{Labeling}{30}{section*.15}
+\contentsline {subsection}{\numberline {4.1.3}Dataset \textbf {$D_3$} - Autonomata Spoken Name Corpus}{30}{subsection.4.1.3}
+\contentsline {subsection}{\numberline {4.1.4}Annotation procedure}{31}{subsection.4.1.4}
+\contentsline {section}{\numberline {4.2}Identifying difficult words}{31}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Measuring the difficulty}{31}{subsection.4.2.1}
+\contentsline {subsubsection}{$M_1$ measure - averaged Mel Cepstral Distortion}{32}{section*.16}
+\contentsline {subsubsection}{$M_2$ measure - averaged phonetic distance}{34}{section*.17}
+\contentsline {subsubsection}{$M_3$ measure - occurrence of confusable bigrams}{36}{section*.18}
+\contentsline {subsection}{\numberline {4.2.2}Measure combination}{38}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Discussion}{40}{subsection.4.2.3}
+\contentsline {section}{\numberline {4.3}Improving the pronunciation}{41}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Overview}{41}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Exploiting the speech recgonizer}{42}{subsection.4.3.2}
+\contentsline {subsubsection}{Getting the recognizer}{42}{section*.19}
+\contentsline {subsubsection}{Compressing the $n$-best list}{44}{section*.20}
+\contentsline {subsubsection}{Choosing the best transcription}{45}{section*.21}
+\contentsline {paragraph}{Discussion}{47}{section*.22}
+\contentsline {subsection}{\numberline {4.3.3}Combining acoustic and textual information}{48}{subsection.4.3.3}
+\contentsline {paragraph}{Discussion}{50}{section*.23}
+\contentsline {chapter}{Conclusion}{52}{chapter*.24}
+\contentsline {section}{\numberline {4.4}Summary and discussion}{52}{section.4.4}
+\contentsline {section}{\numberline {4.5}Future Work}{52}{section.4.5}
+\contentsline {paragraph}{Data}{52}{section*.25}
+\contentsline {paragraph}{Predicting Difficulty}{53}{section*.26}
+\contentsline {paragraph}{Combining the text and acoustics}{53}{section*.27}
+\contentsline {chapter}{Bibliography}{54}{chapter*.28}
+\contentsline {chapter}{List of Figures}{56}{chapter*.29}
+\contentsline {chapter}{List of Tables}{59}{chapter*.30}
+\contentsline {chapter}{List of Abbreviations}{60}{chapter*.31}
+\contentsline {chapter}{Attachments}{61}{chapter*.32}
