@@ -1,6 +1,7 @@
 \chapter{Experiments}
 \section{Used Datasets}
 \label{data-desc}
+To be able to experimentally verify the experiments, we have to  
 We are interested in datasets that would contain a lot of Out-of-vocabulary words.
 This is desirable for us, because it means the the dataset contains a lot of words, that are not present in a vocabulary of the speech recognition and text-to-speech (TTS) that we have used.
 When it comes to pronunciation of such words, text-to-speech usually performs poorly.
@@ -11,6 +12,8 @@ Dataset $D_1$ contains 100 randomly chosen Dutch Names.
 We take the ortographic transcription of these names and create two phonetic transcriptions.
 The first is obtained from our $g2p$ module, the other is created with the procedure described in \ref{combine}.
 Both transcriptions were then synthesized using the $Cereproc$ engine and rated by judgers using the CCR method introduced in \ref{tts-eval}.
+Two raters labelled the dataset.
+Computing their agreement, we get Cohen's kappa $0.27$, which means better agreement is observable than it would be by chance.
 \subsection{Dataset \textbf{$D_2$} - artificial}
 $D_2$ is also manually labeled set of 110 words.
 70 words are English, remaining 40 are Czech.
@@ -59,7 +62,22 @@ We sum up the results for the $D_1$ dataset in TODO and for the $D_2$ in Table \
 \label{annotatorstbl}
 \caption{The table contains correlations that were observed among the raters.}
 \end{table}
-
+\subsection{Phonetic alphabets}
+\par
+The problem is that some of the tools we work with use different phonetic alphabets with possibly different rules.
+However, the TTS engines work with IPA, so it is necessary to convert the transcriptions.
+To overcome this problem, we have derived one-to-one mappings between these sets and IPA.
+This process may introduce some errors, however the alphabets are usually based on similar principles, so it is no so hard to derive this mappings.
+Namely, we used the Arpabet\footnote{https://en.wikipedia.org/wiki/Arpabet}, Timit\footnote{https://catalog.ldc.upenn.edu/docs/LDC93S1/PHONCODE.TXT} and CGN\footnote{https://pdfs.semanticscholar.org/64d5/d612f9c639271a1340820a418fa5baf02770.pdf} phoneme sets.
+\par
+As we have suggested, some speech synthesizers are able to accept input in the SSML format which we introduce in \ref{SSML}.
+However, not all the synthesizers have this ability.
+We use Cereproc to work with utterances written in SSML.
+An example of such utterance is given in \figref{SSML_trn}.
+The problem with providing transcriptions in this way is, that the Cereproc synthesizer ignores the characters defining stretch of the phoneme.
+Therefore, we omit these characters from the transcriptions by mapping the stretched phonemes to their base variants
+This leads to worse quality of the pronunciation, however is sufficient to explore if the transcription contains sensible phonemes.
+\img{ssml_ipa.png}{1.0}{An example of the synthesizer's input in SSML, forcing it to use our phonetic transcription.}{SSML_trn}
 \section{Identifying difficult words}
 \label{ident-diff}
 If we want to improve pronunciation of the synthesized recordings, we should first identify words that are mispronounced. Obviously, we could let the TTS system pronounce each word in a best effort style and  the user would identify mistakes and correct them. This approach has several drawbacks. First, the communication with the user is rather complicated, since the incorrectly pronounced word has to be isolated prior to obtaining the correct pronunciation.
@@ -436,6 +454,25 @@ The idea is, that if the $g2p$ has low confidence at some poisition $i$, we repl
 however, the problem is, that the transcriptions may be of different length.
 Thus we have to employ Dynamic Time Warping (DTW) algorithm again to align the transcriptions.
 \img{fst-combined.png}{0.55}{An ilustrative example of the FST combined from the $g2p$ (top) and speech decoder (bottom). A part of input is chosen corresponding to the syllable "\v{C}O" and the chosen path is highlighted. It can be seen, that the path goes through both the decoder's and $g2p$'s hypotheses.}{fst-combined}
+We derived 90 transcription with this method and have it rated by humans.
+The raters compared recordings synthesized from the derived transcriptions and the transcriptions derived by $g2p$.
+Then they decided, whether the $g2p$ or derived transcription is better or they are equaly good.
+The recording were played in random order, so the raters did not tend to rate one type better.
+The inter-rater agreement was measured by means of \textit{Cohen's kappa}, the measure value was $0.28$.
+The ratings are summarized in Table \ref{combrat}.
+We can see, that the derived transcriptions were rated slightly better.
+\begin{table}
+\begin{center}
+\begin{tabular}{ |c|c|c|c| } 
+ \hline
+ &\textbf{g2p} & \textbf{equal} & \textbf{derived} \\ \hline
+ Rater 1 & 24\% & 38\% & 38\% \\ \hline 
+ Rater 2 & 29\% & 28\% & 43\% \\ \hline
+ \end{tabular}
+\end{center}
+\label{combrat}
+\caption{Distribution of human ratings. Each field describe percentage that each rater assigned to the respective ctegory. 90 recordings were rated in total. We can see, that the derived transcriptions were rated slightly better.}
+\end{table}
 \par
 It is not straightforward how to use the DTW.
 Another problem is, that although we obtained posterior probabilities, the $g2p$ and the decoder treat their graphs differently, namely the decoder assigns greater probabilities to the individual phonemes, thus restricting number of alternatives.

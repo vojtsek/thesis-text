@@ -197,3 +197,14 @@ Finally, we can define:
 F-score = 2 \times \frac{precision \times recall}{precision + recall}
 \end{equation}
 That is, the \textit{F-score}, sometimes called \textit{$F_1$ score} is a harmonic mean of \textit{precision} and \textit{recall.}
+\section{Evaluating human ratings}
+When considering human ratings, we should evaluate how individual ratings agree.
+One option is to compute so called \textit{Cohen's kappa coefficient}\cite{cohen1968weighted}.
+It takes into account the possibility of the agreement occuring by chance.
+Cohen's kappa measures the agreement between two raters who classify items into mutually exclusive categories.
+The definition of $\kappa$ is:
+\begin{equation}
+\kappa = \frac {p_{o}-p_{e}}{1-p_{e}}=1-\frac {1-p_{o}}{1-p_{e}}
+\end{equation}
+where $p_o$ is the relative observed agreement among raters (identical to accuracy), and $p_e$ is the hypothetical probability of chance agreement, using the observed data to calculate the probabilities of each observer randomly seeing each category.
+Interpretation is, that $\kappa = 1$ means complete agreement and $\kappa \leq 0$ if there is no agreement among the raters other than what would be expected by chance. 

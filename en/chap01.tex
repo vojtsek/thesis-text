@@ -7,19 +7,19 @@ We now briefly introduce setting of such system.
 Leading a reasonable dialogue with a user is a substantially difficult composed of many subtasks.
 High level overview of such system is given in \figref{sds}.
 First, the input from the user has to be processed
-Spoken dialogue systems typically contain Automatic Speech Recognition (ASR) module for this purposes, so the natural speech can be recognized and translated into words.
+Spoken dialogue systems typically contain Automatic Speech Recognition (ASR) module for this purposes, so the natural speech can be recognized and translated into text.
 Afterwards, some Spoken Language Understanding (SLU) technique has to be employed in order to extract essential information from the input.
 In plain words, we have to understand the meaning of the utterance obtained from the user.
 The dialogue system than derives a relevant response using its policy.
 The process of this derivation depends on particular implementation.
 A $rule-based$ policy can be used, however it is more common nowadays to employ $data-driven$ approaches.
 \par
-The derived response has to be translated into human readable language, using Natural Language Generation (NLG) techniques.
+The derived response then has to be translated into human readable language, using Natural Language Generation (NLG) techniques.
 The response can be displayed in textual form, however, it is more common to generate audio recording with human voice reading the response.
 Although it is possible to use a set of prerecorded utterances, this approach has obvious limitations since it is not able to read an arbitrary phrase.
 Particularly, it may be difficult to read named entities and numerical values such as time and date.
 Also, the usage of variable utterances provides better user experience.
-\img{SDS.png}{0.9}{A high level architecture of spoken dialogue system.}{sds}
+\img{SDS.png}{0.9}{A high level architecture of spoken dialogue system. The data flow between respective components is showed. We can see, that different components may work with different data representations.}{sds}
 \par
 To introduce a variability and allow to use nearly arbitrary phrase a Text-To-Speech (TTS) module is usually also part of dialogue systems.
 The purpose of this module is to transform written text utterance to natural speech.
@@ -36,14 +36,14 @@ Although this does not occur often, the negative effect can be quite strong, sin
 \par
 In this work, we aim to improve the TTS system pronunciation of OOV words.
 First, we explore methods that can identify words that are potentially difficult to pronounce.
-The identification is first step towards the improvement, because we can then ask the user for proper pronunciation.
-We propose and explore several measures that can reflect badly pronounced words without any prior language knowledge.
+The identification is first step towards the improvement, because it allows us to ask the user for proper pronunciation directly without trying it first.
+That saves the user from the unpleasant experience.
+We propose and explore several measures that can reflect incorrectly pronounced words without any prior language knowledge.
 \par
 Next, we try to improve the TTS system's pronuncication of the desired words.
-To achieve this, we ask the user and obtain correct pronunciations from him.
-So we get training examples and we are able to improve the TTS system by processing the obtained recording, deriving a phonetic transcription (i.e. pronunciation) and adding it to the TTS vocabulary.
-Moreover, the derived pronunciations can be used to improve the recognition ability of the ASR module, since it is also dictionary-based.
-Thus if we enlarge the vocabulary, the ASR has got access to more possibilities and can recognize the new words correctly.
+We try to learn it with the help of spoken examples of these words.
+To achieve this, we have to gather correct pronunciations first.
+Once we get training examples, we are able to improve the TTS system by processing the obtained recording, deriving a phonetic transcription (i.e. pronunciation) and adding it to the TTS vocabulary.
 \par
 \begin{center}
 \begin{figure}[h]
@@ -62,7 +62,8 @@ There are several issues, that are related with the OOV words so methods of deri
 As it has been said, it can be used to enlarge vocabularies of TTS or ASR systems.
 This may potentially lead to better pronunciation in case of TTS.
 It is because the extended vocabulary implies, that a number of occurences of the badly pronounced words decreases.
-In case of ASR systems, bigger vocabulary can cause, that less words are recognized incorrectly.
+Moreover, the derived pronunciations can be used to improve the recognition ability of the ASR module, since it is also dictionary-based.
+Thus if we enlarge the vocabulary, the ASR has got access to more possibilities and can recognize the new words correctly.
 There exist several ways how to obtain such feedback, however, this is not a subject of this work.
 It is related with respective dialogue policy and concrete applications.
 Theoretically, the method can work with just one gold example, however, it is better to obtain more recordings in general.

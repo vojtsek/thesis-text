@@ -2,7 +2,8 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces The table contains correlations that were observed among the raters.}}{31}{table.4.1}
-\contentsline {table}{\numberline {4.2}{\ignorespaces The table contains results of linear regression model training on aggregated MFCC vectors. Correlation with human judgment and $R^2$ measure for respective cross-validation folds are shown.}}{36}{table.4.2}
-\contentsline {table}{\numberline {4.3}{\ignorespaces Overview of results in terms of Phone Error Rate (PER) or Oracle PER, respectively. We measured the Oracle PER only on the most succesful decoder. The best results are showed in bold.}}{43}{table.4.3}
-\contentsline {table}{\numberline {4.4}{\ignorespaces Test set accuracies of various models both with and without the reference transcription included. The baseline is set by trivial classifier, which assigns each example the most frequent label. Red values indicates, that the model does not outperform the baseline, bold values are the beast achieved results.}}{47}{table.4.4}
+\contentsline {table}{\numberline {4.1}{\ignorespaces The table contains correlations that were observed among the raters.}}{33}{table.4.1}
+\contentsline {table}{\numberline {4.2}{\ignorespaces The table contains results of linear regression model training on aggregated MFCC vectors. Correlation with human judgment and $R^2$ measure for respective cross-validation folds are shown.}}{39}{table.4.2}
+\contentsline {table}{\numberline {4.3}{\ignorespaces Overview of results in terms of Phone Error Rate (PER) or Oracle PER, respectively. We measured the Oracle PER only on the most succesful decoder. The best results are showed in bold.}}{46}{table.4.3}
+\contentsline {table}{\numberline {4.4}{\ignorespaces Test set accuracies of various models both with and without the reference transcription included. The baseline is set by trivial classifier, which assigns each example the most frequent label. Red values indicates, that the model does not outperform the baseline, bold values are the beast achieved results.}}{50}{table.4.4}
+\contentsline {table}{\numberline {4.5}{\ignorespaces Distribution of human ratings. Each field describe percentage that each rater assigned to the respective ctegory. 90 recordings were rated in total. We can see, that the derived transcriptions were rated slightly better.}}{52}{table.4.5}
