@@ -56,7 +56,7 @@
 \DeclareMathOperator*{\argmax}{argmax}
 \DeclareMathOperator*{\minop}{min}  
 \graphicspath{{img/}}
-\newcommand{\figref}[1]{Figure \ref{#1}}
+\newcommand{\figref}[1]{Figure \ref{fig:#1}}
 \newcommand{\tabref}[1]{\hyperref[#1]{Table \ref{#1}}}
 \newcommand{\sect}[1]{\LARGE\textbf{{#1}}\normalsize}
 \newcommand{\link}[1]{\textcolor{blue}{\texttt{#1}}}
@@ -66,9 +66,9 @@
 \newcommand{\img}[4]{\begin{figure}[h!]
 
 \centering
-\label{#4}
 \includegraphics[width=#2\textwidth]{#1}
 \caption{#3}
+\label{fig:#4}
 \end{figure}}
 
 %%% Basic information on the thesis

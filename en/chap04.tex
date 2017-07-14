@@ -290,6 +290,8 @@ That menas the decoder outputs phonetic representantion of words.
 \end{itemize}
 For training, a subset of Librispeech corpus\footnote{http://www.openslr.org/12/} or Timit{https://catalog.ldc.upenn.edu/ldc93s1} were used. The evaluation was done on the TODO:ptien-ny.
 Based on the results, we choose the decoder acoustic part of which is modelled by the chain model and the decoding graph models phones as bigrams.
+For the Timit dataset, the phone error rate measured on different data gives poor results.
+This can be caused by the fact that the dataset is not very big and thus the model can have problems accommodating to different acoustic conditions. 
 \begin{table}
 \centering
 \begin{tabular}{ |c|c|c|c| } 

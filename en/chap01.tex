@@ -24,7 +24,7 @@ Also, the usage of variable utterances provides better user experience.
 To introduce a variability and allow to use nearly arbitrary phrase a Text-To-Speech (TTS) module is usually also part of dialogue systems.
 The purpose of this module is to transform written text utterance to natural speech.
 Modern TTS systems produce audio waveforms that sound naturaly and the pronunciation is sufficiently good.
-Nevertheless, it may experience some difficulties, mainly when it comes to unknown words.
+Nevertheless, it may experience some difficulties, mainly when it comes to words that are not containe in the pronunciation lexicon
 This may happen, because although some multilingual TTS systems exists (\cite{sproat1997multilingual}, \cite{miro2009multilingual}), the system is usually trained using certain set of words, typically from one language.
 But some applications often require to pronounce named entities or other language- or domain-specific words, that cannot be present during the training phase.
 Furthermore, the system needs to obtain information, which language it should use.
@@ -64,8 +64,11 @@ This may potentially lead to better pronunciation in case of TTS.
 It is because the extended vocabulary implies, that a number of occurences of the badly pronounced words decreases.
 Moreover, the derived pronunciations can be used to improve the recognition ability of the ASR module, since it is also dictionary-based.
 Thus if we enlarge the vocabulary, the ASR has got access to more possibilities and can recognize the new words correctly.
-There exist several ways how to obtain such feedback, however, this is not a subject of this work.
-It is related with respective dialogue policy and concrete applications.
+Yet another application is related to user experience. It can be, that although the word is contained in the pronunciation lexicon, the respective pronunciation is wrong or the user is just used to pronounce the world in different way.
+That is when a method of derivation of pronunciation from the recording may be helpful.
+\par
+There exist several ways how to obtain the desired recordings, however, this is not a subject of this work.
+It is dependent on dialogue policy and can vary in concrete applications.
 Theoretically, the method can work with just one gold example, however, it is better to obtain more recordings in general.
 In \figref{dialogsample} we provide basic example of simple dialogue, illustrating how real application could look like.
 However, in this work we assume the user's recording(s) have been gathered already and we do not discuss the dialogue policy.

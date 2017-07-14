@@ -1,28 +1,51 @@
 \chapter{Proposed approaches}
 \section{Basic overview}
-We aim to improve the pronunciation, that means, we need to derive phonetic transcriptions of a good quality. The straightforward way of achieving this is to use a grapheme-to-phoneme (g2p) module. As we discuss in \ref{g2p-desc} and \ref{relatedwork}, this approach has some limitations, mainly because the pronunciation of some tokens in different languages may vary. However, grapheme-to-phoneme conversion is a well explored area and its output may serve as a sufficiently good baseline.
+\label{basover}
+We want to deal with the problem of Out-of-Vocabulary (OOV) words in Text-to-speech and potentionally the ASR systems.
+Our goal is to improve the phase, where the pronunciation in form of phonetic transcription is derived.
+That means, we need to derive phonetic transcriptions of arbitrary words, correct pronunciation of which is unknown to us.
+The straightforward way of achieving this is to use a \textit{grapheme-to-phoneme} ($g2p$) converter.
+As we discuss in sections \ref{g2p-desc} and \ref{relatedwork}, this approach has some limitations, mainly because the pronunciation of some tokens in different languages may vary.
+This means, that $g2p$ may provide pronunciation which would be correct if the world came from certain language $l$, but since it is not true, the pronunciation is actually wrong.
+However, \textit{grapheme-to-phoneme conversion} is a well explored area and its output may serve as a sufficiently good baseline.
+\par
 In section \ref{relatedwork} we also discuss methods that are able to derive phonetic transcriptions directly from the speech signal, using a speech recognition framework. These methods are somewhat complex and they are typically specific for a particular recognizer. Rather than improving any of these methods, we aim to explore a possibility to combine them. That is, we want to exploit both textual and acoustic information to derive phonetic transcriptions of the desired words.
 \par
+\label{detection}
+The question is, how to get audio samples containing the correctly pronounced spoken versions.
+One option is to make the best effort when pronouncing the words.
+In case that we pronounce some of the words incorrectly, we rely on the user's reaction, i.e. we expect he informs us about the mistake and subsequently provide a correct example.
+Other option we have is to detect possible faults apriori and ask the user for the correct pronunciation directly.
+Whole process may look like this:
+\begin{enumerate}
+\item Lookup the desired word in the pronunciation lexicon. In case it is not found here proceed to the classification step:
+\item Decide if the word is difficult to pronounce for our Text-to-speech system.
+\item If it is marked as difficult, ask the user for correct pronunciation.
+\end{enumerate}
 In the desired settings, the acoustic data with user's recordings are obtained online.
-We mean by this a situation. when the system asks the user for a correct pronunciation directly.
+We mean by this a situation, when the system asks user for a correct pronunciation directly.
 It can be difficult to make user say words we are interested in, so the ultimate goal is to develop an algorithm able to extract those words from a dialogue history or ask user to say them in a not irritating way.
 The Crucial point of this approach is, that the user should not feel bored by the process. For the purpose of this work, we assume that we have already obtained recordings with correct pronunciations and work with it.
 In the real setting we would have to employ a dialogue policy to be able to gather our own recordings or process the history and try to identify respective words.
 \section{Used techniques}
 \subsection{Phoneme recognition}
 \label{ph-rec}
-To improve the pronunciation, it is essential to obtain information from the user's recording.
-We need to work on the phonetic level, so we have to gather phonetic transcription of the recording.
+To improve the pronunciation, it is essential to process the user's recording and be able to obtain essential information from it.
+We need to work on the phonetic level, so we have to get phonetic transcription of the recording.
 In theory, we could use the standard output of the speech recognizer, i.e. a sequence of words and transcribe it phonetically.
-However, this is not desirable, because such procedure adds new source of potential errors, because we would have to use some mechanism, $g2p$ module for instance, that would create the transcription.
-Furthermore, since we aim to add new words to the TTS vocabulary, it is likely, that the word is missing also in the vocabulary of the speech recognition system.
-This fact means that the desired word will not appear in the recognizer's output and thus we cannot obtain any relevant transcription.
-Instead, we can modify the decoder used in the speech recognizer in such way, that it outputs sequences of phonemes rather than words.
+This has two essential problems:
+\begin{enumerate}
+\item Such procedure adds new source of potential errors, because we would have to use some mechanism, $g2p$ module for instance, that would create the transcription. This mechanism is error prone and we do not have a reliable one - if we had, we would not have to exploit the recording in the first place.
+\item Furthermore, since we aim to add new words to the TTS vocabulary, it is likely, that the word is missing also in the vocabulary of the speech recognition system.
+This fact means that the desired word will not appear in the recognizer's output, different word will appear instead.
+Thus we cannot obtain any relevant transcription.
+\end{enumerate}
+Instead of this, we can modify the decoder used in the speech recognizer in such way, that it outputs sequences of phonemes rather than words.
 This can be done in several ways, some of which we introduce in the following text.
 \subsubsection{On the Automatic Speech Recognition (ASR) decoding process}
 \label{asr-decoding}
 We use the Kaldi framework\footnote{http://kaldi-asr.org/} for the ASR task and follow the procedure suggested in the official documentation.
-Kaldi constructs a Finite State Transducer for purposes of the decoding process\footnote{http://kaldi-asr.org/doc/graph.html}.
+Kaldi constructs a Finite State Transducer (FST) for purposes of the decoding process\footnote{http://kaldi-asr.org/doc/graph.html}.
 This transducer is created as a composition of four other FSTs, $HCLG = H \circ C \circ L \circ G$.
 The meanings of the parts are as follows:
 \begin{itemize}
@@ -35,67 +58,73 @@ As we can see, the $G$ FST brings information contained in the language model to
 We provide an example in \figref{Lfst} which shows, that the $L$ transducer determines the output elements.
 Hence, by modification of $G$ and $L$ we can change the output set of the decoded tokens.
 \img{Lfst.png}{0.9}{An example of the finite state transducer representing the lexicon\cite{mohri2002weighted}}{Lfst}
-\subsubsection{Evaluation}
+\subsubsection{Modifying the Language Model}
+Language Model (LM) is an essential part of every ASR engine.
+It provides probabilities that a particular word occur in the considered context. 
+For example we can imagine a model that assigns probability to every possible sequence of words.
+The length of the considered sequence can be restricted to $n$.
+Such sequences are usually referred to as \textit{n-grams}.
+The easiest approach is to use a so called 0-gram LM.
+It simply distributes the probability mass uniformly among the words, i.e. each word occurs with same probability, independently of the context.
+\par
+Obviously, this model is not very good.
+If we want to use more sophisticated approach, we can use collected textual data and estimate probabilities of word $n$-grams.
+Since we consider phonemes, we can construct a Language Model that describes probabilities of phoneme occurrences instead of words.
+\par
+We can then modify $L$ and $G$ transducers to change the output of the recognizer to phonemes.
+Ideally, we would use a set of name transcriptions to train the language model because it enrich the model with the domain information.
+However, it is difficult to get corpus that consists of phonetic transcriptions and yet is large enough to robustly estimate the LM parameters.
+So we create an artificial training dataset by taking an ordinary corpus of words and transcribing with a $g2p$ module.
+\par
+Alternatively, we could use phonetic alignments that are created during the decoding process and can be extracted from the recognizer.
+The phonetic alignments are derived during the decoding, it holds information, which phonemes were used.
+However, the Automatic Speech Recognition decoder in its common form restricts the output to contain only words that are present in its vocabulary.
+The phoneme sequences corresponds to this words and therefore no unknown word (phoneme sequence) can appear in this alignments.
+In other words, that transcriptions are influenced not only by the acoustic information but also by the Language Model.
+Therefore, this approach is not applicable for us.
+\par
+Creation process of the decoding graph works with vocabulary and phonetic dictionary.
+The vocabulary contains a list of known words and the dictionary respective phonetic transcriptions.
+To change the transducers in the above (\ref{asr-decoding}) mentioned way, we reduce the vocabulary to list of phonemes and setting the dictionary mapping to be identity.
+This way we force the decoder to output phonemes.
+\subsubsection{Timit dataset}
+The previous approach has a disadvantage that it is difficult to obtain a Language Model of good quality without a proper corpus of transcriptions.
+Such corpus may be found as a part of the Timit dataset \cite{lopes2011phoneme}.
+In fact, the Kaldi framework contains scripts, that train a model using this dataset.
+The Timit dataset has got transcriptions labeled with granularity of individual phonemes.
+This means we can train the phonetic recognizer directly.
+Problem is that different set of phonemes is used but we can solve it by mapping the phonemes to IPA. 
+\subsubsection{Modeling phoneme bigrams}
+The decoding graph is context dependent. 
+It means that the decoder takes into account both the right and the left context of the phonemes. 
+In order to model the pronunciation on various positions in the word, each phoneme is represented in several variants, depending in which part of the word it is located (\textit{beginning, end, inside}). 
+One option is to model each phoneme as a singleton, that is context-independent unit, as we have done in previous.
+Alternatively, we can create a decoding graph, that models bigrams of phonemes.
+This way the information about the context is preserved.
+Moreover, we can model the input more accurately and distinguish pauses between words from spaces between phonemes.
+This approach proved to yield the best results.
+\subsubsection{Evaluation of phoneme recognizers}
 \label{p-eval}
-In ASR systems, the most common phone recognition evaluation measures are Phone Error Rate (PER), or the related performance metric, phone accuracy rate.
+In ASR systems, the most common phone recognition evaluation measures are Phone Error Rate (PER), or the related performance metric, Phone Accuracy Rate.
 The latter is defined by the following expression:
 \begin{equation}
 Accuracy = \frac{N_T - S - D - I}{N_T} \times 100\%
 \end{equation}
 where $N_T$ is the total number of phonemes in the gold utterance and $S, D$ and $I$ are the substitution, deletion and insertion errors, respectively.
-From this perspective, we can see it as related to Levenshtein distance of the gold and test sequences.
+From this perspective, we can see it as related to Levenshtein distance of the refrence and test sequences.
 Then, we can define $PER \: = \: 100\% - Accuracy$.
 \par
 Another measure is correctness, which is similar to accuracy, but does not consider insertion errors.
-The number of insertion, deletion and substitution errors is computed using the best alignment between two token sequences: the manually aligned (gold) and the recognized (test).
+\par
+The number of insertion, deletion and substitution errors is computed using the best alignment between two token sequences: the manually aligned (reference) and the recognized (test).
 An alignment resulting from search strategies based on dynamic programming is normally used successfully for a large number of speech recognition tasks \cite{ney2000progress}.
 We use a $sclite$ utility\footnote{http://www1.icsi.berkeley.edu/Speech/docs/sctk-1.2/sclite.htm} to measure PER.
-\subsubsection{Modifying the Language Model}
-Language Model (LM) is an essential part of every ASR engine.
-It provides probabilities that a particular word occur in the considered context. 
-For example we can imagine a model that assigns probability to every possible n-gram.
-The easiest approach is to use a so called 0-gram LM.
-It simply distributes the probability mass uniformly among the words.
-\par
-Obviously, this model is not very good.
-If we want to employ prior knowledge about domain, we can use collected textual data and estimate probabilities of $n$-grams.
-If we want to decode phonemes, we can construct a language model that describes probabilities of phoneme occurrences instead of words.
-\par
-We can then modify $L$ and $G$ transducers to change the output of the recognizer to phonemes.
-Ideally, we would use a set of name transcriptions to train the language model.
-However, it is difficult to get such corpus that would be also large enough to robustly estimate the LM parameters.
-So we create an artificial training dataset by transcribing written text with a $g2p$ module.
-Alternatively, we could use phonetic alignments that are created during the decoding process and can be extracted from the recognizer.
-However, we did not choose this option, since the transcriptions that are obtained this way are not accurate enough, mainly because of the word recognition errors.
-\par
-Creation of the decoding graph works with vocabulary and phonetic dictionary.
-The vocabulary contains a list of known words and the dictionary respective phonetic transcriptions. 
-To change the transducers in the above mentioned way, we reduce the vocabulary to list of phonemes and setting the dictionary mapping to be identity.
-This way we force the decoder to output phonemes.
-\subsubsection{Timit dataset}
-The above approach has a disadvantage lying in the fact that it is difficult to obtain a language model of good quality without a proper corpus of transcriptions.
-This corpus may be found as a part of the Timit dataset \cite{lopes2011phoneme}.
-In fact, the Kaldi framework contains scripts, that train a model using this dataset.
-The Timit dataset has got transcriptions labeled with granularity of individual phonemes.
-This means we can train the phonetic recognizer directly.
-Problem is that different set of phonemes is used but we can solve it by mapping the phonemes to IPA.
-Worse is the fact, that the phone error rate measured on different data gives poor results.
-This can be caused by the fact that the dataset is not very big and thus the model can have problems accommodating to different acoustic conditions.  
-\subsubsection{Modeling phoneme bigrams}
-The decoding graph is context dependent. 
-It means that the decoder takes into account both the right and the left context of the phonemes. 
-In order to model the pronunciation on various positions in the word, each phoneme is represented in several variants, depending in which part of the word it is located ($beginning, end, inside$). 
-One option is to model each phoneme as a singleton as we have done in previous.
-Alternatively, we can create a decoding graph, that models bigrams of phonemes.
-This way the information about the context is preserved.
-Moreover, we can model the input more accurately and distinguish pauses between words from space between phonemes. 
-This approach proved to yield the best results.
 \subsubsection{Exploring the speech recognizer}
 \label{nbest-detail}
 The decoding process in Automatic Speech Recognition yields a list of hypotheses, ordered by their confidence scores, so called $n$-best list.
 Usually, the best hypothesis is chosen and used since it is the most relevant result.
-However, interesting information may be found deeper of the list.
-We explore this theory in the following paragraphs.
+However, interesting information may be found deeper in the list.
+We explore this assumption in the following paragraphs.
 \par
 In section \ref{p-eval} we have introduced Phone Error Rate (PER).
 We extend the term here and define \textbf{Oracle Phone Error Rate}:
@@ -103,7 +132,8 @@ We extend the term here and define \textbf{Oracle Phone Error Rate}:
 OPER = \minop_{h \in hypotheses} PER(h, gold)
 \end{equation}
 We can see that Oracle Phone Error Rate is PER of the best hypothesis (if we consider the hypothesis with the lowest PER as the best one.)
-In real setup we obviously does not have such oracle that would tell us the best hypothesis, so we have no other option but looking at the top of the $n$-best list, computing PER per each hypothesis and choosing the closest one.
+In real setup we obviously does not have such oracle that would tell us which hypothesis is actually the best
+So if we want to evaluate it, we have no other option but look at the top of the $n$-best list, compute PER for each hypothesis and choose the closest one.
 Hence we approximate the true Oracle PER, since if we explore "sufficiently many" best alternatives, the probability that we did not see the best one is very low.
 We give an overview of our results in \figref{OPER}.
 \img{OPER.png}{0.9}{A plot of Oracle Phone Error Rate dependency on the depth of the $n$-best list we explore. We can see, that the Oracle PER decreases with the depth, so it makes sense to try to exploit the hypotheses located deeper.}{OPER}
@@ -148,7 +178,7 @@ An example set of words that may be used for such test is given in \figref{rhyme
 \par
 While a TTS system has to be intelligible, this does not guarantee user acceptance, because
 its quality may be far from that of a human speaker.
-That is the reason, why methods like Mean Opinion Score (MOS) are frequently used.
+That is the reason, why methods like \textit{Mean Opinion Score (MOS)} are frequently used.
 MOS is human-subject judgment testing that asks the subjects to rate several samples on the scale of 1 to 5 (1 = Bad, 2 = Poor, 3 = Fair, 4 = Good, 5 = Excellent).
 The scores are averaged, resulting in an overall MOS rating.
 We have used this method of labeling to annotate our sample dataset.

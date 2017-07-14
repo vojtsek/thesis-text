@@ -407,35 +407,49 @@ However the process of designing sufficient set of rules is difficult, mainly si
 Because of this, a \textit{data-driven} approach based on machine learning has to be employed.
 Many such techniques were explored, starting with Sejnowski and Rosenberg \cite{sejnowski1988nettalk}.
 The approaches can be divided into three groups.
-\subsubsection{Techniques based on local similarities}
+\subsubsection{Techniques based on local classification}
 The techniques presuppose an alignment in the training data between letters and phonemes or create such an alignment in a separate preprocessing step.
-The alignment is typically construed so that each alignment item comprises exactly one letter.
-Each slot is then classified (using its context) and a correct phoneme is predicted.
+The alignment is typically constructed so that each alignment item comprises exactly one letter.
+Then the sequence is traversed from left to right, each slot is classified (using its context) and a correct phoneme is predicted.
 Neural networks and decision tree classifiers are commonly used for this task.
 \subsubsection{Pronunciation by analogy}
-This term is typically used for methods that could be described as nearest-neighbor-like.
-They search for local similarities in the training lexicon and the output pronunciation is chosen to be analogous to retrieved examples. 
+This term is typically used for methods that could be described as \textit{nearest-neighbors-like}.
+This means that they maintain a lexicon of known words and their pronunciations.
+When the input is given, the methods search for similar words in the training lexicon and the output pronunciation is chosen to be analogous to retrieved examples. 
 In the work of Dedina and Nusbaum \cite{dedina1991pronounce} the authors first identify words from the database that match the input string and then build a pronunciation lattice from them.
-Paths through the lattice then represent the derived pronunciations.
+In this lattice, nodes represent candidate phonemes, so paths through the lattice represent possible pronunciations.
+Optimal path is found, it corresponds to the derived pronunciations.
+Different path scoring approaches may be used, as it is done in the work of Marchand and Damper \citep{marchand2000multistrategy}.
+\par
+The method described by Bagshaw \cite{bagshaw1998phonemic} is rule-based.
+It operates with a set of grapheme-phoneme correspondences which are designed by hand.
+A se of context-dependent rules is induced over these units.
+When deriving the output pronunciation, they search over the lattice of competing segmentations with scores based on rule weights and rule violation penalties.
+\par
 \subsubsection{Probabilistic approaches}
 The problem can also be viewed from a probabilistic perspective.
+Previously, we scored the hypothesis by means of context, rules etc.
+Processe of deriving the pronunciation in these approaches is based on probability.
+Some model of the probabilistic distribution has to be described and its parameters have to be estimated.
+\par
 Pioneers in this area were Lucassen and Mercer \cite{lucassen1984information}.
 They create $1-to-n$ alignments of the training data using a context independent channel model.
 The prediction of the next phoneme is based on a symmetric window of letters and left-sided window of phonemes.
 Authors then construct regression tree, the leafs of which carry probability distribution over phonemes.
-\linebreak\linebreak
+\par
 \label{g2p-jseq}
 A popular approach based on probability modeling is to employ so called \textit{joint sequence models} \cite{bisani2008joint}.
-We use an open-source implementation of such a model in our work.
-This approach formalizes the task as follows:
+We use an open-source implementation of such a model in our work \footnote{https://github.com/sequitur-g2p/sequitur-g2p}.
+This approach creates joint units consisting of graphemes and phonemes and models probability distribution of sequences of such units the probability of formalizes the task as follows:
 \begin{equation}
 \boldsymbol{\varphi(g)} = \argmax_{\varphi'\in\Phi^*} p(\boldsymbol{g,\varphi'})
 \end{equation}
-where * denotes a Kleene star.
-In other words, for a given ortographic form $\boldsymbol{g} \in G^*$ we want to find the most likely pronunciation $\boldsymbol{\varphi} \in \Phi^*$, where $G, \Phi$ are ortographic and phonetic alphabets.
+where * is a Kleene start, which denotes a set of strings created by unlimited repetition of characters in $\boldsymbol{\Phi}$.
+\par
+In other words, for a given ortographic form $\boldsymbol{g} \in \boldsymbol{G}^*$ we want to find the most likely pronunciation $\boldsymbol{\varphi} \in \Phi^*$, where $\boldsymbol{G}, \boldsymbol{\Phi}$ are ortographic and phonetic alphabets.
 The fundamental idea of joint-sequence models is that the relation of input and output sequences can be generated from a common sequence of joint units.
 These units carry both input and output symbols.
-Formally, the unit called \textit{grapheme} is a pair $q = (\mathbf{g}, \mathbf{\varphi}) \in Q \subset G* \times \Phi$ where $\mathbf{g}$ and $\mathbf{\varphi}$ are letter and phoneme sequences which can be of different lengths.
+Formally, the unit called \textit{grapheme} is a pair $q = (\mathbf{g}, \mathbf{\varphi}) \in Q \subset \boldsymbol{G}* \times boldsymbol{\Phi}$ where $\mathbf{g}$ and $\mathbf{\varphi}$ are letter and phoneme sequences which can be of different lengths.
 In the simplest case, each unit carries zero or one input and zero or one output symbol.
 This corresponds to the conventional definition of finite state transducers (FST) that are described in \ref{fst-desc}.
 The letter and the phoneme sequences are grouped into an equal number of segments.
@@ -450,14 +464,19 @@ The joint probability distribution $p(\mathbf{g}, \mathbf{\varphi})$ has thus be
 p(q_1^K) \cong \prod_{j=1}^{K+1} p(q_j\vert q_{j-1},\dots,q_{j-M+1})
 \end{equation}
 The probability distribution is then typically estimated by an Expectation-Maximization algorithm.
-\linebreak \linebreak
-Generally, the problem of the wrong pronunciation in TTS  is caused by a bad phonetic transcription.
+\subsubsection{Relation to Text-to-speech synthesis}
+Generally, the problem of the wrong pronunciation in TTS can have many different reasons.
 Traditional TTS systems are modular, one module's output is inputted into the next one.
-Because of this fact, the errors cumulate and thus the mistakes made by $g2p$ cannot be repaired.
-So if we want to improve the pronunciation, we can try to improve the $g2p$ as it is done in \cite{deri2016grapheme}.
+Because of this fact, the errors acumulate and thus the mistakes made in the beginning of the processing pipeline cannot be undone.
+Often the problems may be caused by incorrect phonetic transcription.
+Even if the system had perfect speech synthesis module, it simply can't output a good result when an incorrect pronunciation is given in the beginning.
+\par
+So if we want to improve the outcomes, we can improve the transcription derivation phase.
+Since the pronunciation lexicon is assumed to contain no errors, we must focus on improvement of the $g2p$ as it is done in work of Deri et al. \cite{deri2016grapheme}.
 Authors in this work propose a method of exploiting a $g2p$ trained on a language with a high number of available resources to create a $g2p$ for language for which we do not have sufficient number of examples.
 This method relies on the existence of a conversion mapping between these two languages.
 Also it requires to do the conversion for every new language.
+\par
 In theory, a model can be created, that is able to transcribe grapheme sequences into an appropriate phonetic representation and can handle multiple languages.
 However, it needs to somehow obtain information, which language the input sequence comes from, which is not straightforwardly doable.
 This method has several drawbacks, because the language is not always known and the set of known languages is limited, so it does not really solve the OOV problem.
@@ -465,20 +484,21 @@ Also, it potentially requires a lot of training data.
 Moreover, if we want to learn a new pronunciation of just one word, it's more convenient to do it in a different way.
 \subsection{Learning pronunciation from spoken examples}.
 \label{pronunc-spoken}
-This group of methodologies aim to derive phonetic transcriptions directly from audio input.
+This section describe approaches that try to derive phonetic transcriptions directly from audio input.
 They are built on the theory of Automatic Speech Recognition which we discuss in \ref{ASR-desc}.
 Authors of \cite{slobada1996dictionary} introduce method of deriving correct pronunciation for a word in order to enlarge the recognizer's dictionary.
 They propose a data-driven approach to automatically add new words and their variants, respectively.
-The authors argue that in the spontaneous speech, the most frequent pronunciation does not need to be the one that is marked as correct and is used in the training phase.
+The authors argue that in the spontaneous speech, the most frequent pronunciation does not need to be the one that is marked as correct and is used in the training of the acoustic model used for the recognition.
 Thus the overall performance of the recognizer may be degraded since the phonetic units are bound with inadequate acoustics.
-The method is proposed, that relies on the use of both phoneme and word-level speech recognizer.
-The phoneme recognizer is constructed using smoothed bigram Language model.
+\par
+In the work, the method is proposed, that relies on the use of both phoneme and word-level speech recognizer.
+The phoneme recognizer is constructed using smoothed bigram Language Model.
 We discuss the phoneme recognizers in more detail in \ref{ASR-phn}.
 The algorithm collects all occurrences of words in the database and creates phonetic transcriptions using the recognizer.
 It then sorts the variants, rejects some of them an creates an $n-best$ list which is added to the dictionary.
 The recognizer can then be retrained, allowing multiple pronunciations for each word.
 Thus the recognition performance can be improved by an automatic procedure without the need for using the phonological rules.
-\linebreak\linebreak
+\par
 In the work of McGraw et al. \cite{mcgraw2013learning}, the concept of Pronunciation Mixture Models is introduced.
 The authors use a special kind of speech recognizer, the search space of which has four primary hierarchical components: a language model $G$, a phoneme lexicon $L$, phonological rules $P$ that expand the phoneme pronunciations to their phone variations, and a mapping from phone sequences to context-dependent model labels
 $C$.
@@ -500,10 +520,9 @@ If we further assume, that pronunciation sub-units $\mathbf{b}_i \in \mathbf{B}$
 P(\mathbf{u}_i\vert\mathbf{B})P(\mathbf{B}\vert\mathbf{W}_i;\Theta)P(\mathbf{W}_i) = P(\mathbf{u}_i\vert\mathbf{B})(\prod_{j=1}^{k_i}P(\mathbf{b}_j\vert \mathbf{w}^i_j;\Theta))P(\mathbf{W}_i) 
 \end{equation}
 The model parameters are then estimated using the EM-algorithm.
-Parameters related to the language model, can be initialized with use of graphone language model.
+Parameters related to the language model, can be initialized with use of graphone language model which we mention in the section describing the methods of $g2p$ conversion.
 Several technical issues has to be dealt with, however the Pronunciation Mixture Models can be trained on the same data as traditional ASR engines and can be used to obtain phonetic transcriptions from audio data.
-\linebreak\linebreak
-
+\par
 Similar approach is considered in the work of Reddy and Gouvea \cite{reddy2011learning}, except they do not have access to acoustic models or phone lattices.
 They use only the mistakes done by the recognizer as their source of information.
 An OOV word is passed through an ASR decoder giving an $n$-best word recognition output.
@@ -525,7 +544,7 @@ It is a well explored field of study with many different variants of realization
 Although it achieves very good results nowadays, it suffers from the fact that same groups of letters may have different pronunciations in different languages.
 We typically don't have access to the information which language is considered and it may be difficult to get access to sufficient number of datasets.
 The latter problem can be partially solved by transfer learning as proposed in \cite{deri2016grapheme}.
-\linebreak\linebreak
+\par
 Alternatively, one can derive pronunciations directly from an audio signal.
 This approach has been also explored by some authors, however it usually requires quite low-level modifications of the speech recognizer.
 Also, the authors used the derived pronunciations to enlarge the phonetic dictionary of the recognizer, not to improve the Text-To-Speech systems.
