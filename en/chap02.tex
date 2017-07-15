@@ -253,11 +253,12 @@ However, in principle it is possible to add the transcriptions directly into the
 \end{center}
 
 \subsection*{Overview of the used TTS systems}
+\label{usedtts}
 \begin{enumerate}
-\item Cereproc\footnote{https://www.cereproc.com/}
+\item Cereproc \cite{aylett2007cerevoice} \footnote{https://www.cereproc.com/}
 This engine is a commercial software that is free for educational purposes.
 Although it is not open-sourced, we use it for its good quality and reliable outputs.
-\item MaryTTS\footnote{http://mary.dfki.de/} MaryTTS is a German open-source project written in Java.
+\item MaryTTS \cite{schroder2006openmary}\footnote{http://mary.dfki.de/} MaryTTS is a German open-source project written in Java.
 It is highly customizable and modular.
 Thus we can explore output of an arbitrary module or replace it in the processing pipeline.
 MaryTTS is based on client-server architecture.
@@ -392,6 +393,91 @@ IPA symbols are composed of one or more elements of two basic types, letters and
 The general principle of the IPA is to provide one letter for each distinctive sound (speech segment), although this practice is not followed if the sound itself is complex.
 An example of IPA characters is given in \figref{ipa_overview}.
 \img{ipa_overview.png}{0.9}{Some letter of the IPA alphabet together with their occurrences in English words.}{ipa_overview}
+\section{Text-to-speech systems' evaluation}
+\label{tts-eval}
+The TTS evaluation\cite{huang2001spoken} is an important task since we often want to choose between two or more engines.
+However the task introduces several challenges some of which we mention in this section.
+We need to define a metric in order to evaluate the TTS.
+Such a metric will be dependent on particular task's setting and may consist of several variables.
+We can describe a taxonomy of different evaluation methods, depending from which point of view we look at it we distinguish between:
+\begin{itemize}
+\item \textit{Black box vs. Glass box evaluation} - whether we evaluate the TTS system as a whole or look at particular modules of it.
+\item \textit{Human vs. automated} There are two fundamentally distinct ways of evaluating
+speech synthesizers: one is to use human subjects; the other to automate the evaluation process.
+Nowadays, it is necessary to employ humans in the evaluation process, mainly to evaluate the quality of integration and functionality of the system.
+\item \textit{Global vs. analytic} approach tell us whether we rate global aspects such as naturalness and overall quality or more analytic aspects like vowel and consonant clarity, tempo or appropriateness of stresses and accents.
+\end{itemize}
+\par
+A critical measurement of a TTS system is whether or not human listeners can understand
+the text read by the system. So called \textit{intelligibility} tests were developed to measure this aspect.
+For example Diagnostic Rhyme Test is used that uses set composed of pairs of similar words.
+Those are synthesized with a TTS engine and the listeners try to correctly distinguish between them.
+The intelligibility is the evaluated and compared to listening human speakers.
+An example set of words that may be used for such test is given in \figref{rhymetest}.
+\img{rhymetest.png}{0.9}{An example set of words used to perform the Diagnostic Rhyme Test}{rhymetest}
+\par
+While a TTS system has to be intelligible, this does not guarantee user acceptance, because
+its quality may be far from that of a human speaker.
+That is the reason, why methods like \textit{Mean Opinion Score (MOS)} are frequently used.
+MOS is human-subject judgment testing that asks the subjects to rate several samples on the scale of 1 to 5 (1 = Bad, 2 = Poor, 3 = Fair, 4 = Good, 5 = Excellent).
+The scores are averaged, resulting in an overall MOS rating.
+We have used this method of labeling to annotate our sample dataset.
+\par
+Normalized MOS scores for different TTS systems can be obtained without any preference judgments.
+Nevertheless, sometimes comparisons are desired, especially for systems that are informally judged to be fairly close in quality.
+So called Category Rating (CCR) method, may be used.
+In this method, listeners are presented with a pair of speech samples on each trial. The order of the system A system B samples is chosen at random for each trial, providing, that half of the trials, the system A sample is followed by the system B and the order is reversed in the remaining trials.
+Listeners rate the pair with labels meaning, that the second utterance is:
+\begin{itemize}
+\item 3 - much better
+\item 2 - better
+\item 1 slightly better
+\item 0 about the same
+\item -1 slightly worse
+\item -2 worse
+\item -3 much worse
+\end{itemize}
+Sometimes the granularity can be reduced as much as simply "prefer A/prefer B".
+We use this method to tell which transcription is better.
+\section{Evaluating classifiers}
+Basic measure that is used to evaluate classifiers' performance is \textit{accuracy}.
+It is a fraction of correctly classified examples over the total number of examples.
+However, more descriptive measures are need sometimes.
+In this work, we use the \textit{F-score}, which is computed using terms \textit{precision} and \textit{recall}~\cite{sokolova2006beyond}.
+To explain this terms, we first need to introduce some others.
+Suppose, we have binary classification task, that is we want to identify positive and negative examples.
+In this settings, four types of situations may occur:
+\begin{itemize}
+\item \textit{True Positive(TP)} - classifier identified positive example as positive
+\item \textit{False Positive(FP)} - classifier identified negative example as positive
+\item \textit{True Negative(TN)} - classifier identified negative example as negative
+\item \textit{False Negative(FN)} - classifier identified positive examples as negative
+\end{itemize}
+\par
+With this terminology, we can define:
+\begin{equation}
+precision = \frac{TP}{TP + FP}
+\end{equation}
+\begin{equation}
+recall = \frac{TP}{TP + FN}
+\end{equation}
+In other words, \textit{precision} describes how many selected examples are relevant, while \textit{recall} tells us how many relevant examples were actually selected.
+Finally, we can define:
+\begin{equation}
+F-score = 2 \times \frac{precision \times recall}{precision + recall}
+\end{equation}
+That is, the \textit{F-score}, sometimes called \textit{$F_1$ score} is a harmonic mean of \textit{precision} and \textit{recall.}
+\section{Evaluating human ratings}
+When considering human ratings, we should evaluate how individual ratings agree.
+One option is to compute so called \textit{Cohen's kappa coefficient}\cite{cohen1968weighted}.
+It takes into account the possibility of the agreement occuring by chance.
+Cohen's kappa measures the agreement between two raters who classify items into mutually exclusive categories.
+The definition of $\kappa$ is:
+\begin{equation}
+\kappa = \frac {p_{o}-p_{e}}{1-p_{e}}=1-\frac {1-p_{o}}{1-p_{e}}
+\end{equation}
+where $p_o$ is the relative observed agreement among raters (identical to accuracy), and $p_e$ is the hypothetical probability of chance agreement, using the observed data to calculate the probabilities of each observer randomly seeing each category.
+Interpretation is, that $\kappa = 1$ means complete agreement and $\kappa \leq 0$ if there is no agreement among the raters other than what would be expected by chance. 
 \pagebreak
 \section{Related Work}
 \label{relatedwork}

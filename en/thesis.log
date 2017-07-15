@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.16)  14 JUL 2017 12:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.16)  15 JUL 2017 11:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2333,7 +2333,8 @@ Package hyperref Info: Option `breaklinks' set `true' on input line 123.
 \c@thm=\count120
 \c@defn=\count121
 ) (./thesis.aux (./title.aux) (./chap01.aux) (./chap02.aux)
-(./chap03.aux) (./chap04.aux) (./epilog.aux) (./bibliography.aux))
+(./chap03.aux) (./chap04.aux) (./chap05.aux) (./epilog.aux) (./bibliography.aux
+))
 \openout1 = `thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 129.
@@ -2354,8 +2355,7 @@ LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 129.
 LaTeX Font Info:    ... okay on input line 129.
 LaTeX Font Info:    Try loading font information for OT1+lmr on input line 129.
 
-
-(/usr/share/texmf/tex/latex/lm/ot1lmr.fd
+ (/usr/share/texmf/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 \AtBeginShipoutBox=\box29
@@ -2417,7 +2417,7 @@ Package hyperref Info: Option `pageanchor' set `false' on input line 6.
 
 pdfTeX warning: pdflatex (file ./img/../img/logo-en.pdf): PDF inclusion: found 
 PDF version <1.5>, but at most version <1.4> allowed
-<img/../img/logo-en.pdf, id=208, 506.4591pt x 156.49065pt>
+<img/../img/logo-en.pdf, id=212, 506.4591pt x 156.49065pt>
 File: img/../img/logo-en.pdf Graphic file (type pdf)
 
 <use img/../img/logo-en.pdf>
@@ -2480,7 +2480,7 @@ Package hyperref Info: Option `pageanchor' set `true' on input line 57.
 
  (./chap01.tex
 Chapter 1.
-<img/SDS.png, id=305, 823.075pt x 508.90125pt>
+<img/SDS.png, id=310, 823.075pt x 508.90125pt>
 File: img/SDS.png Graphic file (type png)
  <use img/SDS.png>
 Package pdftex.def Info: img/SDS.png used on input line 22.
@@ -2546,7 +2546,7 @@ File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 75.
 
-<img/fst_example.png, id=361, 949.5475pt x 607.26875pt>
+<img/fst_example.png, id=366, 949.5475pt x 607.26875pt>
 File: img/fst_example.png Graphic file (type png)
 
 <use img/fst_example.png>
@@ -2562,7 +2562,7 @@ Overfull \hbox (324.36363pt too wide) in paragraph at lines 141--158
 ywordspresentinthevocabularythelanguagemodelisbuilton.$\OT1/lmr/m/n/12 hus,|
  []
 
-[10] <img/TTSarch.png, id=389, 815.045pt x 302.12875pt>
+[10] <img/TTSarch.png, id=394, 815.045pt x 302.12875pt>
 File: img/TTSarch.png Graphic file (type png)
  <use img/TTSarch.png>
 Package pdftex.def Info: img/TTSarch.png used on input line 210.
@@ -2612,79 +2612,95 @@ Underfull \hbox (badness 10000) in paragraph at lines 249--251
 | \OT1/lmtt/b/n/12 <voice name="Mike">I want to be like Mike.</voice>
  []
 
-[13] <img/dendrogram.png, id=436, 421.575pt x 316.18124pt>
+[13] <img/dendrogram.png, id=445, 421.575pt x 316.18124pt>
 File: img/dendrogram.png Graphic file (type png)
 
 <use img/dendrogram.png>
-Package pdftex.def Info: img/dendrogram.png used on input line 320.
+Package pdftex.def Info: img/dendrogram.png used on input line 321.
 (pdftex.def)             Requested size: 371.30594pt x 278.4864pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [14] [15 <./img/dendrogram.png (PNG copy)>] [16]
-<img/ipa_overview.png, id=465, 927.465pt x 594.72188pt>
+<img/ipa_overview.png, id=474, 927.465pt x 594.72188pt>
 File: img/ipa_overview.png Graphic file (type png)
 
 <use img/ipa_overview.png>
-Package pdftex.def Info: img/ipa_overview.png used on input line 394.
+Package pdftex.def Info: img/ipa_overview.png used on input line 395.
 (pdftex.def)             Requested size: 371.30594pt x 238.09325pt.
- [17 <./img/ipa_overview.png>] [18]
-Overfull \hbox (33.31145pt too wide) in paragraph at lines 465--467
+ [17 <./img/ipa_overview.png>]
+<img/rhymetest.png, id=487, 410.9754pt x 237.0456pt>
+File: img/rhymetest.png Graphic file (type png)
+ <use img/rhymetest.png>
+Package pdftex.def Info: img/rhymetest.png used on input line 417.
+(pdftex.def)             Requested size: 371.30594pt x 214.16734pt.
+
+[18 <./img/rhymetest.png>] [19] [20] [21]
+Overfull \hbox (33.31145pt too wide) in paragraph at lines 551--553
 \OT1/lmr/m/n/12 The prob-a-bil-ity dis-tri-bu-tion is then typ-i-cally es-ti-ma
 ted by an Expectation-Maximization|
  []
 
-[19] [20]
-Overfull \hbox (6.84805pt too wide) in paragraph at lines 538--540
+[22] [23]
+Overfull \hbox (6.84805pt too wide) in paragraph at lines 624--626
 \OT1/lmr/m/n/12 The au-thors model the joint prob-a-bil-ity of hy-poth-e-sis an
 d ref-er-ence word $\OML/lmm/m/it/12 P\OT1/lmr/m/n/12 (\OT1/lmr/bx/n/12 e\OML/l
 mm/m/it/12 ; \OT1/lmr/bx/n/12 w\OT1/lmr/m/n/12 ) =|
  []
 
-[21]) [22]
+[24]) [25]
 \openout2 = `chap03.aux'.
 
  (./chap03.tex
 Chapter 3.
-[23
+[26
 
 
 
-] <img/Lfst.png, id=555, 218.416pt x 113.3836pt>
+]
+
+Package amsmath Warning: Foreign command \atopwithdelims;
+(amsmath)                \frac or \genfrac should be used instead
+(amsmath)                 on input line 46.
+
+[27] <img/sample_align.jpg, id=600, 151.56625pt x 69.25874pt>
+File: img/sample_align.jpg Graphic file (type jpg)
+
+<use img/sample_align.jpg>
+Package pdftex.def Info: img/sample_align.jpg used on input line 79.
+(pdftex.def)             Requested size: 144.40024pt x 65.98564pt.
+ [28 <./img/sample_align.jpg>]
+<img/Lfst.png, id=614, 218.416pt x 113.3836pt>
 File: img/Lfst.png Graphic file (type png)
  <use img/Lfst.png>
-Package pdftex.def Info: img/Lfst.png used on input line 60.
+Package pdftex.def Info: img/Lfst.png used on input line 116.
 (pdftex.def)             Requested size: 371.30594pt x 192.75821pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[24] [25 <./img/Lfst.png (PNG copy)>] [26]
-<img/OPER.png, id=591, 2409.0pt x 1281.78876pt>
+[29] [30 <./img/Lfst.png (PNG copy)>] [31]
+<img/OPER.png, id=651, 2409.0pt x 1281.78876pt>
 File: img/OPER.png Graphic file (type png)
  <use img/OPER.png>
-Package pdftex.def Info: img/OPER.png used on input line 139.
-(pdftex.def)             Requested size: 371.30594pt x 197.56036pt.
-
-<img/besthypdistr.png, id=593, 2409.0pt x 1281.78876pt>
-File: img/besthypdistr.png Graphic file (type png)
-
-<use img/besthypdistr.png>
-Package pdftex.def Info: img/besthypdistr.png used on input line 146.
+Package pdftex.def Info: img/OPER.png used on input line 200.
 (pdftex.def)             Requested size: 371.30594pt x 197.56036pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[27 <./img/OPER.png>] [28 <./img/besthypdistr.png>]
-<img/rhymetest.png, id=613, 410.9754pt x 237.0456pt>
-File: img/rhymetest.png Graphic file (type png)
- <use img/rhymetest.png>
-Package pdftex.def Info: img/rhymetest.png used on input line 177.
-(pdftex.def)             Requested size: 371.30594pt x 214.16734pt.
+<img/besthypdistr.png, id=653, 2409.0pt x 1281.78876pt>
+File: img/besthypdistr.png Graphic file (type png)
 
-[29 <./img/rhymetest.png>] [30]) [31]
+<use img/besthypdistr.png>
+Package pdftex.def Info: img/besthypdistr.png used on input line 207.
+(pdftex.def)             Requested size: 371.30594pt x 197.56036pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+) [32] [33 <./img/OPER.png> <./img/besthypdistr.png>]
 \openout2 = `chap04.aux'.
 
  (./chap04.tex
@@ -2727,273 +2743,275 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 25.
 
-[32
+[34
 
 
 
-] [33] <img/ssml_ipa.png, id=664, 602.25pt x 80.3pt>
+] [35] <img/ssml_ipa.png, id=699, 602.25pt x 80.3pt>
 File: img/ssml_ipa.png Graphic file (type png)
  <use img/ssml_ipa.png>
-Package pdftex.def Info: img/ssml_ipa.png used on input line 80.
+Package pdftex.def Info: img/ssml_ipa.png used on input line 81.
 (pdftex.def)             Requested size: 412.56496pt x 55.01128pt.
 
-[34 <./img/ssml_ipa.png>]
 
-Package amsmath Warning: Foreign command \atopwithdelims;
-(amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 93.
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 83.
 
-<img/m1barchart.png, id=677, 2409.0pt x 1281.78876pt>
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 83.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 83.
+
+<img/m1barchart.png, id=702, 2409.0pt x 1281.78876pt>
 File: img/m1barchart.png Graphic file (type png)
  <use img/m1barchart.png>
-Package pdftex.def Info: img/m1barchart.png used on input line 103.
+Package pdftex.def Info: img/m1barchart.png used on input line 92.
 (pdftex.def)             Requested size: 412.56496pt x 219.505pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<img/mcd_correlation.png, id=680, 2409.0pt x 2563.5775pt>
+[36 <./img/ssml_ipa.png>]
+<img/mcd_correlation.png, id=716, 2409.0pt x 2563.5775pt>
 File: img/mcd_correlation.png Graphic file (type png)
 
 <use img/mcd_correlation.png>
-Package pdftex.def Info: img/mcd_correlation.png used on input line 108.
+Package pdftex.def Info: img/mcd_correlation.png used on input line 105.
 (pdftex.def)             Requested size: 371.30594pt x 395.12074pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<img/mcdexample.png, id=682, 540.0175pt x 389.455pt>
+<img/mcdexample.png, id=718, 540.0175pt x 389.455pt>
 File: img/mcdexample.png Graphic file (type png)
  <use img/mcdexample.png>
 Package pdftex.def Info: img/mcdexample.png used on input line 112.
 (pdftex.def)             Requested size: 371.30594pt x 267.7853pt.
 
+[37 <./img/m1barchart.png>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<img/cv_folds.png, id=686, 282.67183pt x 399.79906pt>
+<img/cv_folds.png, id=728, 282.67183pt x 399.79906pt>
 File: img/cv_folds.png Graphic file (type png)
  <use img/cv_folds.png>
-Package pdftex.def Info: img/cv_folds.png used on input line 115.
+Package pdftex.def Info: img/cv_folds.png used on input line 116.
 (pdftex.def)             Requested size: 371.30594pt x 525.1864pt.
 
-[35]
+[38 <./img/mcd_correlation.png>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[36 <./img/m1barchart.png>]
-<img/mcdphcorr.jpg, id=705, 2409.0pt x 1281.78876pt>
+<img/mcdphcorr.jpg, id=738, 2409.0pt x 1281.78876pt>
 File: img/mcdphcorr.jpg Graphic file (type jpg)
  <use img/mcdphcorr.jpg>
-Package pdftex.def Info: img/mcdphcorr.jpg used on input line 144.
+Package pdftex.def Info: img/mcdphcorr.jpg used on input line 142.
 (pdftex.def)             Requested size: 371.30594pt x 197.56036pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[37 <./img/mcd_correlation.png>]
-<img/sample_align.jpg, id=714, 151.56625pt x 69.25874pt>
-File: img/sample_align.jpg Graphic file (type jpg)
-
-<use img/sample_align.jpg>
-Package pdftex.def Info: img/sample_align.jpg used on input line 167.
-(pdftex.def)             Requested size: 144.40024pt x 65.98564pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[38 <./img/mcdexample.png>] [39 <./img/cv_folds.png>] [40 <./img/mcdphcorr.jpg>
- <./img/sample_align.jpg>] <img/bigroccurrs.jpg, id=740, 803.0pt x 602.25pt>
+[39 <./img/mcdexample.png>] [40 <./img/cv_folds.png>]
+<img/bigroccurrs.jpg, id=759, 803.0pt x 602.25pt>
 File: img/bigroccurrs.jpg Graphic file (type jpg)
-
-<use img/bigroccurrs.jpg>
-Package pdftex.def Info: img/bigroccurrs.jpg used on input line 193.
+ <use img/bigroccurrs.jpg>
+Package pdftex.def Info: img/bigroccurrs.jpg used on input line 165.
 (pdftex.def)             Requested size: 371.30594pt x 278.48112pt.
 
-<img/confusion_limit.png, id=741, 433.62pt x 433.62pt>
+<img/confusion_limit.png, id=760, 433.62pt x 433.62pt>
 File: img/confusion_limit.png Graphic file (type png)
 
 <use img/confusion_limit.png>
-Package pdftex.def Info: img/confusion_limit.png used on input line 194.
+Package pdftex.def Info: img/confusion_limit.png used on input line 166.
 (pdftex.def)             Requested size: 371.30594pt x 371.32458pt.
-
+ [41 <./img/mcdphcorr.jpg>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<img/identify-predictions-boxplot.png, id=745, 578.16pt x 433.62pt>
+<img/identify-predictions-boxplot.png, id=772, 578.16pt x 433.62pt>
 File: img/identify-predictions-boxplot.png Graphic file (type png)
 
 <use img/identify-predictions-boxplot.png>
 Package pdftex.def Info: img/identify-predictions-boxplot.png used on input lin
-e 210.
+e 182.
 (pdftex.def)             Requested size: 371.30594pt x 278.47525pt.
- [41 <./img/bigroccurrs.jpg>]
+ [42 <./img/bigroccurrs.jpg>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[42 <./img/confusion_limit.png>]
-<img/identify-predictions.png, id=761, 578.16pt x 433.62pt>
+<img/identify-predictions.png, id=779, 578.16pt x 433.62pt>
 File: img/identify-predictions.png Graphic file (type png)
 
 <use img/identify-predictions.png>
-Package pdftex.def Info: img/identify-predictions.png used on input line 222.
+Package pdftex.def Info: img/identify-predictions.png used on input line 194.
 (pdftex.def)             Requested size: 412.56496pt x 309.42061pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<img/roc.png, id=763, 578.16pt x 433.62pt>
+<img/roc.png, id=781, 578.16pt x 433.62pt>
 File: img/roc.png Graphic file (type png)
  <use img/roc.png>
-Package pdftex.def Info: img/roc.png used on input line 231.
+Package pdftex.def Info: img/roc.png used on input line 203.
 (pdftex.def)             Requested size: 371.30594pt x 278.47525pt.
-
+ [43 <./img/confusion_limit.png>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[43 <./img/identify-predictions-boxplot.png>] [44 <./img/identify-predictions.p
-ng>] [45 <./img/roc.png>]
-Overfull \hbox (40.79364pt too wide) in paragraph at lines 297--311
+[44 <./img/identify-predictions-boxplot.png>] [45 <./img/identify-predictions.p
+ng>] [46 <./img/roc.png>]
+Overfull \hbox (40.79364pt too wide) in paragraph at lines 254--268
  [][] |
  []
 
-<img/decoderPER.png, id=796, 2409.0pt x 1281.78876pt>
+<img/decoderPER.png, id=826, 2409.0pt x 1281.78876pt>
 File: img/decoderPER.png Graphic file (type png)
  <use img/decoderPER.png>
-Package pdftex.def Info: img/decoderPER.png used on input line 313.
+Package pdftex.def Info: img/decoderPER.png used on input line 270.
 (pdftex.def)             Requested size: 371.30594pt x 197.56036pt.
 
-Overfull \hbox (53.37617pt too wide) in paragraph at lines 291--314
+Overfull \hbox (53.37617pt too wide) in paragraph at lines 248--271
 \OT1/lmr/m/n/12 For train-ing, a sub-set of Lib-rispeech cor-pus[][][] or Timit
 https://catalog.ldc.upenn.edu/ldc93s1|
  []
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[46] <img/spectral-clusters.png, id=813, 451.82976pt x 307.85883pt>
+[47 <./img/decoderPER.png>]
+<img/spectral-clusters.png, id=839, 451.82976pt x 307.85883pt>
 File: img/spectral-clusters.png Graphic file (type png)
 
 <use img/spectral-clusters.png>
-Package pdftex.def Info: img/spectral-clusters.png used on input line 337.
+Package pdftex.def Info: img/spectral-clusters.png used on input line 294.
 (pdftex.def)             Requested size: 371.30594pt x 253.00017pt.
 
-<img/kmeans-clusters.png, id=814, 451.82976pt x 323.22331pt>
+<img/kmeans-clusters.png, id=840, 451.82976pt x 323.22331pt>
 File: img/kmeans-clusters.png Graphic file (type png)
 
 <use img/kmeans-clusters.png>
-Package pdftex.def Info: img/kmeans-clusters.png used on input line 338.
+Package pdftex.def Info: img/kmeans-clusters.png used on input line 295.
 (pdftex.def)             Requested size: 371.30594pt x 265.6268pt.
- [47 <./img/decoderPER.png>]
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[48 <./img/spectral-clusters.png (PNG copy)>]
-<img/bon-encoding.png, id=832, 511.9125pt x 216.81pt>
+[48 <./img/spectral-clusters.png (PNG copy)>] [49 <./img/kmeans-clusters.png (P
+NG copy)>] <img/bon-encoding.png, id=856, 511.9125pt x 216.81pt>
 File: img/bon-encoding.png Graphic file (type png)
 
 <use img/bon-encoding.png>
-Package pdftex.def Info: img/bon-encoding.png used on input line 375.
+Package pdftex.def Info: img/bon-encoding.png used on input line 332.
 (pdftex.def)             Requested size: 371.30594pt x 157.25764pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[49 <./img/kmeans-clusters.png (PNG copy)>]
-<img/size_acc.png, id=841, 578.16pt x 433.62pt>
+ [50 <./img/bon-encoding.png>]
+<img/size_acc.png, id=866, 578.16pt x 433.62pt>
 File: img/size_acc.png Graphic file (type png)
  <use img/size_acc.png>
-Package pdftex.def Info: img/size_acc.png used on input line 414.
+Package pdftex.def Info: img/size_acc.png used on input line 371.
 (pdftex.def)             Requested size: 371.30594pt x 278.47525pt.
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<img/distribution.png, id=843, 578.16pt x 433.62pt>
+<img/distribution.png, id=867, 578.16pt x 433.62pt>
 File: img/distribution.png Graphic file (type png)
  <use img/distribution.png>
-Package pdftex.def Info: img/distribution.png used on input line 424.
+Package pdftex.def Info: img/distribution.png used on input line 372.
 (pdftex.def)             Requested size: 371.30594pt x 278.47525pt.
 
-[50 <./img/bon-encoding.png>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[51 <./img/size_acc.png>] [52 <./img/distribution.png>]
-<img/fst-combined.png, id=867, 292.09125pt x 211.79124pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[51] <img/fst-combined.png, id=878, 292.09125pt x 211.79124pt>
 File: img/fst-combined.png Graphic file (type png)
 
 <use img/fst-combined.png>
-Package pdftex.def Info: img/fst-combined.png used on input line 458.
+Package pdftex.def Info: img/fst-combined.png used on input line 406.
 (pdftex.def)             Requested size: 226.91197pt x 164.53725pt.
-
-<img/preliminary.png, id=870, 326.21875pt x 144.54pt>
-File: img/preliminary.png Graphic file (type png)
-
-<use img/preliminary.png>
-Package pdftex.def Info: img/preliminary.png used on input line 485.
-(pdftex.def)             Requested size: 268.1647pt x 118.82791pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-) [53 <./img/fst-combined.png>] [54 <./img/preliminary.png>]
-\openout2 = `epilog.aux'.
+<img/preliminary.png, id=881, 326.21875pt x 144.54pt>
+File: img/preliminary.png Graphic file (type png)
 
- (./epilog.tex
+<use img/preliminary.png>
+Package pdftex.def Info: img/preliminary.png used on input line 433.
+(pdftex.def)             Requested size: 268.1647pt x 118.82791pt.
+) [52 <./img/size_acc.png>]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[53 <./img/distribution.png> <./img/fst-combined.png>] [54 <./img/preliminary.p
+ng>]
+\openout2 = `chap05.aux'.
+
+ (./chap05.tex
+Chapter 5.
 [55
 
 
 
 ]) [56]
+\openout2 = `chap06.aux'.
+
+ (./chap06.tex
+Chapter 6.
+[57
+
+
+
+]) [58]
 \openout2 = `bibliography.aux'.
 
- (./bibliography.tex (./thesis.bbl [57
+ (./bibliography.tex (./thesis.bbl [59
 
 
 
-] [58])) [59] (./thesis.lof
-[60
+] [60])) [61] (./thesis.lof
+Overfull \hbox (9.84114pt too wide) in paragraph at lines 13--13
+ [][] [][]\OT1/lmr/m/n/12 An ex-am-ple of the fi-nite state trans-ducer rep-re-
+sent-ing the lexicon[[]]. |
+ []
+
+[62
 
 
-] [61])
+] [63])
 \tf@lof=\write7
 \openout7 = `thesis.lof'.
 
- [62] (./thesis.lot)
+ [64] (./thesis.lot)
 \tf@lot=\write8
 \openout8 = `thesis.lot'.
 
- [63
+ [65
 
-] [64
+] [66
 
-] [65
+] [67
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 170.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 170.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 187.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 187.
  (./thesis.aux (./title.aux)
-(./chap01.aux) (./chap02.aux) (./chap03.aux) (./chap04.aux) (./epilog.aux)
-(./bibliography.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 170.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 170.
+(./chap01.aux) (./chap02.aux) (./chap03.aux) (./chap04.aux) (./chap05.aux)
+(./chap06.aux) (./bibliography.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 187.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 187.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 422DC0B7973A4D595080D56560413A1E;8683.
+(rerunfilecheck)             Checksum: E6D484B349A9D65953A3E1D3EACEF25B;8770.
 
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 170.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 187.
  ) 
 Here is how much of TeX's memory you used:
- 13298 strings out of 494910
- 184123 string characters out of 6179836
- 260995 words of memory out of 5000000
- 15959 multiletter control sequences out of 15000+600000
+ 13335 strings out of 494910
+ 184674 string characters out of 6179836
+ 261656 words of memory out of 5000000
+ 15976 multiletter control sequences out of 15000+600000
  84233 words of font info for 82 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  36i,10n,36p,952b,852s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -3013,9 +3031,9 @@ re/texmf/fonts/type1/public/lm/lmr7.pfb></usr/share/texmf/fonts/type1/public/lm
 fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy6.
 pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf/fonts/t
 ype1/public/lm/lmtk10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt12.pfb>
-Output written on thesis.pdf (69 pages, 2937522 bytes).
+Output written on thesis.pdf (71 pages, 2947262 bytes).
 PDF statistics:
- 1212 PDF objects out of 1440 (max. 8388607)
- 289 named destinations out of 1000 (max. 500000)
- 563 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1263 PDF objects out of 1440 (max. 8388607)
+ 301 named destinations out of 1000 (max. 500000)
+ 571 words of extra memory for PDF output out of 10000 (max. 10000000)
 

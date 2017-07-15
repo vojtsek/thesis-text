@@ -11,63 +11,66 @@
 \contentsline {subsection}{\numberline {2.6.1}Dynamic Time Warping (DTW)}{13}{subsection.2.6.1}
 \contentsline {subsection}{\numberline {2.6.2}Clustering}{14}{subsection.2.6.2}
 \contentsline {subsection}{\numberline {2.6.3}Notions in speech communication}{16}{subsection.2.6.3}
-\contentsline {section}{\numberline {2.7}Related Work}{18}{section.2.7}
-\contentsline {subsection}{\numberline {2.7.1}Grapheme-to-phoneme conversion}{18}{subsection.2.7.1}
-\contentsline {subsubsection}{Techniques based on local classification}{18}{section*.6}
-\contentsline {subsubsection}{Pronunciation by analogy}{18}{section*.7}
-\contentsline {subsubsection}{Probabilistic approaches}{19}{section*.8}
-\contentsline {subsubsection}{Relation to Text-to-speech synthesis}{20}{section*.9}
-\contentsline {subsection}{\numberline {2.7.2}Learning pronunciation from spoken examples}{20}{subsection.2.7.2}
-\contentsline {subsection}{\numberline {2.7.3}Conclusion}{22}{subsection.2.7.3}
-\contentsline {chapter}{\numberline {3}Proposed approaches}{23}{chapter.3}
-\contentsline {section}{\numberline {3.1}Basic overview}{23}{section.3.1}
-\contentsline {section}{\numberline {3.2}Used techniques}{24}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Phoneme recognition}{24}{subsection.3.2.1}
-\contentsline {subsubsection}{On the Automatic Speech Recognition (ASR) decoding process}{24}{section*.10}
-\contentsline {subsubsection}{Modifying the Language Model}{25}{section*.11}
-\contentsline {subsubsection}{Timit dataset}{26}{section*.12}
-\contentsline {subsubsection}{Modeling phoneme bigrams}{26}{section*.13}
-\contentsline {subsubsection}{Evaluation of phoneme recognizers}{26}{section*.14}
-\contentsline {subsubsection}{Exploring the speech recognizer}{27}{section*.15}
-\contentsline {section}{\numberline {3.3}Text-to-speech systems' evaluation}{28}{section.3.3}
-\contentsline {section}{\numberline {3.4}Evaluating classifiers}{30}{section.3.4}
-\contentsline {section}{\numberline {3.5}Evaluating human ratings}{31}{section.3.5}
-\contentsline {chapter}{\numberline {4}Experiments}{32}{chapter.4}
-\contentsline {section}{\numberline {4.1}Used Datasets}{32}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Dataset \textbf {$D_1$} - artificial}{32}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Dataset \textbf {$D_2$} - artificial}{32}{subsection.4.1.2}
-\contentsline {paragraph}{Labeling}{32}{section*.16}
-\contentsline {subsection}{\numberline {4.1.3}Dataset \textbf {$D_3$} - Autonomata Spoken Name Corpus}{32}{subsection.4.1.3}
-\contentsline {subsection}{\numberline {4.1.4}Librispeech}{33}{subsection.4.1.4}
-\contentsline {subsection}{\numberline {4.1.5}Timit}{33}{subsection.4.1.5}
-\contentsline {subsection}{\numberline {4.1.6}TODO: ptien}{33}{subsection.4.1.6}
-\contentsline {subsection}{\numberline {4.1.7}Carnegie Mellon University Dictionary}{33}{subsection.4.1.7}
-\contentsline {subsection}{\numberline {4.1.8}Annotation procedure}{33}{subsection.4.1.8}
-\contentsline {subsection}{\numberline {4.1.9}Phonetic alphabets}{33}{subsection.4.1.9}
-\contentsline {section}{\numberline {4.2}Identifying difficult words}{34}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Measuring the difficulty}{35}{subsection.4.2.1}
-\contentsline {subsubsection}{$M_1$ measure - averaged Mel Cepstral Distortion}{35}{section*.17}
-\contentsline {subsubsection}{$M_2$ measure - averaged phonetic distance}{36}{section*.18}
-\contentsline {subsubsection}{$M_3$ measure - occurrence of confusable bigrams}{37}{section*.19}
-\contentsline {subsection}{\numberline {4.2.2}Measure combination}{41}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Discussion}{43}{subsection.4.2.3}
+\contentsline {section}{\numberline {2.7}Text-to-speech systems' evaluation}{17}{section.2.7}
+\contentsline {section}{\numberline {2.8}Evaluating classifiers}{19}{section.2.8}
+\contentsline {section}{\numberline {2.9}Evaluating human ratings}{20}{section.2.9}
+\contentsline {section}{\numberline {2.10}Related Work}{21}{section.2.10}
+\contentsline {subsection}{\numberline {2.10.1}Grapheme-to-phoneme conversion}{21}{subsection.2.10.1}
+\contentsline {subsubsection}{Techniques based on local classification}{21}{section*.6}
+\contentsline {subsubsection}{Pronunciation by analogy}{21}{section*.7}
+\contentsline {subsubsection}{Probabilistic approaches}{22}{section*.8}
+\contentsline {subsubsection}{Relation to Text-to-speech synthesis}{23}{section*.9}
+\contentsline {subsection}{\numberline {2.10.2}Learning pronunciation from spoken examples}{23}{subsection.2.10.2}
+\contentsline {subsection}{\numberline {2.10.3}Conclusion}{25}{subsection.2.10.3}
+\contentsline {chapter}{\numberline {3}Proposed approaches}{26}{chapter.3}
+\contentsline {section}{\numberline {3.1}Basic overview}{26}{section.3.1}
+\contentsline {section}{\numberline {3.2}Used techniques}{27}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Detecting difficult words}{27}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Measuring the difficulty}{27}{subsection.3.2.2}
+\contentsline {subsubsection}{$M_1$ measure - averaged Mel Cepstral Distortion}{27}{section*.10}
+\contentsline {subsubsection}{$M_2$ measure - averaged phonetic distance}{27}{section*.11}
+\contentsline {subsubsection}{$M_3$ measure - occurrence of confusable bigrams}{28}{section*.12}
+\contentsline {subsection}{\numberline {3.2.3}Phoneme recognition}{29}{subsection.3.2.3}
+\contentsline {subsubsection}{On the Automatic Speech Recognition (ASR) decoding process}{29}{section*.13}
+\contentsline {subsubsection}{Modifying the Language Model}{30}{section*.14}
+\contentsline {subsubsection}{Timit dataset}{31}{section*.15}
+\contentsline {subsubsection}{Modeling phoneme bigrams}{31}{section*.16}
+\contentsline {paragraph}{evaluation}{31}{section*.17}
+\contentsline {subsubsection}{Evaluation of phoneme recognizers}{31}{section*.18}
+\contentsline {subsubsection}{Exploring the speech recognizer}{32}{section*.19}
+\contentsline {chapter}{\numberline {4}Experiments}{34}{chapter.4}
+\contentsline {section}{\numberline {4.1}Used Datasets}{34}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Dataset \textbf {$D_1$} - artificial}{34}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Dataset \textbf {$D_2$} - artificial}{34}{subsection.4.1.2}
+\contentsline {paragraph}{Labeling}{34}{section*.20}
+\contentsline {subsection}{\numberline {4.1.3}Dataset \textbf {$D_3$} - Autonomata Spoken Name Corpus}{34}{subsection.4.1.3}
+\contentsline {subsection}{\numberline {4.1.4}Librispeech}{35}{subsection.4.1.4}
+\contentsline {subsection}{\numberline {4.1.5}Timit}{35}{subsection.4.1.5}
+\contentsline {subsection}{\numberline {4.1.6}TODO: ptien}{35}{subsection.4.1.6}
+\contentsline {subsection}{\numberline {4.1.7}Carnegie Mellon University Dictionary}{35}{subsection.4.1.7}
+\contentsline {subsection}{\numberline {4.1.8}Annotation procedure}{35}{subsection.4.1.8}
+\contentsline {subsection}{\numberline {4.1.9}Phonetic alphabets}{35}{subsection.4.1.9}
+\contentsline {section}{\numberline {4.2}Detecting difficult words}{36}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}$M_1$ measure}{36}{subsection.4.2.1}
+\contentsline {subsubsection}{Improving $M_1$}{38}{section*.21}
+\contentsline {subsubsection}{$M_2$ measure}{39}{section*.22}
+\contentsline {subsubsection}{$M_3$ measure}{39}{section*.23}
+\contentsline {subsection}{\numberline {4.2.2}Measure combination}{42}{subsection.4.2.2}
 \contentsline {section}{\numberline {4.3}Improving the pronunciation}{44}{section.4.3}
 \contentsline {subsection}{\numberline {4.3.1}Overview}{44}{subsection.4.3.1}
 \contentsline {subsection}{\numberline {4.3.2}Exploiting the speech recgonizer}{45}{subsection.4.3.2}
-\contentsline {subsubsection}{Getting the recognizer}{46}{section*.20}
-\contentsline {subsubsection}{Compressing the $n$-best list}{46}{section*.21}
-\contentsline {subsubsection}{Choosing the best transcription}{48}{section*.22}
-\contentsline {paragraph}{Discussion}{50}{section*.23}
+\contentsline {subsubsection}{Getting the recognizer}{45}{section*.24}
+\contentsline {subsubsection}{Compressing the $n$-best list}{47}{section*.25}
+\contentsline {subsubsection}{Choosing the best transcription}{49}{section*.26}
 \contentsline {subsection}{\numberline {4.3.3}Combining acoustic and textual information}{51}{subsection.4.3.3}
-\contentsline {paragraph}{Discussion}{54}{section*.24}
-\contentsline {chapter}{Conclusion}{55}{chapter*.25}
-\contentsline {section}{\numberline {4.4}Summary and discussion}{55}{section.4.4}
-\contentsline {section}{\numberline {4.5}Future Work}{55}{section.4.5}
-\contentsline {paragraph}{Data}{55}{section*.26}
-\contentsline {paragraph}{Predicting Difficulty}{56}{section*.27}
-\contentsline {paragraph}{Combining the text and acoustics}{56}{section*.28}
-\contentsline {chapter}{Bibliography}{57}{chapter*.29}
-\contentsline {chapter}{List of Figures}{60}{chapter*.30}
-\contentsline {chapter}{List of Tables}{63}{chapter*.31}
-\contentsline {chapter}{List of Abbreviations}{64}{chapter*.32}
-\contentsline {chapter}{Attachments}{65}{chapter*.33}
+\contentsline {chapter}{\numberline {5}Discussion}{55}{chapter.5}
+\contentsline {chapter}{\numberline {6}Conclusion}{57}{chapter.6}
+\contentsline {section}{\numberline {6.1}Summary}{57}{section.6.1}
+\contentsline {paragraph}{Data}{57}{section*.31}
+\contentsline {paragraph}{Predicting Difficulty}{58}{section*.32}
+\contentsline {paragraph}{Combining the text and acoustics}{58}{section*.33}
+\contentsline {chapter}{Bibliography}{59}{chapter*.34}
+\contentsline {chapter}{List of Figures}{62}{chapter*.35}
+\contentsline {chapter}{List of Tables}{65}{chapter*.36}
+\contentsline {chapter}{List of Abbreviations}{66}{chapter*.37}
+\contentsline {chapter}{Attachments}{67}{chapter*.38}
